@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Japan Major Cities Tour Guide | 일본 주요도시 여행 가이드</title>
+  <style>
+    :root {
+      --bg: #020617;
+      --bg-soft: #0b1220;
+      --card: #020617;
+      --accent: #38bdf8;
+      --accent2: #22c55e;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1f2937;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1e293b 0, #020617 55%, #000 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: linear-gradient(to right, rgba(15,23,42,0.98), rgba(15,23,42,0.7));
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0.9rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .logo-badge {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #4ade80, #22c55e, #065f46);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: #ecfeff;
+      box-shadow: 0 0 18px rgba(34,197,94,0.7);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      font-size: 0.88rem;
+    }
+
+    nav a {
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      color: var(--muted);
+      transition: 0.18s ease;
+      white-space: nowrap;
+    }
+
+    nav a:hover {
+      border-color: var(--accent);
+      background: rgba(56,189,248,0.12);
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 3rem;
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+      gap: 2rem;
+      align-items: center;
+      padding: 1.75rem 1.5rem;
+      margin-bottom: 2.25rem;
+      border-radius: 1.5rem;
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,0.2), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(34,197,94,0.18), transparent 55%),
+        linear-gradient(to bottom right, #020617, #020617);
+      border: 1px solid rgba(148,163,184,0.28);
+      box-shadow: 0 28px 80px rgba(15,23,42,0.9);
+    }
+
+    .hero-text h1 {
+      font-size: clamp(1.9rem, 2.5vw + 1rem, 2.5rem);
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-text p {
+      color: var(--muted);
+      font-size: 0.96rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .tag {
+      font-size: 0.78rem;
+      padding: 0.22rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.5);
+      background: rgba(15,23,42,0.7);
+    }
+
+    .hero-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-left: 2px solid var(--accent);
+      padding-left: 0.6rem;
+    }
+
+    .hero-image {
+      border-radius: 1.25rem;
+      overflow: hidden;
+      border: 1px solid rgba(148,163,184,0.35);
+      position: relative;
+      background: #020617;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      max-height: 260px;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.02);
+    }
+
+    .hero-chip {
+      position: absolute;
+      bottom: 0.8rem;
+      right: 0.85rem;
+      background: rgba(15,23,42,0.9);
+      border-radius: 999px;
+      padding: 0.4rem 0.85rem;
+      font-size: 0.76rem;
+      border: 1px solid rgba(148,163,184,0.7);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-chip-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent2);
+      box-shadow: 0 0 8px rgba(34,197,94,0.8);
+    }
+
+    /* Generic layout */
+    section {
+      margin-bottom: 2.2rem;
+    }
+
+    .section-title {
+      font-size: 1.35rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .card {
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.14), transparent 55%), #020617;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      padding: 1rem 1rem 1.1rem;
+      box-shadow: 0 14px 40px rgba(15,23,42,0.85);
+      font-size: 0.9rem;
+    }
+
+    .card h3 {
+      font-size: 1.02rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .pill {
+      display: inline-block;
+      font-size: 0.76rem;
+      color: var(--muted);
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      padding: 0.12rem 0.55rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card h4 {
+      font-size: 0.9rem;
+      margin: 0.5rem 0 0.25rem;
+    }
+
+    ul {
+      margin-left: 1.1rem;
+      margin-bottom: 0.4rem;
+      font-size: 0.88rem;
+    }
+
+    li + li {
+      margin-top: 0.1rem;
+    }
+
+    .region-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .routes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 0.7rem;
+    }
+
+    .route-card {
+      background: #020617;
+      border-radius: 0.9rem;
+      border: 1px solid var(--border);
+      padding: 0.75rem 0.9rem;
+      font-size: 0.86rem;
+    }
+
+    .route-card h4 {
+      margin-bottom: 0.15rem;
+      font-size: 0.9rem;
+    }
+
+    .route-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .footer {
+      margin-top: 2.3rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .badges {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 0.1rem 0.6rem;
+      font-size: 0.75rem;
+      background: rgba(15,23,42,0.85);
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .hero-image {
+        order: -1;
+      }
+      nav ul {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-badge">JP</div>
+        <div>Japan Major Cities Tour Guide</div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#top">HOME</a></li>
+          <li><a href="#kansai">관서지방</a></li>
+          <li><a href="#kanto">관동지방</a></li>
+          <li><a href="#hokkaido">훗카이도</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-text">
+        <h1>일본 주요도시 투어 가이드</h1>
+        <p>
+          일본 여행의 핵심 지역인 관서지방(오사카·교토·고베), 관동지방(도쿄), 그리고 훗카이도를 한눈에 볼 수 있는
+          도시별·지역별 여행 가이드입니다. 과제·팀 프로젝트·포트폴리오용 웹페이지로 활용할 수 있도록
+          정적 HTML로 구성했습니다.
+        </p>
+        <div class="hero-tags">
+          <span class="tag">#관서지방</span>
+          <span class="tag">#오사카</span>
+          <span class="tag">#교토</span>
+          <span class="tag">#고베</span>
+          <span class="tag">#도쿄</span>
+          <span class="tag">#훗카이도</span>
+          <span class="tag">#일본여행</span>
+        </div>
+        <div class="hero-note">
+          이 페이지는 <strong>도시별 특징 · 대표 관광 코스 · 즐길거리 · 음식 정보</strong>를 중심으로 구성되어 있으며,
+          필요에 따라 팀 로고, 사진, 지도 등을 추가해 확장할 수 있습니다.
+        </div>
+      </div>
+      <div class="hero-image">
+        <!-- 오사카 도톤보리 야경 (Wikimedia Commons) -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Dotonbori_Night.jpg" alt="오사카 도톤보리 야경" />
+        <div class="hero-chip">
+          <span class="hero-chip-dot"></span>
+          <span>Osaka · Dotonbori Night View</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Region overview -->
+    <section>
+      <h2 class="section-title">🇯🇵 일본 주요 권역 개요</h2>
+      <p class="section-subtitle">관서지방 · 관동지방 · 훗카이도 3개 축으로 보는 일본 도시 여행</p>
+
+      <div class="grid">
+        <article class="card">
+          <h3>관서지방 (Kansai)</h3>
+          <div class="region-label">오사카 · 교토 · 고베 중심</div>
+          <p>
+            일본 서쪽의 중심 권역으로, 전통과 현대가 공존하는 지역입니다.  
+            교토의 사찰·역사 거리, 오사카의 미식·야경, 고베의 항만 야경과
+            고베규 등 다양한 매력을 한 번에 경험할 수 있습니다.
+          </p>
+          <h4>대표 도시</h4>
+          <ul>
+            <li>오사카: 미식·쇼핑·유흥 중심 도시</li>
+            <li>교토: 사찰·전통 거리·사계절 풍경</li>
+            <li>고베: 항만 야경·산·온천·고베규</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>관동지방 (Kanto)</h3>
+          <div class="region-label">도쿄 중심</div>
+          <p>
+            일본 정치·경제·문화의 중심인 도쿄를 포함하는 권역입니다.  
+            시부야·신주쿠의 초고층 빌딩, 아사쿠사의 전통 거리,
+            스카이트리·오다이바의 야경까지 다양한 도시 풍경을 담고 있습니다.
+          </p>
+          <h4>대표 키워드</h4>
+          <ul>
+            <li>최신 트렌드 & 쇼핑</li>
+            <li>도시 야경 & 전망대</li>
+            <li>전통 사찰(센소지)과 현대적 거리 공존</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>훗카이도 (Hokkaido)</h3>
+          <div class="region-label">삿포로 · 오타루 · 후라노 등</div>
+          <p>
+            일본 최북단의 광대한 섬으로, 사계절 내내 자연 경관과 온천,  
+            설경·라벤더 밭·운해·바다와 산이 모두 있는 지역입니다.
+            해산물, 유제품, 라멘 등 음식도 유명합니다.
+          </p>
+          <h4>대표 테마</h4>
+          <ul>
+            <li>눈(SNOW) & 스키, 설경</li>
+            <li>온천 · 자연 · 드라이브</li>
+            <li>해산물 · 홋카이도 라멘 · 유제품</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Kansai -->
+    <section id="kansai">
+      <h2 class="section-title">🧭 관서지방 (Kansai) · 오사카 · 교토 · 고베</h2>
+      <p class="section-subtitle">전통과 현대, 바다와 산, 미식과 야경을 모두 담은 서일본 핵심 권역</p>
+
+      <div class="grid">
+        <!-- Osaka -->
+        <article class="card" id="osaka">
+          <h3>오사카 (Osaka)</h3>
+          <span class="pill">“먹다가 망한다” 미식의 도시</span>
+          <h4>● 도시 특징</h4>
+          <ul>
+            <li>일본 2대 도시 중 하나로 상업·엔터테인먼트 중심</li>
+            <li>도톤보리, 난바, 우메다 등 번화가가 밀집</li>
+            <li>유니버셜 스튜디오 재팬(USJ)이 위치한 테마파크 도시</li>
+          </ul>
+          <h4>● 대표 관광 코스</h4>
+          <ul>
+            <li>도톤보리 & 신사이바시: 네온사인 야경, 글리코 사인, 쇼핑</li>
+            <li>우메다: 우메다 스카이빌딩 전망대, 대형 백화점 쇼핑</li>
+            <li>신세카이 & 츠텐카쿠: 레트로 거리, 쿠시카츠, 온천(스파월드)</li>
+            <li>오사카성 공원: 성과 공원을 함께 즐기는 산책 코스</li>
+            <li>유니버셜 스튜디오 재팬: 닌텐도 월드·해리포터 존 등</li>
+          </ul>
+          <h4>● 대표 음식</h4>
+          <ul>
+            <li>타코야키, 오코노미야키, 쿠시카츠</li>
+            <li>오사카식 우동, 규타니(소고기 요리), 회전초밥</li>
+          </ul>
+        </article>
+
+        <!-- Kyoto -->
+        <article class="card" id="kyoto">
+          <h3>교토 (Kyoto)</h3>
+          <span class="pill">일본 고도(古都) · 전통 문화의 중심</span>
+          <h4>● 도시 특징</h4>
+          <ul>
+            <li>천 년 수도로 불리는 일본 대표 역사 도시</li>
+            <li>사찰·신사·전통 거리·정원이 밀집</li>
+            <li>사계절(벚꽃·신록·단풍·설경) 풍경으로 유명</li>
+          </ul>
+          <h4>● 대표 관광 코스</h4>
+          <ul>
+            <li>후시미 이나리 신사: 붉은 천 개의 토리이(센본토리이) 산책</li>
+            <li>기요미즈데라: 절벽 위 무대에서 내려다보는 시내 전망</li>
+            <li>아라시야마: 대나무 숲, 도롯코 열차, 강가 산책</li>
+            <li>기온 & 하나미코지: 전통 거리, 운이 좋으면 마이코/게이샤 목격</li>
+            <li>킨카쿠지(금각사): 연못에 비친 황금색 사찰 풍경</li>
+          </ul>
+          <h4>● 대표 음식</h4>
+          <ul>
+            <li>유바(두부 껍질 요리), 가이세키 요리(전통 코스 요리)</li>
+            <li>말차 디저트, 교토식 채소 요리(오반자이)</li>
+          </ul>
+        </article>
+
+        <!-- Kobe -->
+        <article class="card" id="kobe">
+          <h3>고베 (Kobe)</h3>
+          <span class="pill">항만 야경 · 산 · 온천 · 고베규</span>
+          <h4>● 도시 특징</h4>
+          <ul>
+            <li>항구와 산이 맞닿은 도시로 야경이 아름다움</li>
+            <li>서양식 건축물, 외국인 거류지, 온천까지 모두 존재</li>
+          </ul>
+          <h4>● 대표 관광 코스</h4>
+          <ul>
+            <li>고베 하버랜드 & 메리켄 파크: BE KOBE 모뉴먼트, 포트 타워 야경</li>
+            <li>기타노 이진칸 거리: 서양식 저택 거리, 카페·전망</li>
+            <li>롯코산 & 롯코 가든 테라스: 야경·케이블카·자연 경관</li>
+            <li>아리마 온천: 전통 온천 마을(금천·은천)</li>
+          </ul>
+          <h4>● 대표 음식</h4>
+          <ul>
+            <li>고베규 스테이크</li>
+            <li>빵·디저트 문화(고베 빵집, 케이크)</li>
+            <li>중화가(난킨마치)의 중국요리·포크만(고기만두)</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Kanto / Tokyo -->
+    <section id="kanto">
+      <h2 class="section-title">🌆 관동지방 (Kanto) · 도쿄</h2>
+      <p class="section-subtitle">최신 트렌드, 초고층 빌딩, 전통 사찰이 공존하는 일본의 수도권</p>
+
+      <div class="grid">
+        <article class="card" id="tokyo">
+          <h3>도쿄 (Tokyo)</h3>
+          <span class="pill">세계적 메가시티</span>
+          <h4>● 도시 특징</h4>
+          <ul>
+            <li>정치·경제·문화 중심지이자 세계적인 대도시</li>
+            <li>지역별 개성이 뚜렷해 “어느 동네를 가냐”에 따라 분위기가 크게 달라짐</li>
+          </ul>
+          <h4>● 대표 지역 & 명소</h4>
+          <ul>
+            <li>시부야: 스크램블 교차로, 시부야 스카이 전망대, 쇼핑</li>
+            <li>신주쿠: 신주쿠 교엔(도심 공원), 고층 빌딩, 가부키초</li>
+            <li>아사쿠사: 센소지 사원, 나카미세 상점가, 전통 분위기</li>
+            <li>도쿄 스카이트리: 전망대, 쇼핑몰(소라마치), 수족관</li>
+            <li>오다이바: 바다 위 인공 섬, 쇼핑몰, 자유의 여신상 모형, 야경</li>
+            <li>긴자: 고급 브랜드 거리, 백화점, 미술관</li>
+          </ul>
+          <h4>● 대표 음식</h4>
+          <ul>
+            <li>스시 · 사시미, 라멘(도쿄식 쇼유 라멘 포함)</li>
+            <li>규동, 텐동, 돈카츠, 카페·디저트</li>
+            <li>지역별 개성 있는 전문점(스시, 텐푸라, 우나기 등)</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>도쿄 여행 타입별 추천</h3>
+          <span class="pill">초행자 기준</span>
+          <h4>● 1일 핵심 코스 예시</h4>
+          <ul>
+            <li>아사쿠사(센소지) → 스카이트리 전망 → 스미다가와 크루즈 → 오다이바 야경</li>
+          </ul>
+          <h4>● 쇼핑 중심</h4>
+          <ul>
+            <li>시부야(센터가이, 시부야 109) → 하라주쿠(타케시타도리) → 오모테산도 → 긴자</li>
+          </ul>
+          <h4>● 야경·전망 중심</h4>
+          <ul>
+            <li>시부야 스카이 / 도쿄 타워 / 스카이트리 중 1~2곳 + 오다이바 야경</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Hokkaido -->
+    <section id="hokkaido">
+      <h2 class="section-title">❄️ 훗카이도 (Hokkaido)</h2>
+      <p class="section-subtitle">광대한 자연, 설경, 온천, 해산물이 있는 일본 최북단 섬</p>
+
+      <div class="grid">
+        <article class="card">
+          <h3>삿포로 (Sapporo)</h3>
+          <span class="pill">중심 도시 · 축제 · 음식</span>
+          <h4>● 도시 특징</h4>
+          <ul>
+            <li>훗카이도의 중심 도시이자 교통·문화 허브</li>
+            <li>삿포로 눈 축제, 맥주·라멘 등으로 유명</li>
+          </ul>
+          <h4>● 대표 명소</h4>
+          <ul>
+            <li>오도리 공원, 삿포로 TV타워</li>
+            <li>삿포로 시계탑, 홋카이도 구청사</li>
+            <li>삿포로 맥주 박물관 & 맥주 가든</li>
+            <li>나카지마 공원, 히쓰지가오카 전망대 등</li>
+          </ul>
+          <h4>● 대표 음식</h4>
+          <ul>
+            <li>삿포로 미소 라멘</li>
+            <li>징기스칸(양고기 바비큐)</li>
+            <li>홋카이도 소프트크림, 치즈, 버터, 우유</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>오타루 · 후라노 · 비에이</h3>
+          <span class="pill">운하 · 꽃밭 · 푸른 연못</span>
+          <h4>● 오타루 (Otaru)</h4>
+          <ul>
+            <li>오타루 운하 야경, 레트로 창고 거리</li>
+            <li>스시·해산물, 유리공예, 오르골당</li>
+          </ul>
+          <h4>● 후라노 · 비에이 (Furano · Biei)</h4>
+          <ul>
+            <li>라벤더 밭(여름), 구름 바다, 구릉 지형 드라이브</li>
+            <li>비에이 블루폰드(푸른 연못), 꽃밭·전원 풍경</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>남부 훗카이도 · 기타</h3>
+          <span class="pill">야경 · 온천</span>
+          <h4>● 하코다테 (Hakodate)</h4>
+          <ul>
+            <li>하코다테 산 야경(일본 3대 야경 중 하나)</li>
+            <li>아침시장(해산물), 구 외국인 거류지, 교회 거리</li>
+          </ul>
+          <h4>● 온천 & 기타 지역</h4>
+          <ul>
+            <li>노보리베츠 온천, 도야호 온천 등 유명 온천지</li>
+            <li>겨울 시즌 스키 리조트(니세코 등)</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Sample routes -->
+    <section>
+      <h2 class="section-title">🗺 여행 테마별 추천 루트</h2>
+      <p class="section-subtitle">관서 · 관동 · 훗카이도를 조합한 예시 동선</p>
+
+      <div class="routes">
+        <div class="route-card">
+          <h4>● 관서 집중 3일</h4>
+          <div class="route-label">오사카 · 교토 · 고베</div>
+          <div>
+            1일차: 오사카(도톤보리·우메다)<br />
+            2일차: 교토(후시미이나리·기요미즈데라·기온 거리)<br />
+            3일차: 고베(하버랜드·롯코산 야경·고베규)
+          </div>
+        </div>
+        <div class="route-card">
+          <h4>● 도쿄 + 오사카 4~5일</h4>
+          <div class="route-label">관동 + 관서 하이라이트</div>
+          <div>
+            1~2일차: 도쿄(시부야·신주쿠·아사쿠사·스카이트리)<br />
+            3일차: 이동 + 오사카성·신세카이<br />
+            4일차: 도톤보리·USJ 중 택1
+          </div>
+        </div>
+        <div class="route-card">
+          <h4>● 훗카이도 4일</h4>
+          <div class="route-label">삿포로 · 오타루 · 후라노/비에이</div>
+          <div>
+            1일차: 삿포로 시내(오도리 공원·맥주 박물관)<br />
+            2일차: 오타루 운하 & 해산물<br />
+            3일차: 후라노·비에이(꽃밭·블루폰드, 계절별 자연)<br />
+            4일차: 삿포로 근교 온천 or 쇼핑
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div>
+        <strong>사용 목적</strong> · 대학 과제/팀 프로젝트용 정적 웹페이지 예시
+      </div>
+      <div class="badges">
+        <span class="badge">Static HTML</span>
+        <span class="badge">Kansai · Kanto · Hokkaido</span>
+        <span class="badge">Student Project</span>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>

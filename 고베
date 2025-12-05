@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>고베 여행 가이드 | Kobe Travel Guide</title>
+
+  <style>
+    :root {
+      --bg: #020617;
+      --accent: #38bdf8;
+      --accent2: #22c55e;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1f2937;
+    }
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+    body {
+      background: radial-gradient(circle at top, #1e293b 0, #020617 55%, #000 100%);
+      color: var(--text);
+      font-family: system-ui, sans-serif;
+      line-height: 1.6;
+    }
+    header {
+      position: sticky; top: 0;
+      background: rgba(15,23,42,0.92);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--border);
+      z-index: 20;
+    }
+    .header-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1rem 1.3rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    nav ul {list-style: none; display: flex; gap: .7rem;}
+    nav a {
+      color: var(--muted);
+      padding: .25rem .65rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+    }
+    nav a:hover {
+      background: rgba(56,189,248,0.1);
+      border-color: var(--accent);
+      color: var(--text);
+    }
+    main {max-width: 1120px; margin: 0 auto; padding: 1.6rem 1.3rem;}
+    .hero {
+      display: grid;
+      grid-template-columns: 2fr 1.5fr;
+      gap: 2rem;
+      background: rgba(15,23,42,0.6);
+      border-radius: 1.4rem;
+      padding: 1.7rem;
+      border: 1px solid rgba(148,163,184,0.3);
+      margin-bottom: 2.4rem;
+    }
+    .hero-tags {display: flex; gap: .4rem; flex-wrap: wrap;}
+    .tag {
+      border: 1px solid rgba(148,163,184,0.4);
+      padding: .22rem .55rem;
+      background: rgba(15,23,42,0.7);
+      border-radius: 999px;
+      font-size: .78rem;
+    }
+    img {
+      width: 100%; border-radius: 1rem;
+      border: 1px solid var(--border);
+      object-fit: cover; max-height: 260px;
+    }
+    section {margin-bottom: 2.3rem;}
+    .section-title {
+      font-size: 1.4rem; margin-bottom: .4rem;
+    }
+    .section-subtitle {
+      color: var(--muted); margin-bottom: 1.1rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 1.1rem;
+    }
+    .card {
+      background: rgba(15,23,42,0.6);
+      border-radius: 1rem;
+      padding: 1rem;
+      border: 1px solid var(--border);
+      font-size: .92rem;
+    }
+    ul {margin-left: 1.1rem;}
+    li {margin-bottom: .25rem;}
+    .pill {
+      display: inline-block;
+      padding: .15rem .55rem;
+      border: 1px solid rgba(148,163,184,0.5);
+      border-radius: 999px;
+      font-size: .78rem;
+      color: var(--muted);
+      margin-bottom: .4rem;
+    }
+    footer {
+      margin-top: 2rem;
+      padding-top: 1.3rem;
+      border-top: 1px solid var(--border);
+      font-size: .8rem;
+      color: var(--muted);
+      display: flex; justify-content: space-between;
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="header-inner">
+    <div style="font-weight: 700;">Kobe Travel Guide</div>
+    <nav>
+      <ul>
+        <li><a href="#overview">개요</a></li>
+        <li><a href="#harbor">하버랜드</a></li>
+        <li><a href="#kitano">기타노 이진칸</a></li>
+        <li><a href="#rokko">롯코산</a></li>
+        <li><a href="#arima">아리마 온천</a></li>
+        <li><a href="#food">음식</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <h1>고베 여행 가이드 (Kobe)</h1>
+      <p>
+        항만 야경, 산·바다 자연 경관, 서양식 건축, 온천, 그리고 고베규로 유명한 도시 ‘고베’.
+        이 페이지는 고베의 대표 명소와 즐길거리·맛집 키워드를 과제·프로젝트용으로 사용할 수 있도록 정리한
+        홈페이지용 가이드입니다.
+      </p>
+      <div class="hero-tags">
+        <span class="tag">#고베</span>
+        <span class="tag">#항만도시</span>
+        <span class="tag">#롯코산</span>
+        <span class="tag">#하버랜드</span>
+        <span class="tag">#아리마온천</span>
+        <span class="tag">#고베규</span>
+      </div>
+    </div>
+    <div>
+      <img src="images/kobe-harbor.jpg" alt="고베항 야경">
+    </div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section id="overview">
+    <h2 class="section-title">🇯🇵 고베 한눈에 보기</h2>
+    <p class="section-subtitle">항구·산·온천이 모두 있는 도시</p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>도시 특징</h3>
+        <span class="pill">항만도시</span>
+        <ul>
+          <li>바다와 산이 가까워 도시 풍경이 입체적임</li>
+          <li>지진 이후 재정비된 광장·공원·야경 명소가 많음</li>
+          <li>서양식 건축물·이국적 분위기 강함</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>대표 권역</h3>
+        <span class="pill">볼거리 다양</span>
+        <ul>
+          <li>하버랜드: BE KOBE, 포트타워, 대관람차</li>
+          <li>기타노 이진칸: 서양식 저택 거리</li>
+          <li>롯코산: 야경·자연경관</li>
+          <li>아리마 온천: 일본 3대 온천지</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>고베 여행 키워드</h3>
+        <ul>
+          <li>야경 · 항구 · 바다</li>
+          <li>산 · 케이블카 · 전망</li>
+          <li>온천(아리마) · 휴양</li>
+          <li>고베규 · 베이커리</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- HARBOR -->
+  <section id="harbor">
+    <h2 class="section-title">🌃 고베 하버랜드 · 메리켄 파크</h2>
+    <p class="section-subtitle">고베를 상징하는 항만 야경 지구</p>
+
+    <div class="grid">
+      <div class="card">
+        <img src="images/kobe-meriken.jpg" alt="메리켄 파크">
+        <h3>핵심 명소</h3>
+        <ul>
+          <li>고베 포트타워</li>
+          <li>BE KOBE 모뉴먼트</li>
+          <li>가와사키 라이프스타일 박물관</li>
+          <li>하버랜드 대관람차</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>즐길거리</h3>
+        <ul>
+          <li>야경 촬영 (가장 유명한 코스)</li>
+          <li>바다 산책로 걷기</li>
+          <li>쇼핑몰(umie)·카페·레스토랑</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- KITANO -->
+  <section id="kitano">
+    <h2 class="section-title">🏠 기타노 이진칸 거리</h2>
+    <p class="section-subtitle">19세기 외국인 거류지에서 발전한 서양식 건축 거리</p>
+
+    <div class="grid">
+      <div class="card">
+        <img src="images/kobe-kitano.jpg" alt="기타노 이진칸">
+        <h3>특징</h3>
+        <ul>
+          <li>유럽풍 저택이 늘어선 언덕 마을</li>
+          <li>전망 좋은 카페·뮤지엄 다수</li>
+          <li>사진 스팟 인기 지역</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>추천 명소</h3>
+        <ul>
+          <li>우로코 하우스</li>
+          <li>기타노 비이켄</li>
+          <li>구 이탈리아관·영국관 등</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROKKO -->
+  <section id="rokko">
+    <h2 class="section-title">🌄 롯코산 · 롯코 가든 테라스</h2>
+    <p class="section-subtitle">고베 최고의 야경과 자연 경관</p>
+
+    <div class="grid">
+      <div class="card">
+        <img src="images/kobe-rokko.jpg" alt="롯코산 야경">
+        <h3>주요 포인트</h3>
+        <ul>
+          <li>케이블카로 정상 이동 가능</li>
+          <li>가든 테라스에서 오사카만까지 보이는 파노라마</li>
+          <li>별관측·숲 테마파크 등 패밀리 코스 존재</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>추천 활동</h3>
+        <ul>
+          <li>야경 감상(“천만 달러의 야경”으로 불림)</li>
+          <li>카페·전망 레스토랑 이용</li>
+          <li>하이킹·전망대 방문</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARIMA -->
+  <section id="arima">
+    <h2 class="section-title">♨ 아리마 온천 (Arima Onsen)</h2>
+    <p class="section-subtitle">일본 3대 온천도시 중 하나</p>
+
+    <div class="grid">
+      <div class="card">
+        <img src="images/arima-onsen.jpg" alt="아리마 온천">
+        <h3>특징</h3>
+        <ul>
+          <li>금천·은천이라는 두 종류의 온천수</li>
+          <li>일일 온천 가능(다수 유료탕 존재)</li>
+          <li>전통 온천 마을 분위기</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>즐길거리</h3>
+        <ul>
+          <li>금천(金泉) 체험: 붉은색 철분 온천</li>
+          <li>은천(銀泉) 체험: 투명한 탄산수계 온천</li>
+          <li>온천거리 산책, 전통 디저트 먹거리</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOD -->
+  <section id="food">
+    <h2 class="section-title">🥩 고베 대표 음식</h2>
+    <p class="section-subtitle">고베규부터 한국인이 좋아하는 베이커리까지</p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>고베규</h3>
+        <ul>
+          <li>일본 3대 와규 중 하나</li>
+          <li>스테이크·샤브샤브·스키야키 스타일 제공</li>
+          <li>가격 차이가 크므로 사전 확인 필요</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>기타 음식</h3>
+        <ul>
+          <li>고베 빵·케이크(베이커리 문화 발달)</li>
+          <li>난킨마치(차이나타운) 음식</li>
+          <li>고베 커피 문화</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>고베 여행 가이드 · 과제/프로젝트용 홈페이지 버전</div>
+    <div>Static HTML · Japan Kansai</div>
+  </footer>
+
+</main>
+</body>
+</html>
