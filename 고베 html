@@ -10,7 +10,7 @@
         padding: 0;
         background: #0f1117;
         color: white;
-        font-family: "Pretendard", sans-serif;
+        font-family: "Pretendard", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         line-height: 1.6;
     }
 
@@ -32,5 +32,278 @@
 
     .card-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+    }
 
+    .card {
+        background: #1a1d26;
+        border-radius: 14px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(255,255,255,0.05);
+        transition: 0.3s;
+    }
+
+    .card:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 0 20px rgba(255,255,255,0.15);
+    }
+
+    .btn-detail {
+        margin-top: 10px;
+        display: inline-block;
+        padding: 9px 13px;
+        background: #4a90e2;
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: 0.25s;
+    }
+
+    .btn-detail:hover {
+        background: #6fb2ff;
+    }
+
+    .detail {
+        display: none;
+        background: #262a34;
+        padding: 15px;
+        margin-top: 12px;
+        border-radius: 10px;
+        animation: fadeIn 0.4s;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-4px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+        text-align: center;
+        padding: 30px;
+        margin-top: 60px;
+        color: #aaa;
+        font-size: 14px;
+    }
+</style>
+
+<script>
+    function toggleDetail(id) {
+        const box = document.getElementById(id);
+        box.style.display = box.style.display === "block" ? "none" : "block";
+    }
+</script>
+
+</head>
+
+<body>
+
+<header>
+    <h1>고베 여행 가이드</h1>
+    <p>항구·야경·온천·서양식 거리까지 한 번에 즐길 수 있는 관서 지방의 매력 도시</p>
+</header>
+
+<div class="container">
+
+    <!-- ① 도시 소개 -->
+    <h2>① 고베 한눈에 보기</h2>
+    <p>
+        고베는 오사카와 교토 사이에 위치한 항구 도시로, 바다와 산이 가까워 입체적인 도시 풍경을 가진 곳이다.
+        개항 이후 일찍부터 외국 문물이 들어와 서양식 건축과 카페 문화가 발달했으며,
+        하버랜드의 항만 야경, 롯코산의 전망, 아리마 온천의 휴식, 그리고 고베규까지
+        하루 이틀 안에 다양한 여행 스타일을 경험할 수 있다는 점이 특징이다.
+    </p>
+    <p>
+        산노미야·모토마치 일대의 번화가, 항만 재개발로 조성된 메리켄 파크·하버랜드,
+        외국인 거류지였던 기타노 이진칸, 그리고 고베 시내에서 조금 떨어진 아리마 온천까지 연결해
+        “도시 + 바다 + 산 + 온천”을 모두 묶어 여행 루트를 짤 수 있는 것이 고베 여행의 가장 큰 장점이다.
+    </p>
+
+    <!-- ② 핵심 관광지 -->
+    <h2>② 핵심 관광지</h2>
+    <div class="card-grid">
+
+        <!-- 하버랜드 / 메리켄 파크 -->
+        <div class="card">
+            <h3>하버랜드 & 메리켄 파크</h3>
+            <p>고베를 대표하는 항만 야경과 산책 코스.</p>
+            <div class="btn-detail" onclick="toggleDetail('spot1')">상세보기</div>
+            <div class="detail" id="spot1">
+                • 고베 포트타워, 선박 모양 건물, 공원이 어우러진 항만 지구  
+                • 「BE KOBE」 모뉴먼트 앞이 사진 스팟으로 유명  
+                • 밤에는 조명이 켜져 로맨틱한 분위기 연출  
+                • 쇼핑몰 ‘umie’, 바다 뷰 카페·레스토랑 밀집  
+            </div>
+        </div>
+
+        <!-- 기타노 이진칸 -->
+        <div class="card">
+            <h3>기타노 이진칸 거리</h3>
+            <p>서양식 저택과 카페가 모인 이국적인 언덕 마을.</p>
+            <div class="btn-detail" onclick="toggleDetail('spot2')">상세보기</div>
+            <div class="detail" id="spot2">
+                • 개항 이후 외국인 거류지로 사용되던 서양식 저택들이 남아 있는 지역  
+                • 우로코 하우스, 기타노 비이켄 등 다양한 저택을 유료 관람 가능  
+                • 언덕 위라 고베 시내와 바다가 내려다보이는 카페도 존재  
+                • 골목마다 사진 찍기 좋은 스팟이 많아 산책 코스로 인기  
+            </div>
+        </div>
+
+        <!-- 롯코산 -->
+        <div class="card">
+            <h3>롯코산 (Mt. Rokko)</h3>
+            <p>고베·오사카만을 내려다보는 야경 명소.</p>
+            <div class="btn-detail" onclick="toggleDetail('spot3')">상세보기</div>
+            <div class="detail" id="spot3">
+                • 케이블카·버스를 이용해 산 위 전망대까지 이동  
+                • “천만 달러의 야경”이라고 불릴 정도로 야간 조망이 유명  
+                • 롯코 가든 테라스에는 카페·레스토랑·작은 정원이 있어 데이트 코스로도 좋음  
+                • 날씨 좋은 날엔 멀리까지 시야가 트여, 낮 풍경도 매력적  
+            </div>
+        </div>
+
+        <!-- 아리마 온천 -->
+        <div class="card">
+            <h3>아리마 온천</h3>
+            <p>일본 3대 온천 중 하나로 꼽히는 전통 온천 마을.</p>
+            <div class="btn-detail" onclick="toggleDetail('spot4')">상세보기</div>
+            <div class="detail" id="spot4">
+                • 고베 시내에서 전철·버스로 30~40분 거리  
+                • 금천(붉은 색, 철·염분)과 은천(맑은 온천수) 두 종류의 탕이 유명  
+                • 골목마다 온천 여관, 공중목욕탕, 온천 만주 가게 등이 모여 있음  
+                • 온천 후 산책하기 좋은 아담한 마을 구조  
+            </div>
+        </div>
+
+        <!-- 난킨마치(차이나타운) -->
+        <div class="card">
+            <h3>난킨마치 (고베 차이나타운)</h3>
+            <p>거리 음식과 중국풍 분위기가 살아 있는 소규모 차이나타운.</p>
+            <div class="btn-detail" onclick="toggleDetail('spot5')">상세보기</div>
+            <div class="detail" id="spot5">
+                • 모토마치 역 근처에 위치한 차이나타운  
+                • 니쿠만(고기만두), 딤섬, 버블티, 볶음요리 등 간식 먹거리가 풍부  
+                • 규모는 크지 않지만, 짧게 들르기 좋은 코스  
+                • 고베 시내의 다른 지역과 동선 연결이 좋아 점심·간식 코스로 추천  
+            </div>
+        </div>
+
+        <!-- 산노미야·모토마치 -->
+        <div class="card">
+            <h3>산노미야 · 모토마치 상점가</h3>
+            <p>쇼핑과 식당, 카페가 모여 있는 고베 중심 상권.</p>
+            <div class="btn-detail" onclick="toggleDetail('spot6')">상세보기</div>
+            <div class="detail" id="spot6">
+                • 산노미야역 주변은 번화가, 모토마치는 아케이드 상점가 중심  
+                • 로컬 식당·카페·빵집·편집숍 등이 다양하게 분포  
+                • 하버랜드, 난킨마치와 도보·전철로 금방 이동 가능  
+                • 고베 시내를 돌아볼 때 자연스럽게 거치게 되는 중심 축  
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ③ 고베 음식 -->
+    <h2>③ 고베 음식 가이드</h2>
+    <div class="card-grid">
+
+        <!-- 고베규 -->
+        <div class="card">
+            <h3>고베규 (Kobe Beef)</h3>
+            <p>일본을 대표하는 고급 와규 브랜드 중 하나.</p>
+            <div class="btn-detail" onclick="toggleDetail('food1')">상세 설명</div>
+            <div class="detail" id="food1">
+                • 마블링이 고르게 퍼져 있어 육즙과 고소함이 뛰어남  
+                • 스테이크, 철판 구이, 샤브샤브, 스키야키 등 다양한 방식으로 제공  
+                • 산노미야·모토마치·하버랜드 일대에 전문점 다수  
+                • 예산을 정해두고 코스 가격을 비교해 선택하는 것이 좋음  
+            </div>
+        </div>
+
+        <!-- 빵·카페 -->
+        <div class="card">
+            <h3>빵 · 카페 문화</h3>
+            <p>서양식 문화의 영향으로 빵과 카페가 발달한 도시.</p>
+            <div class="btn-detail" onclick="toggleDetail('food2')">상세 설명</div>
+            <div class="detail" id="food2">
+                • 고베는 빵집·파티스리·카페 밀집 도시로도 유명  
+                • 기타노, 산노미야, 모토마치 일대에 감성 있는 카페 많음  
+                • 브런치, 샌드위치, 케이크, 커피 등 메뉴 구성이 서양식에 가깝다  
+            </div>
+        </div>
+
+        <!-- 난킨마치 먹거리 -->
+        <div class="card">
+            <h3>난킨마치 거리 음식</h3>
+            <p>고베 스타일의 중화요리를 간단히 즐길 수 있는 곳.</p>
+            <div class="btn-detail" onclick="toggleDetail('food3')">상세 설명</div>
+            <div class="detail" id="food3">
+                • 손에 들고 먹기 좋은 만두류, 꼬치, 디저트가 많음  
+                • 한국·중국·일본 감성이 섞여 있는 B급 먹거리 천국  
+                • 짧은 시간에 여러 가지를 조금씩 맛보기 좋음  
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ④ 추천 일정 -->
+    <h2>④ 추천 일정 (당일 ~ 1박2일)</h2>
+
+    <div class="card">
+        <h3>당일치기 (오사카/교토에서 이동)</h3>
+        <p>
+            • 오전: 산노미야 도착 → 기타노 이진칸 산책  
+            • 오후: 모토마치·난킨마치에서 점심 및 쇼핑  
+            • 저녁: 하버랜드 & 메리켄 파크 야경 감상  
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>1박 2일 (고베 + 아리마 온천)</h3>
+        <p>
+            <strong>1일차</strong> — 산노미야·모토마치 → 기타노 이진칸 → 하버랜드 야경  
+            <br>
+            <strong>2일차</strong> — 아리마 온천 이동 → 온천 체험 및 마을 산책 → 귀가  
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>야경 중심 코스</h3>
+        <p>
+            • 오후 느지막이 산노미야 도착 → 카페·쇼핑  
+            <br>• 해질 무렵 롯코산 이동 → 전망대에서 야경 감상  
+            <br>• 이후 하버랜드로 내려와 항만 야경 2차 관람  
+        </p>
+    </div>
+
+    <!-- ⑤ 고베 여행 팁 -->
+    <h2>⑤ 고베 여행 팁</h2>
+    <div class="card-grid">
+        <div class="card">
+            <h3>교통</h3>
+            <p>
+                • 오사카(우메다·난바)에서 전철로 약 30~40분 거리  
+                • 산노미야를 기준으로 동네별로 이동 루트를 짜면 편리  
+                • 아리마 온천·롯코산은 버스·전철 환승 필요, 시간 여유 필수  
+            </p>
+        </div>
+        <div class="card">
+            <h3>여행 스타일</h3>
+            <p>
+                • “오사카에서 하루 떼우기”용 도시로도 좋지만,  
+                  온천과 야경까지 즐기려면 1박 정도 여유 있으면 더 좋음.  
+                • 카페·빵·야경·온천을 골고루 섞은 루트가 고베의 장점을 가장 잘 살린다.  
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    © Kobe Travel Guide — Created for Team Project
+</footer>
+
+</body>
+</html>
