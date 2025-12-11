@@ -1,1 +1,46 @@
+<section id="kyoto">
+  <h2>교토 여행 가이드 (Kyoto)</h2>
+  <p>천년 고도로 불리는 교토는 사찰, 신사, 전통 거리, 자연 경관이 조화를 이루는 일본의 대표 역사도시입니다.</p>
+
+  <div class="grid">
+
+    <!-- 1. 기요미즈데라 -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1545569341-9eb8b30979d3?auto=format&fit=crop&w=900&q=60">
+      <p><strong>기요미즈데라</strong> — 교토를 대표하는 절벽 위 사찰로 사계절마다 풍경이 압도적이다.</p>
+    </div>
+
+    <!-- 2. 후시미 이나리 -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=900&q=60">
+      <p><strong>후시미 이나리 센본토리이</strong> — 붉은 토리이가 끝없이 이어지는 교토의 상징.</p>
+    </div>
+
+    <!-- 3. 아라시야마 대나무숲 -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=60">
+      <p><strong>아라시야마 대나무숲</strong> — 초록색 대나무가 하늘까지 뻗어 있는 명소.</p>
+    </div>
+
+    <!-- 4. 금각사 -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1549692520-acc6669e2f0c?auto=format&fit=crop&w=900&q=60">
+      <p><strong>금각사(킨카쿠지)</strong> — 황금으로 빛나는 건물이 연못에 반사되어 아름다운 풍경을 만든다.</p>
+    </div>
+
+    <!-- 5. 은각사 -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1581349481260-487d32e9bf0d?auto=format&fit=crop&w=900&q=60">
+      <p><strong>은각사</strong> — 금각사와 달리 소박하고 서정적인 분위기의 정원으로 유명하다.</p>
+    </div>
+
+    <!-- 6. 기온 거리 -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1505205296326-2178af1b47bf?auto=format&fit=crop&w=900&q=60">
+      <p><strong>기온 거리</strong> — 전통 목조 건물이 남아 있고 게이샤 문화가 유지되는 곳.</p>
+    </div>
+
+    <!-- 7. 철학의 길 -->
+    <div class="card">
+      <img src="https://images.unsplash.com/
 
