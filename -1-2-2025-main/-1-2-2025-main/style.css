@@ -1,0 +1,38 @@
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #f8fafc;
+  color: #333;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #004c8c;
+  color: white;
+  padding: 15px 0;
+}
+
+h1 {
+  margin: 0;
+}
+
+.map-container {
+  margin: 30px auto;
+  width: 90%;
+  max-width: 800px;
+}
+
+img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+footer {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #004c8c;
+  color: white;
+  font-size: 0.9em;
+}
