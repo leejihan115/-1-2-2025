@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>교토 여행 가이드 | Kyoto Travel Guide</title>
+
+  <style>
+    body {
+      background: #020617;
+      color: #e5e7eb;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.7;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(15,23,42,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #1f2937;
+      padding: 0.9rem 1.5rem;
+    }
+    nav {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+    nav .logo {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      padding: 0;
+      margin: 0;
+    }
+    nav a {
+      text-decoration: none;
+      color: #9ca3af;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.86rem;
+    }
+    nav a:hover {
+      background: rgba(56,189,248,0.15);
+      border-color: #38bdf8;
+      color: #e5e7eb;
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1.7rem 1.4rem 3rem;
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0,3fr) minmax(0,2.1fr);
+      gap: 2rem;
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.18), transparent 55%),
+                  radial-gradient(circle at top right, rgba(74,222,128,0.18), transparent 50%),
+                  rgba(15,23,42,0.9);
+      border-radius: 1.6rem;
+      border: 1px solid rgba(148,163,184,0.5);
+      padding: 1.8rem 1.5rem;
+      margin-bottom: 2.4rem;
+    }
+    .hero h1 {margin: 0 0 0.4rem; font-size: clamp(1.9rem, 3vw, 2.4rem);}
+    .hero p {color: #cbd5f5; font-size: 0.94rem; margin-bottom: 0.7rem;}
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 0.6rem;
+    }
+    .tag {
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.7);
+      padding: 0.18rem 0.6rem;
+      font-size: 0.78rem;
+      color: #e5e7eb;
+      background: rgba(15,23,42,0.9);
+    }
+    .hero-note {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      border-left: 2px solid #38bdf8;
+      padding-left: 0.6rem;
+      margin-top: 0.4rem;
+    }
+    .hero-img {
+      position: relative;
+      border-radius: 1.2rem;
+      overflow: hidden;
+      border: 1px solid #1f2933;
+    }
+    .hero-img img {
+      width: 100%;
+      max-height: 280px;
+      object-fit: cover;
+      display: block;
+    }
+    .hero-chip {
+      position: absolute;
+      bottom: 0.85rem;
+      right: 0.85rem;
+      padding: 0.35rem 0.75rem;
+      background: rgba(15,23,42,0.95);
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.7);
+      font-size: 0.78rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: #e5e7eb;
+    }
+    .chip-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 8px rgba(34,197,94,0.9);
+    }
+
+    section {margin-bottom: 2.6rem;}
+    .section-title {font-size: 1.5rem; margin-bottom: 0.3rem;}
+    .section-subtitle {font-size: 0.9rem; color: #9ca3af; margin-bottom: 1rem;}
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap: 0.9rem;
+      margin-top: 0.7rem;
+    }
+    .gallery img {
+      width: 100%;
+      height: 170px;
+      border-radius: 0.9rem;
+      object-fit: cover;
+      border: 1px solid #1f2937;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 1rem;
+    }
+    .card {
+      background: rgba(15,23,42,0.92);
+      border-radius: 1rem;
+      border: 1px solid #1f2937;
+      padding: 1rem 1rem 1.1rem;
+      font-size: 0.9rem;
+    }
+    .card h3 {margin: 0 0 0.35rem; font-size: 1.02rem;}
+    .pill {
+      display: inline-block;
+      font-size: 0.78rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.7);
+      padding: 0.12rem 0.5rem;
+      color: #94a3b8;
+      margin-bottom: 0.4rem;
+    }
+    ul {margin: 0.1rem 0 0.2rem 1.1rem; font-size: 0.88rem;}
+    li {margin-bottom: 0.18rem;}
+
+    .routes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 0.9rem;
+    }
+    .route {
+      background: rgba(15,23,42,0.96);
+      border-radius: 0.9rem;
+      border: 1px solid #1f2937;
+      padding: 0.8rem 0.9rem;
+      font-size: 0.86rem;
+    }
+    .route h4 {margin: 0 0 0.1rem; font-size: 0.95rem;}
+    .route-label {color:#9ca3af; font-size: 0.78rem; margin-bottom: 0.25rem;}
+
+    footer {
+      border-top: 1px solid #1f2937;
+      padding-top: 1rem;
+      font-size: 0.78rem;
+      color: #6b7280;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    @media (max-width: 840px) {
+      .hero {grid-template-columns: 1fr;}
+      .hero-img {order: -1;}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <nav>
+    <div class="logo">Kyoto Travel Guide</div>
+    <ul>
+      <li><a href="#overview">개요</a></li>
+      <li><a href="#higashiyama">히가시야마·기온</a></li>
+      <li><a href="#arashiyama">아라시야마</a></li>
+      <li><a href="#fushimi">후시미 이나리</a></li>
+      <li><a href="#north">금각사·은각사</a></li>
+      <li><a href="#extra">추가 명소</a></li>
+      <li><a href="#food">교토 음식</a></li>
+      <li><a href="#routes">코스</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <h1>교토 여행 가이드 (Kyoto)</h1>
+      <p>
+        교토는 일본의 옛 수도로, 사찰·신사·전통 거리·정원이 도시 곳곳에 펼쳐진 고도(古都)입니다.
+        벚꽃·신록·단풍·설경이 계절마다 완전히 다른 분위기를 만들며,
+        기모노 대여와 전통 카페, 유바·가이세키 같은 음식 문화까지 함께 즐길 수 있는 곳입니다.
+      </p>
+      <div class="hero-tags">
+        <span class="tag">#기요미즈데라</span>
+        <span class="tag">#기온</span>
+        <span class="tag">#아라시야마</span>
+        <span class="tag">#후시미이나리</span>
+        <span class="tag">#금각사</span>
+        <span class="tag">#은각사</span>
+        <span class="tag">#유바</span>
+      </div>
+      <div class="hero-note">
+        사진 경로는 <code>images/kyoto/...</code> 로 설정해 두었습니다.
+        팀에서 직접 촬영한 사진이나 저작권 문제 없는 이미지를 같은 경로에 넣으면 시각자료가 자동으로 채워집니다.
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="images/kyoto/kyoto-hero-gion-street.jpg" alt="기온 전통 거리 야경">
+      <div class="hero-chip">
+        <span class="chip-dot"></span>
+        <span>Gion & Yasaka · Traditional Streets</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section id="overview">
+    <h2 class="section-title">🇯🇵 교토 한눈에 보기</h2>
+    <p class="section-subtitle">
+      전통 거리, 사찰, 신사, 정원이 도시 전체에 펼쳐진 일본의 클래식 이미지 그 자체.
+    </p>
+
+    <div class="card-grid">
+      <article class="card">
+        <h3>도시 특징</h3>
+        <span class="pill">천년 수도</span>
+        <ul>
+          <li>오랫동안 일본의 수도였던 역사로 인해 문화재와 사찰이 매우 많음</li>
+          <li>동쪽(히가시야마)과 서쪽(아라시야마)의 분위기가 극명하게 다름</li>
+          <li>지하철·버스·JR가 골고루 발달해 있지만, 도보·버스 이동 비중이 높은 편</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h3>대표 권역</h3>
+        <span class="pill">권역별 성격</span>
+        <ul>
+          <li>히가시야마·기온: 전통 거리, 기요미즈데라, 야사카 신사</li>
+          <li>아라시야마: 대나무 숲, 산·강 자연 경관</li>
+          <li>후시미: 붉은 센본 토리이</li>
+          <li>북부: 금각사·은각사·철학의 길</li>
+          <li>시내: 니시키 시장, 쇼핑, 카페</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h3>교토 여행 키워드</h3>
+        <span class="pill">여행 타입</span>
+        <ul>
+          <li>전통 · 사찰 · 신사 · 기모노</li>
+          <li>자연 · 산책 · 대나무 숲</li>
+          <li>말차 디저트 · 유바 · 가이세키</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="gallery">
+      <img src="images/kyoto/overview-kiyomizu.jpg" alt="기요미즈데라 전경">
+      <img src="images/kyoto/overview-arashiyama.jpg" alt="아라시야마 도게츠교">
+      <img src="images/kyoto/overview-fushimi.jpg" alt="후시미 이나리 센본 토리이">
+      <img src="images/kyoto/overview-kinkakuji.jpg" alt="금각사 전경">
+    </div>
+  </section>
+
+  <!-- HIGASHIYAMA / GION -->
+  <section id="higashiyama">
+    <h2 class="section-title">🌙 히가시야마 · 기온 · 기요미즈데라</h2>
+    <p class="section-subtitle">
+      교토 하면 떠오르는 전통 거리의 대부분이 모여 있는 지역.
+    </p>
+
+    <div class="card-grid">
+      <article class="card">
+        <h3>기요미즈데라(청수사)</h3>
+        <span class="pill">전망 · 사계절 명소</span>
+        <ul>
+          <li>벼랑 위에 지어진 목조 무대에서 교토 시내를 내려다볼 수 있는 사찰</li>
+          <li>벚꽃·단풍·설경 모두 사진 스팟으로 유명</li>
+          <li>야간 라이트업 시즌에는 완전히 다른 분위기 연출</li>
+        </ul>
+        <div class="gallery">
+          <img src="images/kyoto/higashiyama-kiyomizu1.jpg" alt="기요미즈데라 본당">
+          <img src="images/kyoto/higashiyama-kiyomizu2.jpg" alt="기요미즈데라에서 본 시내 풍경">
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>산넨자카 · 니넨자카</h3>
+        <span class="pill">돌계단 전통 골목</span>
+        <ul>
+          <li>기요미즈데라로 이어지는 전통 돌길 언덕</li>
+          <li>기념품 가게, 찻집, 전통 과자점 등이 줄지어 있음</li>
+          <li>기모노 대여 후 사진 찍기에 가장 인기 있는 거리 중 하나</li>
+        </ul>
+        <div class="gallery">
+          <img src="images/kyoto/higashiyama-sannenzaka.jpg" alt="산넨자카 거리">
+          <img src="images/kyoto/higashiyama-ninenzaka.jpg" alt="니넨자카 거리">
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>기온 · 야사카 신사 · 마루야마 공원</h3>
+        <span class="pill">야간 산책 코스</span>
+        <ul>
+          <li>전통 목조 건물이 이어진 기온 거리(하나미코지 등)</li>
+          <li>야사카 신사와 연결되는 마루야마 공원은 벚꽃 시즌에 특히 유명</li>
+          <li>저녁에 조용히 산책하며 조명 켜진 전통 거리를 감상하기 좋음</li>
+        </ul>
+        <div class="gallery">
+          <img src="images/kyoto/gion-street-night.jpg" alt="기온 야간 거리">
+          <img src="images/kyoto/yasaka-shrine.jpg" alt="야사카 신사">
+          <img src="images/kyoto/maruyama-park-sakura.jpg" alt="마루야마 공원 벚꽃">
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ARASHIYAMA -->
+  <section id="arashiyama">
+    <h2 class="section-title">🎍 아라시야마 · 대나무 숲 · 도게츠교</h2>
+    <p class="section-subtitle">
+      자연·강·산·대나무 숲이 한 번에 모여 있는 교토 서쪽의 대표 자연 명소.
+    </p>
+
+    <div class="card-grid">
+      <article class="card">
+        <h3>아라시야마 대나무 숲</h3>
+        <span class="pill">포토 스팟</span>
+        <ul>
+          <li>하늘까지 뻗은 대나무가 양쪽을 채운 산책로</li>
+          <li>이른 아침 방문 시 비교적 한가롭다는 후기가 많음</li>
+          <li>철길, 소규모 사찰들과 함께 사진 코스 구성 가능</li>
+        </ul>
+        <div class="gallery">
+          <img src="images/kyoto/arashiyama-bamboo1.jpg" alt="대나무 숲 산책로">
+          <img src="images/kyoto/arashiyama-bamboo2.jpg" alt="아라시야마 대나무 숲">
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>도게츠교 & 강가 산책</h3>
+        <span class="pill">사계절 경치</span>
+        <ul>
+          <li>강 위 다리와 산 풍경이 어우러진 아라시야마의 상징적인 장소</li>
+          <li>벚꽃·단풍·설경 어느 계절이든 사진이 잘 나오는 포인트</li>
+          <li>강변 카페, 보트 체험 등과 묶어 코스 구성 가능</li>
+        </ul>
+        <div class="gallery">
+          <img src="images/kyoto/arashiyama-togetsukyo-spring.jpg" alt="벚꽃 시즌 도게츠교">
+          <img src="images/kyoto/arashiyama-togetsukyo-autumn.jpg" alt="단풍 시즌 도게츠교">
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>덴류지 & 주변 사찰</h3>
+        <span class="pill">정원 감상</span>
+        <ul>
+          <li>세계문화유산으로 지정된 대형 사찰</li>
+          <li>본당 툇마루에서 보는 정원·연못 풍경이 유명</li>
+          <li>아라시야마 대나무 숲 입구와 가깝기 때문에 동선이 좋음</li>
+        </ul>
+        <div class="gallery">
+          <img src="images/kyoto/tenryuji-garden.jpg" alt="덴류지 정원">
+          <img src="images/kyoto/tenryuji-pond.jpg" alt="덴류지 연못">
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- FUSHIMI INARI -->
+  <section id="fushimi">
+    <h2 class="section-title">⛩ 후시미 이나리 타이샤</h2>
+    <p class="section-subtitle">
+      붉은 토리이가 산길을 따라 끝없이 이어지는 교토의 상징적인 신사.
+    </p>
+
+    <div class="card-grid">
+      <article class="card">
+        <h3>센본 토리이</h3>
+        <span class="pill">사진 필수</span>
+        <ul>
+          <li>수천 개의 붉은 토리이가 터널처럼 이어진 산책로</li>
+          <li>산 중턱까지 오르는 코스, 정상까지 가는 코스 선택 가능</li>
+          <li>인파를 피하고 싶다면 아침 일찍 방문하는 편이 유리</li>
+        </ul>
+        <div class="gallery">
+          <img src="images/kyoto/fushimi-senbon1.jpg" alt="센본 토리이">
+          <img src="images/kyoto/fushimi-senbon2.jpg" alt="토리이 사이 산책">
+          <img src="images/kyoto/fushimi-gate-view.jpg" alt="후시미 이나리 풍경">
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>본전 주변 & 상점가</h3>
+        <span class="pill">간식 · 음식</span>
+        <ul>
+          <li>신사 입구 주변에는 이나리즈시(유부초밥), 야키토리, 타코야키 등 간식 가게가 모여 있음</li>
+          <li>소원 빌기, 에마·오마모리 구매 등 전통적인 신사 체험 가능</li>
+        </ul>
+        <div class="gallery">
+          <img src="images/kyoto/fushimi-main-shrine.jpg" alt="후시미 이나리 본전">
+          <img src="images/kyoto/fushimi-food-street.jpg" alt="후시미 이나리 상점가">
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- NORTH KYOTO -->
+  <section id="north">
+    <h2 class="section-title">✨ 북교토: 금각사 · 은각사 · 철학의 길</h2>
+    <p class="section-subtitle">
+      사진으로 가장 많이 보는 교토 사찰들이 모여 있는 북부 지역.
+    </p>
+
+    <div class="card-grid">
+      <article class="card">
+        <h3>금각사(킨카쿠지)</h3>
+        <span class="pill">아이코닉 랜드마크</span>
+        <ul>
+          <li>금박으로 덮인 건물이 연못에 비치는 풍경이 포인트</li>
+          <li>동선을 따라 한 방향으로만 관람하는 구조</li>
+        </ul>
+        <div class="gallery">
+          <img src="images/kyoto/kinkakuji-front.jpg" alt="금각사 정면">
+          <img src="images/kyoto/kinkakuji-reflection.jpg" alt="연못에 비친 금각사">
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>은각사(긴카쿠지) & 은사사</h3>
+        <span class="pill">소박한 정원</span>
+        <ul>
+          <li>실제로 은으로 덮여 있지는 않지만, 정원 분위기가 조용하고 차분함</li>
+          <li>모래 정원인 은사사와 언덕 위 전망 포인트가 특징</li>
+        </ul>
+        <div class="gallery">
+          <img src="images/kyoto/ginkakuji-temple.jpg" alt="은각사">
+          <img src="images/kyoto/ginkakuji-garden.jpg" alt="은각사 정원">
+          <img src="images/kyoto/ginkakuji-sand-garden.jpg" alt="은사사 모래정원">
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>철학의 길 & 난젠지 일대</h3>
+        <span class="pill">산책 루트</span>
+        <ul>
+          <li>운하를 따라 벚나무가 늘어선 산책로로, 벚꽃 시즌에 특히 유명</li>
+          <li>난젠지, 에이칸도, 헤이안진구 등 사찰·신사와 동선 연계 가능</li>
+        </ul>
+        <div class="gallery">
+          <img src="images/kyoto/philosophers-path-sakura.jpg" alt="철학의 길 벚꽃">
+          <img src="images/kyoto/nanzenji-aqueduct.jpg" alt="난젠지 수로각">
+          <img src="images/kyoto/heian-jingu.jpg" alt="헤이안진구">
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- EXTRA SPOTS -->
+  <section id="extra">
+    <h2 class="section-title">🧭 추가 추천 명소 (많을수록 좋다고 해서 왕창 넣음)</h2>
+    <p class="section-subtitle">
+      여유가 있거나 2박 이상 머문다면 들를 만한 곳들.
+    </p>
+
+    <div class="card-grid">
+      <article class="card">
+        <h3>니시키 시장</h3>
+        <span class="pill">교토의 부엌</span>
+        <ul>
+          <li>전통 장아찌, 해산물, 두부, 튀김, 디저트 등 먹거리가 가득한 시장</li>
+          <li>교토 특산품, 말차 과자, 오차즈케용 재료 등을 기념품으로 구매하기 좋음</li>
+        </ul>
+        <div class="gallery">
+          <img src="images/kyoto/nishiki-market1.jpg" alt="니시키 시장 내부">
+          <img src="images/kyoto/nishiki-food.jpg" alt="니시키 시장 먹거리">
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>교토역 & 주변 상업지</h3>
+        <span class="pill">현대 + 전통 혼합</span>
+        <ul>
+          <li>교토역 건물 자체가 거대한 쇼핑·음식 공간</li>
+          <li>역 바로 옆 교토 타워 전망대에서 시내 야경 감상 가능</li>
+        </ul>
+        <div class="gallery">
+          <img src="images/kyoto/kyoto-station-inside.jpg" alt="교토역 내부">
+          <img src="images/kyoto/kyoto-tower-night.jpg" alt="교토 타워 야경">
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>기모노 대여 & 전통 카페</h3>
+        <span class="pill">체험형 코스</span>
+        <ul>
+          <li>히가시야마·기온 일대에 기모노 대여점이 많음</li>
+          <li>말차와 와가시(전통 과자)를 함께 즐기는 카페도 다수</li>
+        </ul>
+        <div class="gallery">
+          <img src="images/kyoto/kimono-rental-street.jpg" alt="기모노 입고 걷는 풍경">
+          <img src="images/kyoto/matcha-cafe.jpg" alt="교토 말차 카페">
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- FOOD -->
+  <section id="food">
+    <h2 class="section-title">🍱 교토 대표 음식·디저트</h2>
+    <p class="section-subtitle">
+      유바·유도후·가이세키·오반자이·말차 디저트 등, 교토 특유의 담백하고 정갈한 음식들.
+    </p>
+
+    <div class="gallery">
+      <img src="images/kyoto/food-yuba.jpg" alt="유바 요리">
+      <img src="images/kyoto/food-yudofu.jpg" alt="유도후 나베">
+      <img src="images/kyoto/food-kaiseki.jpg" alt="가이세키 요리">
+      <img src="images/kyoto/food-obanzai.jpg" alt="오반자이 가정식">
+      <img src="images/kyoto/food-matcha-parfait.jpg" alt="말차 파르페">
+      <img src="images/kyoto/food-wagashi.jpg" alt="와가시 전통 과자">
+    </div>
+
+    <ul>
+      <li><strong>유바</strong> – 끓인 두유에서 생기는 막을 활용한 요리. 정식·덮밥·사시미 스타일 등.</li>
+      <li><strong>유도후</strong> – 두부를 육수에 데워 먹는 심플한 두부 요리. 아라시야마 등 사찰 주변에서 유명.</li>
+      <li><strong>가이세키</strong> – 계절 재료 중심의 코스 요리. 료칸·고급 식당에서 제공.</li>
+      <li><strong>오반자이</strong> – 교토식 가정식 반찬·요리. 작은 접시에 여러 가지가 조금씩 나오는 스타일.</li>
+      <li><strong>말차 디저트</strong> – 우지 말차를 활용한 파르페, 아이스크림, 케이크.</li>
+      <li><strong>와가시</strong> – 계절과 테마를 반영한 전통 과자. 말차와 함께 제공되는 경우가 많음.</li>
+    </ul>
+  </section>
+
+  <!-- ROUTES -->
+  <section id="routes">
+    <h2 class="section-title">🗺 교토 추천 코스 예시</h2>
+    <p class="section-subtitle">
+      실제 이동 시간·교통 상황은 별도 확인이 필요하고, 여기는 구조만 참고하면 됨.
+    </p>
+
+    <div class="routes">
+      <div class="route">
+        <h4>● 교토 1일 핵심 코스</h4>
+        <div class="route-label">처음 가보는 사람 기준</div>
+        <div>
+          오전: 후시미 이나리 센본 토리이<br>
+          오후: 기요미즈데라 → 산넨자카·니넨자카 → 기온 거리<br>
+          저녁: 야사카 신사·마루야마 공원 일대 야간 산책 + 말차 디저트
+        </div>
+      </div>
+
+      <div class="route">
+        <h4>● 교토 2일 자연·전통 코스</h4>
+        <div class="route-label">아라시야마 포함</div>
+        <div>
+          1일차: 아라시야마 대나무 숲 → 덴류지 → 도게츠교 & 강변 산책<br>
+          2일차: 금각사 → 은각사 → 철학의 길 → 난젠지·헤이안진구 일대
+        </div>
+      </div>
+
+      <div class="route">
+        <h4>● 먹방 + 시장 + 시내 코스</h4>
+        <div class="route-label">음식 위주</div>
+        <div>
+          오전: 니시키 시장 먹거리 투어<br>
+          오후: 교토역 주변 쇼핑·카페 → 교토 타워<br>
+          저녁: 기온 or 시내 이자카야 + 말차 디저트 카페
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>Kyoto Mini Homepage · Kansai Region · Team GitHub Project</div>
+    <div>Static HTML · 시각자료 다수 포함 버전</div>
+  </footer>
+</main>
+</body>
+</html>
