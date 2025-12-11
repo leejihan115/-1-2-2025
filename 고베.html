@@ -27,8 +27,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 0.6rem;
       flex-wrap: wrap;
+      gap: 0.6rem;
     }
     nav .logo {font-weight: 700;}
     nav ul {
@@ -36,8 +36,8 @@
       display: flex;
       flex-wrap: wrap;
       gap: 0.4rem;
-      margin: 0;
       padding: 0;
+      margin: 0;
     }
     nav a {
       text-decoration: none;
@@ -84,27 +84,42 @@
     }
     section {margin-bottom: 2.4rem;}
     h2 {font-size: 1.5rem; margin-bottom: 0.4rem;}
-    .sub {font-size: 0.9rem; color: #9ca3af; margin-bottom: 0.9rem;}
+    .sub {font-size: 0.9rem; color: #9ca3af; margin-bottom: 0.8rem;}
+    ul {margin-left: 1.1rem; font-size: 0.9rem;}
+    li {margin-bottom: 0.25rem;}
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
+      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
       gap: 0.9rem;
+      margin-top: 0.7rem;
     }
     .gallery img {
       width: 100%;
-      height: 170px;
+      height: 180px;
       object-fit: cover;
       border-radius: 0.9rem;
       border: 1px solid #1f2937;
     }
-    ul {margin-left: 1.1rem; font-size: 0.9rem;}
-    li {margin-bottom: 0.25rem;}
+    .routes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 0.9rem;
+    }
+    .route {
+      background: rgba(15,23,42,0.9);
+      border-radius: 0.9rem;
+      border: 1px solid #1f2937;
+      padding: 0.8rem 0.9rem;
+      font-size: 0.86rem;
+    }
+    .route h3 {margin: 0 0 0.2rem; font-size: 0.96rem;}
+    .route-label {color:#9ca3af; font-size: 0.8rem; margin-bottom: 0.3rem;}
     footer {
       margin-top: 2rem;
       padding-top: 1rem;
       border-top: 1px solid #1f2937;
-      font-size: 0.8rem;
       color: #6b7280;
+      font-size: 0.8rem;
     }
     @media (max-width: 840px) {
       .hero {grid-template-columns: 1fr;}
@@ -120,7 +135,8 @@
       <li><a href="#harbor">하버랜드</a></li>
       <li><a href="#kitano">기타노</a></li>
       <li><a href="#arima">아리마 온천</a></li>
-      <li><a href="#food">고베 음식</a></li>
+      <li><a href="#food">음식</a></li>
+      <li><a href="#routes">코스</a></li>
     </ul>
   </nav>
 </header>
@@ -131,9 +147,8 @@
     <div>
       <h1>고베 여행 가이드 (Kobe)</h1>
       <p>
-        고베는 항구와 산, 서양식 건축, 온천이 모두 모여 있는 도시입니다.
-        하버랜드의 항만 야경, 기타노 이진칸의 이국적인 거리,
-        롯코산과 아리마 온천까지 하루·1박2일 코스로 즐기기 좋습니다.
+        고베는 바다와 산, 서양식 거리와 온천이 모두 모여 있는 도시입니다.
+        하버랜드의 항만 야경, 기타노 이진칸의 이국적인 분위기, 아리마 온천의 휴식을 한 번에 즐길 수 있습니다.
       </p>
       <div class="tags">
         <span class="tag">#하버랜드</span>
@@ -142,62 +157,101 @@
         <span class="tag">#고베규</span>
       </div>
     </div>
-    <img src="images/kobe/kobe-hero.jpg" alt="고베 항만 야경">
+    <img src="images/kobe-hero.jpg" alt="고베 하버 야경">
   </section>
 
-  <!-- 개요 (3장) -->
+  <!-- 개요 (2장 중 2장) -->
   <section id="overview">
     <h2>🇯🇵 고베 한눈에 보기</h2>
-    <p class="sub">항구·산·온천이 조합된 관서 지방의 매력적인 도시.</p>
+    <p class="sub">
+      항구 도시 특유의 개방적인 분위기와 산·온천이 조합된 관서 지방의 매력적인 여행지입니다.
+    </p>
     <ul>
-      <li>하버랜드·메리켄 파크: 항만 야경과 산책</li>
-      <li>기타노 이진칸: 서양식 저택이 모인 언덕 마을</li>
-      <li>아리마 온천: 일본 3대 온천 중 하나</li>
+      <li>하버랜드: 항만 야경과 쇼핑·카페가 모여 있는 수변 구역</li>
+      <li>기타노 이진칸: 서양식 건축물이 모인 언덕 마을</li>
+      <li>아리마 온천: 일본 3대 온천 중 하나로 꼽히는 전통 온천 마을</li>
     </ul>
     <div class="gallery">
-      <img src="images/kobe/overview-harbor.jpg" alt="고베 항만 풍경">
-      <img src="images/kobe/overview-kitano.jpg" alt="기타노 거리">
-      <img src="images/kobe/overview-arima.jpg" alt="아리마 온천 마을">
+      <img src="images/kobe-harbor.jpg" alt="고베 하버랜드 전경">
+      <img src="images/kobe-kitano.jpg" alt="기타노 이진칸 거리 풍경">
     </div>
   </section>
 
-  <!-- 하버랜드 (2장) -->
+  <!-- 하버랜드 -->
   <section id="harbor">
     <h2>🌃 하버랜드 · 메리켄 파크</h2>
-    <p class="sub">고베를 대표하는 항만 야경 구역.</p>
-    <div class="gallery">
-      <img src="images/kobe/harborland-night.jpg" alt="하버랜드 야경">
-      <img src="images/kobe/be-kobe.jpg" alt="BE KOBE 모뉴먼트">
-    </div>
+    <p class="sub">
+      포트타워, BE KOBE 모뉴먼트, 대관람차 등이 모여 있는 대표 야경 구역입니다.
+    </p>
+    <ul>
+      <li>해질녘에 가면 바다와 도시 불빛이 함께 어우러진 풍경을 볼 수 있음</li>
+      <li>바다를 보며 식사할 수 있는 레스토랑·카페가 많아 데이트 코스로도 인기</li>
+    </ul>
   </section>
 
-  <!-- 기타노 (2장) -->
+  <!-- 기타노 -->
   <section id="kitano">
     <h2>🏠 기타노 이진칸 거리</h2>
-    <p class="sub">서양식 저택과 카페가 모여 있는 언덕 마을.</p>
-    <div class="gallery">
-      <img src="images/kobe/kitano-house.jpg" alt="기타노 서양식 저택">
-      <img src="images/kobe/kitano-street.jpg" alt="기타노 거리 풍경">
-    </div>
+    <p class="sub">
+      서양인 거류지였던 역사를 가진 언덕 마을로, 유럽풍 저택과 카페가 모여 있습니다.
+    </p>
+    <ul>
+      <li>우로코 하우스 등 서양식 저택 내부를 관람할 수 있는 시설 존재</li>
+      <li>언덕 위 카페에서 고베 시내와 바다를 내려다볼 수 있음</li>
+    </ul>
   </section>
 
-  <!-- 아리마 온천 (2장) -->
+  <!-- 아리마 온천 (1장) -->
   <section id="arima">
     <h2>♨ 아리마 온천</h2>
-    <p class="sub">금천·은천으로 유명한 전통 온천 마을.</p>
+    <p class="sub">
+      금천·은천으로 유명한 전통 온천 마을로, 고베 시내에서 비교적 가까운 거리에 위치합니다.
+    </p>
+    <ul>
+      <li>온천 여관과 공중목욕탕이 골목 사이사이에 자리 잡은 구조</li>
+      <li>온천만주, 탄산음료 등 온천 거리 특유의 간식도 즐길 수 있음</li>
+    </ul>
     <div class="gallery">
-      <img src="images/kobe/arima-town.jpg" alt="아리마 온천 마을 거리">
-      <img src="images/kobe/arima-bath.jpg" alt="온천 탕 내부">
+      <img src="images/kobe-arima.jpg" alt="아리마 온천 마을 골목">
     </div>
   </section>
 
-  <!-- 음식 (2장) -->
+  <!-- 음식 (1장) -->
   <section id="food">
     <h2>🍽 고베 대표 음식</h2>
-    <p class="sub">고베규와 빵·카페 문화로 유명한 도시.</p>
+    <p class="sub">
+      고급 와규인 고베규와 빵·카페 문화가 유명한 도시입니다.
+    </p>
     <div class="gallery">
-      <img src="images/kobe/food-kobe-beef.jpg" alt="고베규 스테이크">
-      <img src="images/kobe/food-bakery.jpg" alt="고베 베이커리">
+      <img src="images/kobe-food.jpg" alt="고베규 스테이크">
+    </div>
+    <ul>
+      <li><strong>고베규</strong> – 스테이크·샤브샤브·스키야키 등 다양한 스타일로 즐길 수 있는 고급 소고기</li>
+      <li><strong>베이커리·카페</strong> – 서양식 문화 영향으로 감각적인 빵집과 카페가 많음</li>
+    </ul>
+  </section>
+
+  <!-- 코스 -->
+  <section id="routes">
+    <h2>🗺 고베 추천 코스</h2>
+    <div class="routes">
+      <div class="route">
+        <h3>고베 1일 핵심 코스</h3>
+        <div class="route-label">당일치기</div>
+        <div>
+          오전: 기타노 이진칸 거리 산책<br>
+          오후: 산노미야·모토마치 주변 카페·쇼핑<br>
+          저녁: 하버랜드·메리켄 파크 야경
+        </div>
+      </div>
+      <div class="route">
+        <h3>고베 + 아리마 온천 코스</h3>
+        <div class="route-label">휴식 중심</div>
+        <div>
+          1일차: 고베 시내(기타노·하버랜드) 관광<br>
+          2일차: 아리마 온천에서 온천욕·골목 산책
+        </div>
+      </div>
     </div>
   </section>
 
