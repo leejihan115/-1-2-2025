@@ -1,127 +1,54 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>오사카 여행 가이드</title>
-  <style>
-    body { background:#020617; color:#e2e8f0; font-family:system-ui, sans-serif; margin:0; line-height:1.7; }
-    header { position:sticky; top:0; z-index:20; background:#020617; border-bottom:1px solid #1f2937; padding:0.9rem 1.7rem; }
-    nav { max-width:1120px; margin:0 auto; display:flex; gap:1rem; align-items:center; }
-    nav a { color:#9ca3af; text-decoration:none; font-size:0.9rem; padding:0.3rem 0.7rem; border-radius:999px; }
-    nav a:hover { background:#1f2937; color:#e2e8f0; }
-    main { max-width:1120px; margin:0 auto; padding:1.7rem 1.7rem 3rem; }
-
-    .hero { display:grid; grid-template-columns:minmax(0,3fr) minmax(0,2fr); gap:1.5rem; margin-bottom:2.2rem;
-            background:radial-gradient(circle at top, rgba(56,189,248,0.25), transparent 55%), #020617;
-            border-radius:1.5rem; border:1px solid #1f2937; padding:1.6rem; }
-    .hero h1 { margin:0 0 0.4rem; font-size:clamp(1.9rem, 3vw, 2.5rem); }
-    .hero p { margin:0.3rem 0 0.8rem; color:#cbd5f5; font-size:0.95rem; }
-    .hero-tags { display:flex; flex-wrap:wrap; gap:0.4rem; }
-    .tag { border-radius:999px; border:1px solid #334155; padding:0.18rem 0.6rem; font-size:0.78rem; }
-    .hero img { width:100%; height:260px; object-fit:cover; border-radius:1.1rem; border:1px solid #1f2937; }
-
-    section { margin-bottom:2.6rem; }
-    h2 { font-size:1.6rem; margin-bottom:0.4rem; }
-    .subtitle { font-size:0.93rem; color:#9ca3af; margin-bottom:1rem; }
-
-    .card { background:#020617; border-radius:1rem; border:1px solid #1f2937;
-            padding:1rem 1.1rem; font-size:0.9rem; }
-
-    .gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-               gap:0.9rem; margin-top:1.1rem; }
-    .gallery img { width:100%; height:160px; object-fit:cover; border-radius:0.9rem; border:1px solid #1f2937; }
-
-    footer { border-top:1px solid #1f2937; padding-top:1rem; font-size:0.8rem; color:#6b7280; }
-    @media (max-width:840px){ .hero{grid-template-columns:1fr;} }
-  </style>
-</head>
-<body>
-<header>
-  <nav>
-    <span style="font-weight:700;">Osaka Travel Guide</span>
-    <a href="#overview">개요</a>
-    <a href="#gallery">사진 갤러리</a>
-    <a href="#food">음식</a>
-  </nav>
-</header>
-
-<main>
-  <!-- HERO (이미지 1장) -->
-  <section class="hero">
-    <div>
-      <h1>오사카 여행 가이드</h1>
-      <p>
-        미식 · 쇼핑 · 유흥 · 엔터테인먼트가 모두 모여 있는 간사이의 중심 도시.
-        도톤보리, 우메다, 신세카이, USJ, 오사카성까지 다양한 여행 스타일을 한 번에 즐길 수 있다.
-      </p>
-      <div class="hero-tags">
-        <span class="tag">#도톤보리</span>
-        <span class="tag">#우메다</span>
-        <span class="tag">#신세카이</span>
-        <span class="tag">#USJ</span>
-        <span class="tag">#쿠이다오레</span>
-      </div>
-    </div>
-    <div>
-      <img src="https://source.unsplash.com/1600x1000/?osaka,night,city&sig=1" alt="오사카 야경">
-    </div>
-  </section>
-
-  <!-- OVERVIEW -->
-  <section id="overview">
-    <h2>오사카 한눈에 보기</h2>
-    <p class="subtitle">
-      활기찬 야경, 강렬한 간판, 저렴한 먹거리와 테마파크까지 겹쳐 있는 도시.
-    </p>
-    <div class="card">
-      오사카는 “먹다 지친다”라는 뜻의 쿠이다오레로 불릴 만큼 음식 문화가 발달해 있고,
-      난바·도톤보리 일대의 불야성과 우메다의 현대적인 스카이라인, 오사카성 공원의 역사적인 풍경까지
-      다양한 매력을 가진 도시이다.
-    </div>
-  </section>
-
-  <!-- GALLERY (이미지 19장) -->
+  <!-- GALLERY (이미지 대신 텍스트 카드) -->
   <section id="gallery">
     <h2>오사카 이미지 갤러리</h2>
-    <p class="subtitle">도톤보리, 신사이바시, 우메다, 신세카이, 시장과 음식 중심으로 구성.</p>
-    <div class="gallery">
-      <!-- 2 ~ 20 = 19장 -->
-      <img src="https://source.unsplash.com/1600x1000/?osaka,dotonbori,neon&sig=2"  alt="도톤보리 야경">
-      <img src="https://source.unsplash.com/1600x1000/?osaka,night,street&sig=3"  alt="오사카 거리 야경">
-      <img src="https://source.unsplash.com/1600x1000/?osaka,cityscape&sig=4"    alt="오사카 스카이라인">
-      <img src="https://source.unsplash.com/1600x1000/?osaka,umeda,building&sig=5" alt="우메다 빌딩">
-      <img src="https://source.unsplash.com/1600x1000/?osaka,castle,japan&sig=6"  alt="오사카성">
-      <img src="https://source.unsplash.com/1600x1000/?osaka,shrine&sig=7"       alt="오사카 신사">
-      <img src="https://source.unsplash.com/1600x1000/?osaka,temple&sig=8"       alt="사찰 풍경">
-      <img src="https://source.unsplash.com/1600x1000/?osaka,street,shop&sig=9"  alt="상점가 풍경">
-      <img src="https://source.unsplash.com/1600x1000/?osaka,market,food&sig=10" alt="시장 음식">
-      <img src="https://source.unsplash.com/1600x1000/?osaka,kuromon,market&sig=11" alt="쿠로몬 시장">
-      <img src="https://source.unsplash.com/1600x1000/?osaka,shinsekai&sig=12"   alt="신세카이">
-      <img src="https://source.unsplash.com/1600x1000/?osaka,tsutenkaku,tower&sig=13" alt="츠텐카쿠">
-      <img src="https://source.unsplash.com/1600x1000/?osaka,usj,themepark&sig=14" alt="USJ 분위기">
-      <img src="https://source.unsplash.com/1600x1000/?osaka,takoyaki,food&sig=15" alt="타코야키">
-      <img src="https://source.unsplash.com/1600x1000/?osaka,okonomiyaki&sig=16" alt="오코노미야키">
-      <img src="https://source.unsplash.com/1600x1000/?osaka,kushikatsu&sig=17"  alt="쿠시카츠">
-      <img src="https://source.unsplash.com/1600x1000/?osaka,ramen&sig=18"       alt="라멘">
-      <img src="https://source.unsplash.com/1600x1000/?osaka,harbor,bridge&sig=19" alt="항만 풍경">
-      <img src="https://source.unsplash.com/1600x1000/?osaka,nightview,city&sig=20" alt="야경 전경">
+    <p class="subtitle">
+      사진 대신, 각 칸이 “이미지+설명” 역할을 하는 카드로 구성되어 있음.
+    </p>
+
+    <style>
+      .fake-gallery {
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+        gap:0.9rem;
+        margin-top:1.1rem;
+      }
+      .fake-img {
+        border-radius:0.9rem;
+        border:1px solid #1f2937;
+        background:linear-gradient(135deg,#0f172a,#020617);
+        height:160px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+        padding:0.8rem;
+        font-size:0.9rem;
+        color:#e5e7eb;
+      }
+      .fake-img span {
+        opacity:0.9;
+      }
+    </style>
+
+    <div class="fake-gallery">
+      <div class="fake-img"><span>도톤보리 야경 · 글리코 사인과 네온 간판이 강가를 따라 늘어선 오사카 대표 거리</span></div>
+      <div class="fake-img"><span>신사이바시 아케이드 · 쇼핑과 카페, 잡화점이 가득한 실내 상점가</span></div>
+      <div class="fake-img"><span>우메다 스카이빌딩 · 공중정원 전망대에서 내려다보는 오사카 시내 전경</span></div>
+      <div class="fake-img"><span>오사카성 공원 · 성과 벚꽃, 잔디광장이 어우러진 도심 공원</span></div>
+      <div class="fake-img"><span>신세카이 · 츠텐카쿠 타워와 레트로 간판들이 가득한 거리</span></div>
+      <div class="fake-img"><span>쿠로몬 시장 · 신선한 해산물과 과일, 길거리 음식이 유명한 시장</span></div>
+      <div class="fake-img"><span>USJ(유니버셜 스튜디오 재팬) · 닌텐도 월드와 해리포터 마을이 있는 테마파크</span></div>
+      <div class="fake-img"><span>아베노 하루카스 · 전망대에서 보는 야경과 대형 쇼핑몰</span></div>
+      <div class="fake-img"><span>도톤보리 타코야키 · 길거리에서 바로 구워 파는 오사카 대표 간식</span></div>
+      <div class="fake-img"><span>오코노미야키 · 철판 위에서 바로 구워 먹는 오사카식 부침 요리</span></div>
+      <div class="fake-img"><span>쿠시카츠 · 튀김 꼬치와 전용 소스를 즐길 수 있는 신세카이 명물</span></div>
+      <div class="fake-img"><span>회전초밥 · 가성비 좋게 초밥을 즐길 수 있는 체인점들</span></div>
+      <div class="fake-img"><span>난카이 난바역 주변 · 숙소·식당·쇼핑이 몰려 있는 여행의 중심지</span></div>
+      <div class="fake-img"><span>나카노시마 공원 · 강과 건물이 어우러진 도심 속 산책 코스</span></div>
+      <div class="fake-img"><span>우메다 지하상가 · 비 오는 날에도 이동하기 편한 지하 쇼핑존</span></div>
+      <div class="fake-img"><span>밤의 도톤보리 크루즈 · 강 위에서 바라보는 네온사인 야경</span></div>
+      <div class="fake-img"><span>이자카야 골목 · 회사원들이 퇴근 후 모여 술과 안주를 즐기는 거리</span></div>
+      <div class="fake-img"><span>게임센터 & 프라모델 샵 · 일본 오타쿠 문화 체험 공간</span></div>
+      <div class="fake-img"><span>카페 거리 · 감성 카페와 디저트 가게들이 모인 작은 골목</span></div>
     </div>
   </section>
-
-  <!-- FOOD -->
-  <section id="food">
-    <h2>오사카 대표 음식 한 줄 요약</h2>
-    <div class="card">
-      타코야키, 오코노미야키, 쿠시카츠, 값싼 이자카야 메뉴들이 가득한 “먹방 도시”로,
-      도톤보리와 신세카이 일대에서 대부분의 대표 음식을 경험할 수 있다.
-    </div>
-  </section>
-
-  <footer>
-    Osaka · Kansai Travel Mini Homepage
-  </footer>
-</main>
-</body>
-</html>
-
