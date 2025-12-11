@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>일본 여행 지도 - 홈</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        /* 1. 지도를 감싸는 컨테이너 설정 */
+        .map-container {
+            position: relative; /* **핵심: 자식 요소(버튼)의 위치 기준이 됩니다.** */
+            display: inline-block; /* 컨테이너 크기를 이미지 크기에 맞춥니다. */
+            max-width: 800px; /* 최대 너비를 지정하여 반응형으로 만듭니다 (선택 사항) */
+            margin: 20px auto;
+        }
+
+        /* 이미지 스타일 */
+        .map-container img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* 2. 버튼 공통 스타일 설정 */
+        .map-button {
+            position: absolute; /* **핵심: 부모 요소(.map-container)를 기준으로 위치를 지정합니다.** */
+            display: block;
+            background-color: #FF5733; /* 버튼 배경색 */
+            color: white; /* 버튼 글자색 */
+            padding: 8px 15px;
+            border-radius: 20px; /* 둥근 모서리 */
+            text-decoration: none; /* 밑줄 제거 */
+            font-weight: bold;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s;
+            z-index: 10; /* 버튼이 지도보다 위에 보이도록 */
+        }
+        
+        .map-button:hover {
+            background-color: #C70039;
+        }
+
+        /* 3. 각 지역 버튼의 위치 지정 */
+        
+        /* 도쿄 버튼 위치 (예시 좌표) */
+        .tokyo-button {
+            top: 25%; /* 이미지 상단에서 25% 지점 */
+            left: 70%; /* 이미지 왼쪽에서 70% 지점 */
+            transform: translate(-50%, -50%); /* 버튼의 정중앙이 지정된 위치에 오도록 보정 */
+        }
+
+        /* 교토 버튼 위치 (예시 좌표) */
+        .kyoto-button {
+            top: 55%; /* 이미지 상단에서 55% 지점 */
+            left: 40%; /* 이미지 왼쪽에서 40% 지점 */
+            transform: translate(-50%, -50%); 
+        }
+
+        /* 필요하다면 다른 지역 버튼도 추가 */
+        /*
+        .osaka-button {
+            top: 58%;
+            left: 38%;
+            transform: translate(-50%, -50%);
+        }
+        */
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🗾 일본 여행지 선택하기</h1>
+        <p>지도 위의 버튼을 눌러 상세 정보를 확인하세요!</p>
+    </header>
+
+    <main class="map-container">
+        <img src="map.jpg" alt="일본 지도">
+        
+        <a href="tokyo.html" class="map-button tokyo-button">도쿄 소개</a>
+        
+        <a href="kyoto.html" class="map-button kyoto-button">교토 소개</a>
+        
+        </main>
+    
+    <footer>
+        <p>Copyright &copy; 여행지 소개</p>
+    </footer>
+
+</body>
+</html>
