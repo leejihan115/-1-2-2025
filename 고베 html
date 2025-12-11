@@ -1,1 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>고베 여행 가이드</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: #0f1117;
+        color: white;
+        font-family: "Pretendard", sans-serif;
+        line-height: 1.6;
+    }
+
+    header {
+        padding: 40px;
+        text-align: center;
+        background: linear-gradient(135deg, #1e3c72, #2a5298, #4a90e2);
+        color: white;
+    }
+
+    h1 { font-size: 46px; margin-bottom: 10px; }
+    h2 { font-size: 30px; margin-top: 60px; }
+
+    .container {
+        width: 90%;
+        max-width: 1100px;
+        margin: auto;
+    }
+
+    .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px
 
