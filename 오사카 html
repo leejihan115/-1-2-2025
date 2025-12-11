@@ -1,54 +1,170 @@
-  <!-- GALLERY (이미지 대신 텍스트 카드) -->
-  <section id="gallery">
-    <h2>오사카 이미지 갤러리</h2>
-    <p class="subtitle">
-      사진 대신, 각 칸이 “이미지+설명” 역할을 하는 카드로 구성되어 있음.
-    </p>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>오사카 여행 가이드</title>
 
-    <style>
-      .fake-gallery {
-        display:grid;
-        grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-        gap:0.9rem;
-        margin-top:1.1rem;
-      }
-      .fake-img {
-        border-radius:0.9rem;
-        border:1px solid #1f2937;
-        background:linear-gradient(135deg,#0f172a,#020617);
-        height:160px;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        text-align:center;
-        padding:0.8rem;
-        font-size:0.9rem;
-        color:#e5e7eb;
-      }
-      .fake-img span {
-        opacity:0.9;
-      }
-    </style>
+<style>
+  body {
+    background: #0f172a;
+    color: #e2e8f0;
+    margin: 0;
+    font-family: system-ui, sans-serif;
+  }
 
-    <div class="fake-gallery">
-      <div class="fake-img"><span>도톤보리 야경 · 글리코 사인과 네온 간판이 강가를 따라 늘어선 오사카 대표 거리</span></div>
-      <div class="fake-img"><span>신사이바시 아케이드 · 쇼핑과 카페, 잡화점이 가득한 실내 상점가</span></div>
-      <div class="fake-img"><span>우메다 스카이빌딩 · 공중정원 전망대에서 내려다보는 오사카 시내 전경</span></div>
-      <div class="fake-img"><span>오사카성 공원 · 성과 벚꽃, 잔디광장이 어우러진 도심 공원</span></div>
-      <div class="fake-img"><span>신세카이 · 츠텐카쿠 타워와 레트로 간판들이 가득한 거리</span></div>
-      <div class="fake-img"><span>쿠로몬 시장 · 신선한 해산물과 과일, 길거리 음식이 유명한 시장</span></div>
-      <div class="fake-img"><span>USJ(유니버셜 스튜디오 재팬) · 닌텐도 월드와 해리포터 마을이 있는 테마파크</span></div>
-      <div class="fake-img"><span>아베노 하루카스 · 전망대에서 보는 야경과 대형 쇼핑몰</span></div>
-      <div class="fake-img"><span>도톤보리 타코야키 · 길거리에서 바로 구워 파는 오사카 대표 간식</span></div>
-      <div class="fake-img"><span>오코노미야키 · 철판 위에서 바로 구워 먹는 오사카식 부침 요리</span></div>
-      <div class="fake-img"><span>쿠시카츠 · 튀김 꼬치와 전용 소스를 즐길 수 있는 신세카이 명물</span></div>
-      <div class="fake-img"><span>회전초밥 · 가성비 좋게 초밥을 즐길 수 있는 체인점들</span></div>
-      <div class="fake-img"><span>난카이 난바역 주변 · 숙소·식당·쇼핑이 몰려 있는 여행의 중심지</span></div>
-      <div class="fake-img"><span>나카노시마 공원 · 강과 건물이 어우러진 도심 속 산책 코스</span></div>
-      <div class="fake-img"><span>우메다 지하상가 · 비 오는 날에도 이동하기 편한 지하 쇼핑존</span></div>
-      <div class="fake-img"><span>밤의 도톤보리 크루즈 · 강 위에서 바라보는 네온사인 야경</span></div>
-      <div class="fake-img"><span>이자카야 골목 · 회사원들이 퇴근 후 모여 술과 안주를 즐기는 거리</span></div>
-      <div class="fake-img"><span>게임센터 & 프라모델 샵 · 일본 오타쿠 문화 체험 공간</span></div>
-      <div class="fake-img"><span>카페 거리 · 감성 카페와 디저트 가게들이 모인 작은 골목</span></div>
+  header {
+    padding: 1.5rem;
+    font-size: 2rem;
+    font-weight: 700;
+    border-bottom: 1px solid #1e293b;
+  }
+
+  .section {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  .section h2 {
+    font-size: 1.8rem;
+    margin-bottom: .5rem;
+  }
+
+  .section p {
+    color: #94a3b8;
+    margin-bottom: 1.5rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.3rem;
+  }
+
+  .card {
+    background: #1e293b;
+    border-radius: 0.8rem;
+    overflow: hidden;
+    border: 1px solid #334155;
+  }
+
+  .card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .card .info {
+    padding: 1rem;
+    font-size: 1rem;
+    color: #e2e8f0;
+  }
+</style>
+</head>
+<body>
+
+<header>오사카 여행 가이드</header>
+
+<section class="section">
+  <h2>오사카 한눈에 보기</h2>
+  <p>활기찬 야경, 미식, 쇼핑, 엔터테인먼트가 모두 결합된 간사이의 대표 도시.</p>
+
+  <div class="grid">
+
+    <!-- 1 -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=900&q=60">
+      <div class="info">도톤보리 야경</div>
     </div>
-  </section>
+
+    <!-- 2 -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=900&q=60">
+      <div class="info">글리코 사인 거리</div>
+    </div>
+
+    <!-- 3 -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?auto=format&fit=crop&w=900&q=60">
+      <div class="info">신사이바시 쇼핑 거리</div>
+    </div>
+
+    <!-- 4 -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1503891450247-ee5f8ec46dc7?auto=format&fit=crop&w=900&q=60">
+      <div class="info">우메다 스카이빌딩</div>
+    </div>
+
+    <!-- 5 -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=900&q=60">
+      <div class="info">오사카성 공원</div>
+    </div>
+
+    <!-- 6 -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1526491109672-74740652b963?auto=format&fit=crop&w=900&q=60">
+      <div class="info">오사카성 외부 모습</div>
+    </div>
+
+    <!-- 7 -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=900&q=60">
+      <div class="info">벚꽃 시즌 오사카성</div>
+    </div>
+
+    <!-- 8 -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1518544801958-efcbf8a7ec10?auto=format&fit=crop&w=900&q=60">
+      <div class="info">츠텐카쿠 타워</div>
+    </div>
+
+    <!-- 9 -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1554797589-7241bb691973?auto=format&fit=crop&w=900&q=60">
+      <div class="info">신세카이 거리</div>
+    </div>
+
+    <!-- 10 -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1545569341-9eb8b30979d1?auto=format&fit=crop&w=900&q=60">
+      <div class="info">쿠로몬 시장 음식</div>
+    </div>
+
+    <!-- 11 -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1534353473419-64a063df8495?auto=format&fit=crop&w=900&q=60">
+      <div class="info">오사카 라멘</div>
+    </div>
+
+    <!-- 12 -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?auto=format&fit=crop&w=900&q=60">
+      <div class="info">오코노미야키</div>
+    </div>
+
+    <!-- 13 -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=900&q=60">
+      <div class="info">밤 거리 풍경</div>
+    </div>
+
+    <!-- 14 -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1542044801-94f28b5a3a14?auto=format&fit=crop&w=900&q=60">
+      <div class="info">도톤보리 수상 보트</div>
+    </div>
+
+    <!-- 15 -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1526481280692-9064761b53ae?auto=format&fit=crop&w=900&q=60">
+      <div class="info">오사카 일몰</div>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>
