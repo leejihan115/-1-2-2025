@@ -1,54 +1,250 @@
-  <!-- GALLERY (이미지 대신 텍스트 카드) -->
-  <section id="gallery">
-    <h2>오사카 이미지 갤러리</h2>
-    <p class="subtitle">
-      사진 대신, 각 칸이 “이미지+설명” 역할을 하는 카드로 구성되어 있음.
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>오사카 여행 가이드</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: #0f1117;
+        color: white;
+        font-family: "Pretendard", sans-serif;
+        line-height: 1.6;
+    }
+
+    header {
+        padding: 40px;
+        text-align: center;
+        background: linear-gradient(135deg, #ff4e50, #1f1c2c);
+        color: white;
+    }
+
+    h1 { font-size: 48px; margin-bottom: 10px; }
+    h2 { font-size: 32px; margin-top: 60px; }
+
+    .container {
+        width: 90%;
+        max-width: 1100px;
+        margin: auto;
+    }
+
+    .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+    }
+
+    .card {
+        background: #1a1d26;
+        border-radius: 14px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(255,255,255,0.05);
+        transition: 0.3s;
+    }
+
+    .card:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 0 20px rgba(255,255,255,0.15);
+    }
+
+    .btn-detail {
+        margin-top: 10px;
+        display: inline-block;
+        padding: 10px 14px;
+        background: #ff4e50;
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: 0.25s;
+    }
+
+    .btn-detail:hover {
+        background: #ff7b82;
+    }
+
+    .detail {
+        display: none;
+        background: #262a34;
+        padding: 15px;
+        margin-top: 12px;
+        border-radius: 10px;
+        animation: fadeIn 0.5s;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-5px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+        text-align: center;
+        padding: 30px;
+        margin-top: 60px;
+        color: #aaa;
+    }
+</style>
+
+<script>
+    function toggleDetail(id) {
+        const box = document.getElementById(id);
+        box.style.display = box.style.display === "block" ? "none" : "block";
+    }
+</script>
+</head>
+
+
+<body>
+
+<header>
+    <h1>오사카 여행 가이드</h1>
+    <p>미식, 야경, 쇼핑, 엔터테인먼트가 집결된 관서 지방의 중심 도시</p>
+</header>
+
+<div class="container">
+
+    <h2>① 도시 소개</h2>
+    <p>
+        오사카는 일본 제2의 도시이자 ‘상인의 도시’로, 활기찬 에너지와 화려한 네온사인이 가득하다.
+        난바, 신사이바시, 우메다, 텐노지 등 각각의 지역에 개성이 뚜렷하며,
+        맛집, 쇼핑, 테마파크, 야경이 모두 결합된 종합 관광 도시다.
+    </p>
+    <p>
+        도톤보리의 화려한 간판, 오사카성의 전통미, 우메다 스카이빌딩의 미래적인 전망, 
+        그리고 유니버설 스튜디오 재팬까지—  
+        오사카는 체류 시간이 길수록 매력이 깊어진다.
     </p>
 
-    <style>
-      .fake-gallery {
-        display:grid;
-        grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-        gap:0.9rem;
-        margin-top:1.1rem;
-      }
-      .fake-img {
-        border-radius:0.9rem;
-        border:1px solid #1f2937;
-        background:linear-gradient(135deg,#0f172a,#020617);
-        height:160px;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        text-align:center;
-        padding:0.8rem;
-        font-size:0.9rem;
-        color:#e5e7eb;
-      }
-      .fake-img span {
-        opacity:0.9;
-      }
-    </style>
+    <h2>② 핵심 관광지</h2>
+    <div class="card-grid">
 
-    <div class="fake-gallery">
-      <div class="fake-img"><span>도톤보리 야경 · 글리코 사인과 네온 간판이 강가를 따라 늘어선 오사카 대표 거리</span></div>
-      <div class="fake-img"><span>신사이바시 아케이드 · 쇼핑과 카페, 잡화점이 가득한 실내 상점가</span></div>
-      <div class="fake-img"><span>우메다 스카이빌딩 · 공중정원 전망대에서 내려다보는 오사카 시내 전경</span></div>
-      <div class="fake-img"><span>오사카성 공원 · 성과 벚꽃, 잔디광장이 어우러진 도심 공원</span></div>
-      <div class="fake-img"><span>신세카이 · 츠텐카쿠 타워와 레트로 간판들이 가득한 거리</span></div>
-      <div class="fake-img"><span>쿠로몬 시장 · 신선한 해산물과 과일, 길거리 음식이 유명한 시장</span></div>
-      <div class="fake-img"><span>USJ(유니버셜 스튜디오 재팬) · 닌텐도 월드와 해리포터 마을이 있는 테마파크</span></div>
-      <div class="fake-img"><span>아베노 하루카스 · 전망대에서 보는 야경과 대형 쇼핑몰</span></div>
-      <div class="fake-img"><span>도톤보리 타코야키 · 길거리에서 바로 구워 파는 오사카 대표 간식</span></div>
-      <div class="fake-img"><span>오코노미야키 · 철판 위에서 바로 구워 먹는 오사카식 부침 요리</span></div>
-      <div class="fake-img"><span>쿠시카츠 · 튀김 꼬치와 전용 소스를 즐길 수 있는 신세카이 명물</span></div>
-      <div class="fake-img"><span>회전초밥 · 가성비 좋게 초밥을 즐길 수 있는 체인점들</span></div>
-      <div class="fake-img"><span>난카이 난바역 주변 · 숙소·식당·쇼핑이 몰려 있는 여행의 중심지</span></div>
-      <div class="fake-img"><span>나카노시마 공원 · 강과 건물이 어우러진 도심 속 산책 코스</span></div>
-      <div class="fake-img"><span>우메다 지하상가 · 비 오는 날에도 이동하기 편한 지하 쇼핑존</span></div>
-      <div class="fake-img"><span>밤의 도톤보리 크루즈 · 강 위에서 바라보는 네온사인 야경</span></div>
-      <div class="fake-img"><span>이자카야 골목 · 회사원들이 퇴근 후 모여 술과 안주를 즐기는 거리</span></div>
-      <div class="fake-img"><span>게임센터 & 프라모델 샵 · 일본 오타쿠 문화 체험 공간</span></div>
-      <div class="fake-img"><span>카페 거리 · 감성 카페와 디저트 가게들이 모인 작은 골목</span></div>
+        <!-- 도톤보리 -->
+        <div class="card">
+            <h3>도톤보리 (Dotonbori)</h3>
+            <p>오사카 관광의 중심지, 화려한 네온과 음식의 성지.</p>
+            <div class="btn-detail" onclick="toggleDetail('d1')">상세보기</div>
+            <div class="detail" id="d1">
+                • 글리코상 간판으로 대표되는 오사카의 심장부  
+                • 타코야키, 오코노미야키, 쿠시카츠 등 길거리 음식 천국  
+                • 밤에 특히 활기차고 엔터테인먼트가 풍부  
+                • 강을 따라 유람선을 타며 야경 감상 가능  
+            </div>
+        </div>
+
+        <!-- 신사이바시 -->
+        <div class="card">
+            <h3>신사이바시 (Shinsaibashi)</h3>
+            <p>오사카 최대 쇼핑 거리.</p>
+            <div class="btn-detail" onclick="toggleDetail('d2')">상세보기</div>
+            <div class="detail" id="d2">
+                • 대형 아케이드 쇼핑 스트리트  
+                • 의류, 코스메틱, 카페, 잡화점이 끝없이 이어짐  
+                • 난바까지 도보 이동 가능  
+                • 젊은 층에게 인기 높은 패션 거리  
+            </div>
+        </div>
+
+        <!-- 우메다 -->
+        <div class="card">
+            <h3>우메다 (Umeda)</h3>
+            <p>미래적인 고층빌딩과 전망을 즐기는 지역.</p>
+            <div class="btn-detail" onclick="toggleDetail('d3')">상세보기</div>
+            <div class="detail" id="d3">
+                • 우메다 스카이빌딩 공중정원 전망대 유명  
+                • 오사카 역 주변 초대형 쇼핑몰 밀집  
+                • 야경이 도시 전체에서 가장 아름답다는 평가  
+                • 교통 중심지라 접근성 매우 좋음  
+            </div>
+        </div>
+
+        <!-- 오사카성 -->
+        <div class="card">
+            <h3>오사카성 (Osaka Castle)</h3>
+            <p>전통과 현대가 공존하는 오사카의 상징.</p>
+            <div class="btn-detail" onclick="toggleDetail('d4')">상세보기</div>
+            <div class="detail" id="d4">
+                • 도요토미 히데요시가 축성한 일본 3대 성 중 하나  
+                • 봄 벚꽃·가을 단풍 시즌에 방문객 폭증  
+                • 성 내부는 역사박물관으로 운영  
+                • 주변 공원은 산책 및 자전거 코스로 유명  
+            </div>
+        </div>
+
+        <!-- 유니버설 스튜디오 -->
+        <div class="card">
+            <h3>유니버설 스튜디오 재팬 (USJ)</h3>
+            <p>일본 최고의 테마파크 중 하나.</p>
+            <div class="btn-detail" onclick="toggleDetail('d5')">상세보기</div>
+            <div class="detail" id="d5">
+                • 해리포터, 닌텐도 월드, 쥬라기 공원 인기  
+                • 익스프레스 패스 강력 추천  
+                • 시즌 이벤트(할로윈·크리스마스) 매우 강력  
+                • 음식·굿즈 퀄리티가 일본 테마파크 중 최상위  
+            </div>
+        </div>
+
     </div>
-  </section>
+
+    <h2>③ 오사카 음식 가이드</h2>
+    <div class="card-grid">
+        <div class="card">
+            <h3>타코야키</h3>
+            <p>오사카를 대표하는 간식, 쫄깃하고 가쓰오 풍미가 강함.</p>
+            <div class="btn-detail" onclick="toggleDetail('f1')">조리 특징</div>
+            <div class="detail" id="f1">
+                • 겉은 바삭, 속은 촉촉한 식감  
+                • 특유의 마요네즈 + 소스 조합  
+                • 도톤보리 타코야키 거리 강추  
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>오코노미야키</h3>
+            <p>고기·양배추를 듬뿍 넣어 부치는 오사카식 전.</p>
+            <div class="btn-detail" onclick="toggleDetail('f2')">조리 특징</div>
+            <div class="detail" id="f2">
+                • 철판에서 바로 구워 먹는 스타일  
+                • 부드러운 반죽과 진한 소스 맛  
+                • ‘치보’, ‘미즈노’ 등 유명 맛집 존재  
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>쿠시카츠</h3>
+            <p>각종 재료를 꼬치에 튀겨 소스에 찍어 먹는 요리.</p>
+            <div class="btn-detail" onclick="toggleDetail('f3')">조리 특징</div>
+            <div class="detail" id="f3">
+                • “소스 2번 찍기 금지”로 유명  
+                • 신세카이 지역이 본가  
+                • 바삭함과 고소함이 매력  
+            </div>
+        </div>
+    </div>
+
+    <h2>④ 추천 일정 (1일~3일)</h2>
+    <div class="card">
+        <h3>1일차</h3>
+        • 오사카성 공원 → 난바/신사이바시 쇼핑 → 도톤보리 야경  
+    </div>
+
+    <div class="card">
+        <h3>2일차</h3>
+        • USJ 종일 → 우메다 전망대 야경  
+    </div>
+
+    <div class="card">
+        <h3>3일차</h3>
+        • 신세카이 → 츠텐카쿠 → 해변 산책 또는 쇼핑  
+    </div>
+
+</div>
+
+<footer>
+    © Osaka Travel Guide — Created for Team Project
+</footer>
+
+</body>
+</html>
