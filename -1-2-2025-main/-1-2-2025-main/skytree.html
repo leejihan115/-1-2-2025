@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>도쿄 스카이트리 | Tokyo Travel</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #f9faf8;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* 상단 네비게이션 */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 70px;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 80px;
+      z-index: 1000;
+    }
+
+    .navbar h1 {
+      color: #5aa897;
+      font-size: 20px;
+      margin: 0;
+      cursor: pointer;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 35px;
+    }
+
+    .nav-menu a {
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-menu a:hover {
+      color: #5aa897;
+    }
+
+    /* 배너 */
+    .hero {
+      position: relative;
+      margin-top: 70px;
+      height: 420px;
+      background: url('tokyoskytree1.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.45);
+    }
+
+    .hero-text {
+      position: relative;
+      text-align: center;
+      z-index: 10;
+    }
+
+    .hero-text h2 {
+      font-size: 46px;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+
+    .hero-text p {
+      font-size: 20px;
+      opacity: 0.9;
+    }
+
+    /* 본문 */
+    .content {
+      max-width: 1000px;
+      margin: 80px auto;
+      padding: 0 25px;
+      line-height: 1.8;
+    }
+
+    .content h3 {
+      color: #5aa897;
+      margin-top: 50px;
+      border-left: 5px solid #5aa897;
+      padding-left: 10px;
+      font-size: 22px;
+    }
+
+    .photo {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      margin: 30px 0;
+    }
+
+    .info-box {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      padding: 25px 30px;
+      margin: 40px 0;
+    }
+
+    .info-box h4 {
+      color: #5aa897;
+      margin-bottom: 8px;
+    }
+
+    a.button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 22px;
+      background: #5aa897;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    a.button:hover {
+      background: #4b8d7f;
+    }
+
+    .back-button {
+      display: block;
+      margin: 80px auto 100px auto;
+      text-align: center;
+      font-weight: 600;
+      width: 220px;
+      background: #e0e7e5;
+      color: #333;
+      padding: 14px 0;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .back-button:hover {
+      background: #c5d6cf;
+      transform: scale(1.05);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 45px 0;
+      background: #e7ecea;
+      color: #555;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 상단 메뉴 -->
+  <nav class="navbar">
+    <h1 onclick="location.href='tokyo.html'">Tokyo Travel</h1>
+    <div class="nav-menu">
+      <a href="tokyo.html">홈</a>
+      <a href="#">도쿄소개</a>
+      <a href="#">문화체험</a>
+      <a href="#">맛집추천</a>
+      <a href="#">교통정보</a>
+    </div>
+  </nav>
+
+  <!-- 배너 -->
+  <section class="hero">
+    <div class="hero-text">
+      <h2>도쿄 스카이트리</h2>
+      <p>Tokyo Skytree – 도쿄의 하늘을 찌르는 랜드마크</p>
+    </div>
+  </section>
+
+  <!-- 본문 내용 -->
+  <section class="content">
+    <p>
+      <b>도쿄 스카이트리(Tokyo Skytree)</b>는 일본 도쿄 스미다구에 위치한 방송·전망·관광 복합 타워로,  
+      높이 <b>634m</b>로 일본에서 가장 높고, 세계에서도 두 번째로 높은 타워입니다.  
+      2012년에 개장한 이후, 도쿄의 새로운 상징이자 도시 전역을 한눈에 조망할 수 있는 대표적인 명소로 자리 잡았습니다.
+    </p>
+
+    <img src="tokyoskytree2.jpg" alt="도쿄 스카이트리 전경" class="photo">
+
+    <h3>전망대(Tembo Deck & Tembo Galleria)</h3>
+    <p>
+      스카이트리에는 두 개의 전망대가 있습니다.  
+      첫 번째 전망대인 <b>‘템보 덱’(350m)</b>에서는 도쿄 도심을 비롯해 스미다강과 아사쿠사 일대를 내려다볼 수 있으며,  
+      두 번째 전망대인 <b>‘템보 갤러리아’(450m)</b>는 투명한 유리 슬로프로 이어져 있어 마치 공중을 걷는 듯한 짜릿한 체험을 제공합니다.  
+      날씨가 맑은 날에는 멀리 후지산까지 조망할 수 있어, 관광객들에게 최고의 포토 스팟으로 손꼽힙니다.
+    </p>
+
+    <img src="tokyoskytree3.jpg" alt="도쿄 스카이트리 전망대" class="photo">
+
+    <h3>소라마치(Soramachi) 쇼핑몰</h3>
+    <p>
+      스카이트리 타워 하단에는 <b>‘도쿄 소라마치(Tokyo Solamachi)’</b>라는 대형 쇼핑몰이 위치해 있습니다.  
+      300개 이상의 상점과 레스토랑이 입점해 있으며, 일본 전통 간식, 기념품, 디저트, 애니메이션 굿즈 등  
+      다양한 아이템을 즐길 수 있습니다. 가족 단위 관광객들에게도 인기 있는 복합 공간입니다.
+    </p>
+
+    <h3>이용 정보</h3>
+    <div class="info-box">
+      <h4>운영 시간</h4>
+      <p>10:00 – 21:00 (마지막 입장 20:00)</p>
+
+      <h4>입장 요금</h4>
+      <p>성인 2,100엔 / 청소년 1,550엔 / 어린이 950엔</p>
+
+      <h4>위치</h4>
+      <p>〒131-0045 東京都墨田区押上1丁目1−2 (스미다구 오시아게)</p>
+
+      <h4>교통</h4>
+      <p>도쿄 메트로 한조몬선, 도에이 아사쿠사선, 케이세이선 ‘오시아게역’ 바로 연결</p>
+    </div>
+
+    <div style="text-align:center;">
+      <a class="button" href="https://www.tokyo-skytree.jp/en/" target="_blank">공식 웹사이트 바로가기</a>
+    </div>
+
+    <!-- 도쿄 페이지로 돌아가기 버튼 -->
+    <a href="tokyo.html" class="back-button">← 도쿄 메인으로 돌아가기</a>
+  </section>
+
+  <footer class="footer">
+    © 2025 Tokyo Travel Project | Designed for ERICA Project
+  </footer>
+
+</body>
+</html>

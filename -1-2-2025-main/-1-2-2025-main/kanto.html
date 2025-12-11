@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>관동 지방 여행 지도</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f7f9fb;
+      font-family: 'Noto Sans KR', sans-serif;
+      color: #333;
+      text-align: center;
+    }
+
+    header {
+      background-color: #d32f2f;
+      color: white;
+      padding: 18px 0;
+      font-weight: 700;
+      font-size: 18px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+      letter-spacing: 0.5px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.25);
+    }
+
+    h1 {
+      margin-top: 35px;
+      font-size: 30px;
+      color: #222;
+    }
+
+    .map-container {
+      position: relative;
+      width: 90%;
+      max-width: 1262px;
+      margin: 25px auto 50px auto;
+    }
+
+    .map-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 15px;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    }
+
+    .pref-btn {
+      position: absolute;
+      padding: 9px 15px;
+      background: rgba(255,255,255,0.8);
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 500;
+      transition: all 0.25s ease;
+      backdrop-filter: blur(4px);
+    }
+
+    .pref-btn:hover {
+      background-color: #1565c0;
+      color: white;
+      transform: scale(1.12);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    }
+
+    .city-popup {
+      position: absolute;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+      padding: 14px 16px;
+      width: 220px;
+      text-align: left;
+      font-size: 14px;
+      z-index: 10;
+      animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .city-popup h3 {
+      margin: 5px 0 10px 0;
+      font-size: 15px;
+      color: #1a237e;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+      font-weight: 600;
+    }
+
+    .city-popup .city-item {
+      margin: 4px 0;
+      padding: 6px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .city-popup .city-item:hover {
+      background-color: #1565c0;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    ⚠️ 현재 사용가능한 웹사이트는 도쿄도, 가나가와현의 요코하마시, 가나가와현의 가마쿠라시 입니다 ⚠️
+  </header>
+
+  <h1>관동 지방 여행 지도</h1>
+
+  <div class="map-container">
+    <img src="kanto_map.jpg" alt="관동 지도" class="map-image">
+
+    <!-- 각 현 버튼 -->
+    <button class="pref-btn" style="top: 33%; left: 33%;" onclick="selectPref(event, 'gunma')">군마현</button>
+    <button class="pref-btn" style="top: 28%; left: 52%;" onclick="selectPref(event, 'tochigi')">도치기현</button>
+    <button class="pref-btn" style="top: 38%; left: 66%;" onclick="selectPref(event, 'ibaraki')">이바라키현</button>
+    <button class="pref-btn" style="top: 55%; left: 42%;" onclick="selectPref(event, 'saitama')">사이타마현</button>
+    <button class="pref-btn" style="top: 66%; left: 47%;" onclick="selectPref(event, 'tokyo')">도쿄도</button>
+    <button class="pref-btn" style="top: 68%; left: 63%;" onclick="selectPref(event, 'chiba')">치바현</button>
+    <button class="pref-btn" style="top: 77%; left: 38%;" onclick="selectPref(event, 'kanagawa')">가나가와현</button>
+  </div>
+
+  <script>
+    const cities = {
+      gunma: ["마에바시시","다카사키시","오타시","이세사키시","기류시","시부카와시","누마다시","후지오카시","미도리시","안나카시"],
+      tochigi: ["우츠노미야시","오야마시","가누마시","사노시","도치기시","모카시","닛코시","나스시오바라시","오타와라시","야이타시"],
+      ibaraki: ["미토시","쓰쿠바시","히타치시","가시마시","도리데시","조소시","가미스시","쓰치우라시","유키시","히토리시"],
+      saitama: ["사이타마시","가와고에시","가스카베시","도코로자와시","구마가야시","사야마시","소카시","미사토시","시키시"],
+      chiba: ["치바시","후나바시시","가시와시","마쓰도시","이치카와시","나라시노시","나리타시","이치하라시","야치요시","소데가우라시"],
+      kanagawa: ["요코하마시","가와사키시","사가미하라시","후지사와시","요코스카시","가마쿠라시","오다와라시","히라쓰카시","치가사키시","아쓰기시"]
+    };
+
+    const names = {
+      gunma: "군마현",
+      tochigi: "도치기현",
+      ibaraki: "이바라키현",
+      saitama: "사이타마현",
+      tokyo: "도쿄도",
+      chiba: "치바현",
+      kanagawa: "가나가와현"
+    };
+
+    function selectPref(event, id) {
+      if (id === "tokyo") {
+        window.location.href = "tokyo.html";
+        return;
+      }
+
+      removePopup();
+
+      const btn = event.target;
+      const rect = btn.getBoundingClientRect();
+      const popup = document.createElement("div");
+      popup.className = "city-popup";
+      popup.innerHTML = `<h3>${names[id]}의 시 목록</h3>` +
+        cities[id].map(city => `<div class='city-item' onclick='goToCity("${city}")'>${city}</div>`).join("");
+
+      const mapContainer = document.querySelector(".map-container");
+      const containerRect = mapContainer.getBoundingClientRect();
+
+      popup.style.top = (rect.top - containerRect.top - 10) + "px";
+      popup.style.left = (rect.right - containerRect.left + 10) + "px";
+
+      mapContainer.appendChild(popup);
+    }
+
+    function removePopup() {
+      document.querySelectorAll(".city-popup").forEach(p => p.remove());
+    }
+
+    function goToCity(city) {
+      if (city === "요코하마시") {
+        window.location.href = "yokohama.html";
+      } else if (city === "가마쿠라시") {
+        window.location.href = "kamakura.html";
+      } else {
+        alert("현재 웹페이지 점검 중입니다.");
+      }
+    }
+
+    document.addEventListener("click", e => {
+      if (!e.target.classList.contains("pref-btn") && !e.target.classList.contains("city-item")) {
+        removePopup();
+      }
+    });
+  </script>
+
+</body>
+</html>
