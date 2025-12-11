@@ -1,1 +1,255 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>교토 여행 가이드</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: #0f1117;
+        color: white;
+        font-family: "Pretendard", sans-serif;
+        line-height: 1.6;
+    }
+
+    header {
+        padding: 40px;
+        text-align: center;
+        background: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b);
+        color: white;
+    }
+
+    h1 { font-size: 46px; margin-bottom: 10px; }
+    h2 { font-size: 30px; margin-top: 60px; }
+
+    .container {
+        width: 90%;
+        max-width: 1100px;
+        margin: auto;
+    }
+
+    .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+    }
+
+    .card {
+        background: #1a1d26;
+        border-radius: 14px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(255,255,255,0.05);
+        transition: 0.3s;
+    }
+
+    .card:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 0 20px rgba(255,255,255,0.15);
+    }
+
+    .btn-detail {
+        margin-top: 10px;
+        display: inline-block;
+        padding: 10px 14px;
+        background: #ffaf7b;
+        color: black;
+        font-weight: bold;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: 0.25s;
+    }
+
+    .btn-detail:hover {
+        background: #ffd7b3;
+    }
+
+    .detail {
+        display: none;
+        background: #262a34;
+        padding: 15px;
+        margin-top: 12px;
+        border-radius: 10px;
+        animation: fadeIn 0.5s;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-5px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+        text-align: center;
+        padding: 30px;
+        margin-top: 60px;
+        color: #aaa;
+    }
+</style>
+
+<script>
+    function toggleDetail(id) {
+        const box = document.getElementById(id);
+        box.style.display = box.style.display === "block" ? "none" : "block";
+    }
+</script>
+
+</head>
+
+<body>
+
+<header>
+    <h1>교토 여행 가이드</h1>
+    <p>일본 전통과 자연미가 가장 조화롭게 살아 숨 쉬는 도시, 천년의 수도 교토</p>
+</header>
+
+<div class="container">
+
+    <!-- ① 도시 소개 -->
+    <h2>① 교토 한눈에 보기</h2>
+    <p>
+        교토는 일본의 천년 수도로서, 전통 문화와 자연 경관이 가장 아름답게 보존된 도시이다.
+        기온의 전통 골목, 후시미 이나리의 붉은 도리이, 금각사의 금빛 절경, 아라시야마 대나무숲 등
+        일본을 떠올리면 바로 떠오르는 명소들이 모두 이곳에 있다.
+    </p>
+
+    <p>
+        오사카가 화려한 현대 도시라면, 교토는 시간이 느리게 흐르는 고요한 도시.
+        고즈넉한 사찰, 자연 속 산책, 일본 전통 음식과 찻집, 정원 문화 등이 어우러져 있는 곳이다.
+    </p>
+
+    <!-- ② 핵심 관광지 카드형 -->
+    <h2>② 핵심 관광지</h2>
+    <div class="card-grid">
+
+        <!-- 기온 -->
+        <div class="card">
+            <h3>기온 (Gion)</h3>
+            <p>교토 전통 문화의 중심지, 마이코와 전통 가옥이 있는 곳.</p>
+            <div class="btn-detail" onclick="toggleDetail('g1')">상세보기</div>
+            <div class="detail" id="g1">
+                • 저녁 시간대 골목 조명 분위기 최고  
+                • 마이코(기생) 우연히 마주칠 확률 있음  
+                • 전통 찻집·가이세키 요리집 밀집  
+                • 야사카 신사와 바로 연결  
+            </div>
+        </div>
+
+        <!-- 아라시야마 -->
+        <div class="card">
+            <h3>아라시야마 (Arashiyama)</h3>
+            <p>대나무 숲과 산책 코스로 유명한 자연 관광지.</p>
+            <div class="btn-detail" onclick="toggleDetail('g2')">상세보기</div>
+            <div class="detail" id="g2">
+                • 세계적으로 유명한 대나무 숲의 장관  
+                • 도게츠교 다리 근처 풍경 천국  
+                • 전통 정원과 사찰이 매우 많음  
+                • 사계절 자연 풍경이 다 뛰어남  
+            </div>
+        </div>
+
+        <!-- 후시미 이나리 -->
+        <div class="card">
+            <h3>후시미 이나리 신사</h3>
+            <p>끝없이 이어지는 붉은 도리이(기둥길)로 유명한 명소.</p>
+            <div class="btn-detail" onclick="toggleDetail('g3')">상세보기</div>
+            <div class="detail" id="g3">
+                • 빨간 도리이가 산 정상까지 이어짐  
+                • 사진 명당이 매우 많음  
+                • 낮보다 이른 아침 방문 추천  
+                • 약 2–3시간 산책 코스로 적당함  
+            </div>
+        </div>
+
+        <!-- 금각사 -->
+        <div class="card">
+            <h3>금각사 (Kinkaku-ji)</h3>
+            <p>황금빛 외벽이 반짝이는 교토의 대표 절.</p>
+            <div class="btn-detail" onclick="toggleDetail('g4')">상세보기</div>
+            <div class="detail" id="g4">
+                • 호수 위에 비친 금각사의 반영이 아름다움  
+                • 사계절 색감 변화가 극적임  
+                • 교토 최고의 인기 관광지 중 하나  
+            </div>
+        </div>
+
+        <!-- 청수사 -->
+        <div class="card">
+            <h3>청수사 (Kiyomizu-dera)</h3>
+            <p>교토 시내를 내려다보는 절경의 사찰.</p>
+            <div class="btn-detail" onclick="toggleDetail('g5')">상세보기</div>
+            <div class="detail" id="g5">
+                • 절벽 위에 지어진 거대한 무대 구조  
+                • 벚꽃·단풍 시즌 절경으로 유명  
+                • 근처 기요미즈자카 거리 쇼핑 좋음  
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ③ 음식 섹션 -->
+    <h2>③ 교토 음식 추천</h2>
+    <div class="card-grid">
+
+        <div class="card">
+            <h3>교토 우동</h3>
+            <p>깔끔하고 부드러운 육수의 정석.</p>
+            <div class="btn-detail" onclick="toggleDetail('f1')">자세히</div>
+            <div class="detail" id="f1">
+                • 오사카보다 담백한 풍미  
+                • 면발이 부드럽고 국물이 맑음  
+                • 관광지마다 유명한 우동집 존재  
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>유도후</h3>
+            <p>교토 사찰 요리의 대표 메뉴.</p>
+            <div class="btn-detail" onclick="toggleDetail('f2')">자세히</div>
+            <div class="detail" id="f2">
+                • 따뜻하고 담백한 두부 요리  
+                • 사찰 주변에서 많이 판매  
+                • 건강식으로 여행객들에게 인기  
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>말차 디저트</h3>
+            <p>일본 최고의 말차 생산지 우지 지역 기반.</p>
+            <div class="btn-detail" onclick="toggleDetail('f3')">자세히</div>
+            <div class="detail" id="f3">
+                • 말차 아이스크림·라떼·케이크 인기  
+                • 기온과 니시키 시장에서 쉽게 찾을 수 있음  
+            </div>
+        </div>
+    </div>
+
+    <!-- ④ 추천 일정 -->
+    <h2>④ 추천 일정 (1~3일)</h2>
+
+    <div class="card">
+        <h3>1일차</h3>
+        • 기온 → 야사카 신사 → 청수사 → 니넨자카/산넨자카  
+    </div>
+
+    <div class="card">
+        <h3>2일차</h3>
+        • 후시미 이나리 → 도지사 → 교토역 주변 쇼핑  
+    </div>
+
+    <div class="card">
+        <h3>3일차</h3>
+        • 아라시야마 종일 (대나무숲, 도게츠교, 텐류지 등)  
+    </div>
+
+</div>
+
+<footer>
+    © Kyoto Travel Guide — Created for Team Project
+</footer>
+
+</body>
+</html>
 
