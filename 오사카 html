@@ -1,270 +1,54 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>오사카 여행 가이드 | Osaka Travel Guide</title>
-  <style>
-    body {
-      background: #0f172a;
-      color: #e2e8f0;
-      font-family: system-ui, sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.7;
-    }
-    header {
-      background: rgba(15,23,42,0.95);
-      border-bottom: 1px solid #334155;
-      position: sticky;
-      top: 0;
-      z-index: 20;
-    }
-    nav {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0.9rem 1.4rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-    }
-    nav .logo {font-weight: 700;}
-    nav ul {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin: 0;
-      padding: 0;
-    }
-    nav a {
-      text-decoration: none;
-      color: #94a3b8;
-      padding: 0.25rem 0.7rem;
-      border-radius: 999px;
-      font-size: 0.86rem;
-    }
-    nav a:hover {
-      background: rgba(56,189,248,0.16);
-      color: #e2e8f0;
-      border: 1px solid #38bdf8;
-    }
-    main {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 1.6rem 1.4rem 3rem;
-    }
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0,3fr) minmax(0,2fr);
-      gap: 1.8rem;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid #334155;
-      border-radius: 1.5rem;
-      padding: 1.6rem 1.4rem;
-      margin-bottom: 2.2rem;
-    }
-    .hero img {
-      width: 100%;
-      height: 260px;
-      object-fit: cover;
-      border-radius: 1rem;
-      border: 1px solid #334155;
-    }
-    .tags {margin-top: 0.6rem;}
-    .tag {
-      display: inline-block;
-      padding: 0.25rem 0.6rem;
-      border-radius: 999px;
-      border: 1px solid #475569;
-      font-size: 0.78rem;
-      color: #cbd5e1;
-      margin-right: 0.3rem;
-    }
-    section {margin-bottom: 2.4rem;}
-    h2 {font-size: 1.5rem; margin-bottom: 0.4rem;}
-    .sub {font-size: 0.9rem; color: #94a3b8; margin-bottom: 0.8rem;}
-    ul {margin-left: 1.1rem; font-size: 0.9rem;}
-    li {margin-bottom: 0.25rem;}
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-      gap: 0.9rem;
-      margin-top: 0.7rem;
-    }
-    .gallery img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 0.9rem;
-      border: 1px solid #334155;
-    }
-    .routes {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
-      gap: 0.9rem;
-    }
-    .route {
-      background: rgba(15,23,42,0.9);
-      border-radius: 0.9rem;
-      border: 1px solid #1f2937;
-      padding: 0.8rem 0.9rem;
-      font-size: 0.86rem;
-    }
-    .route h3 {margin: 0 0 0.2rem; font-size: 0.96rem;}
-    .route-label {color:#9ca3af; font-size: 0.8rem; margin-bottom: 0.3rem;}
-    footer {
-      margin-top: 2rem;
-      padding-top: 1rem;
-      border-top: 1px solid #1f2937;
-      color: #64748b;
-      font-size: 0.8rem;
-    }
-    @media (max-width: 840px) {
-      .hero {grid-template-columns: 1fr;}
-    }
-  </style>
-</head>
-<body>
-<header>
-  <nav>
-    <div class="logo">Osaka Travel Guide</div>
-    <ul>
-      <li><a href="#overview">개요</a></li>
-      <li><a href="#dotonbori">도톤보리</a></li>
-      <li><a href="#umeda">우메다</a></li>
-      <li><a href="#shinsekai">신세카이</a></li>
-      <li><a href="#food">음식</a></li>
-      <li><a href="#routes">코스</a></li>
-    </ul>
-  </nav>
-</header>
-
-<main>
-  <!-- HERO (1장) -->
-  <section class="hero">
-    <div>
-      <h1>오사카 여행 가이드 (Osaka)</h1>
-      <p>
-        오사카는 “쿠이다오레(먹다가 망한다)”라는 말이 나올 정도로
-        음식과 야경, 쇼핑, 엔터테인먼트가 결합된 도시입니다.
-        도톤보리·우메다·신세카이만 돌아도 오사카의 성격을 충분히 느낄 수 있습니다.
-      </p>
-      <div class="tags">
-        <span class="tag">#도톤보리</span>
-        <span class="tag">#신사이바시</span>
-        <span class="tag">#우메다</span>
-        <span class="tag">#신세카이</span>
-        <span class="tag">#먹방도시</span>
-      </div>
-    </div>
-    <img src="images/osaka-hero.jpg" alt="오사카 도심 야경">
-  </section>
-
-  <!-- 개요 (2장 중 2장) -->
-  <section id="overview">
-    <h2>🇯🇵 오사카 한눈에 보기</h2>
-    <p class="sub">
-      간사이 공항과 신오사카역이 있는 교통 허브이자, 간사이 여행의 거점 도시.
-      도톤보리(남쪽), 우메다(북쪽), 신세카이(남쪽 레트로) 세 축으로 기억해두면 편합니다.
+  <!-- GALLERY (이미지 대신 텍스트 카드) -->
+  <section id="gallery">
+    <h2>오사카 이미지 갤러리</h2>
+    <p class="subtitle">
+      사진 대신, 각 칸이 “이미지+설명” 역할을 하는 카드로 구성되어 있음.
     </p>
-    <ul>
-      <li>남쪽(난바·도톤보리): 네온사인, 먹거리, 쇼핑, 유흥이 모인 핵심 관광지</li>
-      <li>북쪽(우메다): 고층 빌딩과 백화점, 전자상가가 모인 상업 중심지</li>
-      <li>신세카이 주변: 옛 분위기가 남아 있는 레트로 거리 + 쿠시카츠 골목</li>
-    </ul>
-    <div class="gallery">
-      <img src="images/osaka-dotonbori.jpg" alt="도톤보리 강변 네온사인">
-      <img src="images/osaka-umeda.jpg" alt="우메다 고층 빌딩 야경">
+
+    <style>
+      .fake-gallery {
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+        gap:0.9rem;
+        margin-top:1.1rem;
+      }
+      .fake-img {
+        border-radius:0.9rem;
+        border:1px solid #1f2937;
+        background:linear-gradient(135deg,#0f172a,#020617);
+        height:160px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+        padding:0.8rem;
+        font-size:0.9rem;
+        color:#e5e7eb;
+      }
+      .fake-img span {
+        opacity:0.9;
+      }
+    </style>
+
+    <div class="fake-gallery">
+      <div class="fake-img"><span>도톤보리 야경 · 글리코 사인과 네온 간판이 강가를 따라 늘어선 오사카 대표 거리</span></div>
+      <div class="fake-img"><span>신사이바시 아케이드 · 쇼핑과 카페, 잡화점이 가득한 실내 상점가</span></div>
+      <div class="fake-img"><span>우메다 스카이빌딩 · 공중정원 전망대에서 내려다보는 오사카 시내 전경</span></div>
+      <div class="fake-img"><span>오사카성 공원 · 성과 벚꽃, 잔디광장이 어우러진 도심 공원</span></div>
+      <div class="fake-img"><span>신세카이 · 츠텐카쿠 타워와 레트로 간판들이 가득한 거리</span></div>
+      <div class="fake-img"><span>쿠로몬 시장 · 신선한 해산물과 과일, 길거리 음식이 유명한 시장</span></div>
+      <div class="fake-img"><span>USJ(유니버셜 스튜디오 재팬) · 닌텐도 월드와 해리포터 마을이 있는 테마파크</span></div>
+      <div class="fake-img"><span>아베노 하루카스 · 전망대에서 보는 야경과 대형 쇼핑몰</span></div>
+      <div class="fake-img"><span>도톤보리 타코야키 · 길거리에서 바로 구워 파는 오사카 대표 간식</span></div>
+      <div class="fake-img"><span>오코노미야키 · 철판 위에서 바로 구워 먹는 오사카식 부침 요리</span></div>
+      <div class="fake-img"><span>쿠시카츠 · 튀김 꼬치와 전용 소스를 즐길 수 있는 신세카이 명물</span></div>
+      <div class="fake-img"><span>회전초밥 · 가성비 좋게 초밥을 즐길 수 있는 체인점들</span></div>
+      <div class="fake-img"><span>난카이 난바역 주변 · 숙소·식당·쇼핑이 몰려 있는 여행의 중심지</span></div>
+      <div class="fake-img"><span>나카노시마 공원 · 강과 건물이 어우러진 도심 속 산책 코스</span></div>
+      <div class="fake-img"><span>우메다 지하상가 · 비 오는 날에도 이동하기 편한 지하 쇼핑존</span></div>
+      <div class="fake-img"><span>밤의 도톤보리 크루즈 · 강 위에서 바라보는 네온사인 야경</span></div>
+      <div class="fake-img"><span>이자카야 골목 · 회사원들이 퇴근 후 모여 술과 안주를 즐기는 거리</span></div>
+      <div class="fake-img"><span>게임센터 & 프라모델 샵 · 일본 오타쿠 문화 체험 공간</span></div>
+      <div class="fake-img"><span>카페 거리 · 감성 카페와 디저트 가게들이 모인 작은 골목</span></div>
     </div>
   </section>
-
-  <!-- 도톤보리 -->
-  <section id="dotonbori">
-    <h2>🌟 도톤보리 · 신사이바시</h2>
-    <p class="sub">
-      오사카에서 가장 번화한 거리. 강을 따라 네온사인이 이어지고, 음식점 간판만 봐도 배부른 동네입니다.
-    </p>
-    <ul>
-      <li>글리코 사인 앞 다리에서 강을 배경으로 사진 찍는 것이 대표 인증샷</li>
-      <li>신사이바시 상점가에서 기념품·패션·코스메틱 쇼핑 가능</li>
-      <li>타코야키·오코노미야키·라멘·회전초밥 가게가 골목마다 꽉 차 있음</li>
-    </ul>
-  </section>
-
-  <!-- 우메다 (텍스트) -->
-  <section id="umeda">
-    <h2>🏙 우메다(북오사카)</h2>
-    <p class="sub">
-      철도·지하상가·백화점이 복잡하게 얽혀 있는 오사카의 상업 중심지이자 환승 허브입니다.
-    </p>
-    <ul>
-      <li>우메다 스카이빌딩 공중정원 전망대에서 오사카 시내를 한눈에 볼 수 있음</li>
-      <li>그랜드 프런트, 요도바시 카메라 등 쇼핑 센터가 한 블록 안에 밀집</li>
-      <li>빌딩 숲과 야경이 “대도시 오사카” 이미지를 잘 보여주는 지역</li>
-    </ul>
-  </section>
-
-  <!-- 신세카이 (1장) -->
-  <section id="shinsekai">
-    <h2>🎭 신세카이 & 츠텐카쿠</h2>
-    <p class="sub">
-      전후 레트로 감성이 남아 있는 거리. 형형색색 간판과 쿠시카츠 가게들이 빽빽합니다.
-    </p>
-    <ul>
-      <li>츠텐카쿠 타워를 중심으로 오래된 상점가가 이어짐</li>
-      <li>저렴한 쿠시카츠 가게가 많아, 현지 분위기를 느끼며 한 잔 하기 좋은 곳</li>
-    </ul>
-    <div class="gallery">
-      <img src="images/osaka-shinsekai.jpg" alt="신세카이 거리와 간판들">
-    </div>
-  </section>
-
-  <!-- 음식 (1장) -->
-  <section id="food">
-    <h2>🍜 오사카 대표 음식</h2>
-    <p class="sub">
-      “쿠이다오레의 도시”라는 별명답게 길을 걷다 보면 먹을 것이 계속 눈에 들어옵니다.
-    </p>
-    <div class="gallery">
-      <img src="images/osaka-food.jpg" alt="타코야키와 오코노미야키">
-    </div>
-    <ul>
-      <li><strong>타코야키</strong> – 도톤보리 골목마다 있는 국민 간식. 가게마다 토핑·소스가 조금씩 다름.</li>
-      <li><strong>오코노미야키</strong> – 철판에 구워 나오는 오사카식 부침 요리. 직접 구워 먹는 집도 많음.</li>
-      <li><strong>쿠시카츠</strong> – 신세카이 대표 메뉴. 다양한 재료를 꼬치에 끼워 튀긴 뒤 소스에 찍어 먹음.</li>
-    </ul>
-  </section>
-
-  <!-- 코스 (이미지 없음) -->
-  <section id="routes">
-    <h2>🗺 오사카 추천 코스</h2>
-    <div class="routes">
-      <div class="route">
-        <h3>오사카 1일 핵심 코스</h3>
-        <div class="route-label">처음 가는 사람 기준</div>
-        <div>
-          오전: 우메다 스카이빌딩 전망대<br>
-          오후: 신사이바시 쇼핑 → 도톤보리 산책<br>
-          저녁: 도톤보리 야경 + 먹방 (타코야키·오코노미야키)
-        </div>
-      </div>
-      <div class="route">
-        <h3>오사카 2일 + 레트로 코스</h3>
-        <div class="route-label">느긋하게 보고 싶을 때</div>
-        <div>
-          1일차: 우메다 · 도톤보리 중심<br>
-          2일차: 신세카이 · 텐노지 주변 산책 + 쿠시카츠
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    Osaka Mini Homepage · Kansai Region · GitHub Team Project
-  </footer>
-</main>
-</body>
-</html>
