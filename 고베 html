@@ -315,10 +315,10 @@
     </div>
 
     <div class="gallery">
-      <img src="images/kobe/overview-harbor.jpg" alt="고베 항만 풍경">
-      <img src="images/kobe/overview-kitano.jpg" alt="기타노 이진칸 거리">
-      <img src="images/kobe/overview-rokko.jpg" alt="롯코산 야경">
-      <img src="images/kobe/overview-arima.jpg" alt="아리마 온천 마을">
+      <img src="imageskobeoverview-harbor.jpg.jpg" alt="고베 항만 풍경">
+      <img src="istockphoto-665946670-612x612.jpg" alt="기타노 이진칸 거리">
+      <img src="imageskobeoverview-harbor.jpg.jpg" alt="롯코산 야경">
+      <img src="3558_top.jpg" alt="아리마 온천 마을">
     </div>
   </section>
 
@@ -339,9 +339,9 @@
           <li>야간에는 조명이 켜져 로맨틱한 분위기 연출</li>
         </ul>
         <div class="gallery">
-          <img src="images/kobe/meriken-park-day.jpg" alt="메리켄 파크 전경">
-          <img src="images/kobe/port-tower-night.jpg" alt="고베 포트타워 야경">
-          <img src="images/kobe/be-kobe-monument.jpg" alt="BE KOBE 모뉴먼트">
+          <img src="Kobe_Meriken_Park_(daytime).jpg" alt="메리켄 파크 전경">
+          <img src="istockphoto-1167356331-612x612.jpg" alt="고베 포트타워 야경">
+          <img src="imagessss.jpg" alt="BE KOBE 모뉴먼트">
         </div>
       </article>
 
@@ -353,8 +353,8 @@
           <li>야경 보면서 식사할 수 있는 매장도 많아 데이트 코스로도 유명</li>
         </ul>
         <div class="gallery">
-          <img src="images/kobe/harborland-mosaic.jpg" alt="하버랜드 MOZAIC">
-          <img src="images/kobe/harborland-cafe.jpg" alt="하버랜드 카페 풍경">
+          <img src="mosaic-kobe-japan-august-crowds-front-shopping-complex-harborland-62142371.webp" alt="하버랜드 MOZAIC">
+          <img src="photo2jpg.jpg" alt="하버랜드 카페 풍경">
         </div>
       </article>
     </div>
@@ -376,8 +376,8 @@
           <li>각 건물마다 인테리어·테마가 달라 사진 찍기 좋음</li>
         </ul>
         <div class="gallery">
-          <img src="images/kobe/kitano-house1.jpg" alt="기타노 서양식 저택">
-          <img src="images/kobe/kitano-house2.jpg" alt="우로코 하우스 주변 거리">
+          <img src="45900639.webp" alt="기타노 서양식 저택">
+          <img src="images.jpg" alt="우로코 하우스 주변 거리">
         </div>
       </article>
 
@@ -389,8 +389,8 @@
           <li>좁은 골목과 언덕이 많아, 여유 있게 산책하며 사진 찍기 좋음</li>
         </ul>
         <div class="gallery">
-          <img src="images/kobe/kitano-view-cafe.jpg" alt="기타노 전망 카페">
-          <img src="images/kobe/kitano-street-view.jpg" alt="기타노 이진칸 거리 풍경">
+          <img src="106391260.jpg" alt="기타노 전망 카페">
+          <img src="images (1).jpg" alt="기타노 이진칸 거리 풍경">
         </div>
       </article>
     </div>
@@ -412,8 +412,8 @@
           <li>야간에는 도시 불빛과 항구가 한 번에 보이는 파노라마</li>
         </ul>
         <div class="gallery">
-          <img src="images/kobe/rokko-night-view.jpg" alt="롯코산 야경">
-          <img src="images/kobe/rokko-day-view.jpg" alt="롯코산 낮 풍경">
+          <img src="images (2).jpg" alt="롯코산 야경">
+          <img src="images (3).jpg" alt="롯코산 낮 풍경">
         </div>
       </article>
 
@@ -426,7 +426,7 @@
         </ul>
         <div class="gallery">
           <img src="images/kobe/rokko-garden-terrace.jpg" alt="가든 테라스">
-          <img src="images/kobe/rokko-terrace-cafe.jpg" alt="테라스 카페">
+          <img src="images (4).jpg" alt="테라스 카페">
         </div>
       </article>
     </div>
