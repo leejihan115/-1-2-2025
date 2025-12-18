@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>도쿄 여행 가이드</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-color: #f8f9f6;
+  --text-color: #333;
+  --card-bg: #fff;
+  --primary: #5aa897;
+  --primary-dark: #4a8a7f;
+  --accent: #e63946;
+  --nav-bg: #fff;
+  --shadow: 0 2px 10px rgba(0,0,0,0.1);
+  --muted: #777;
+  --border: rgba(0,0,0,0.1);
+}
+
+body.dark-mode {
+  --bg-color: #121418;
+  --text-color: #f3f3f3;
+  --card-bg: #1b1e24;
+  --primary: #7bc8b5;
+  --primary-dark: #5aa897;
+  --nav-bg: #191c23;
+  --shadow: 0 2px 15px rgba(0,0,0,0.7);
+  --muted: #aaa;
+  --border: rgba(255,255,255,0.1);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg-color);color:var(--text-color);overflow-x:hidden;line-height:1.6}
+
+/* 프리로더 */
+#preloader{position:fixed;inset:0;background:radial-gradient(circle at top,#5aa897 0,#121418 55%);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:5000;transition:opacity .4s,visibility .4s}
+#preloader.hide{opacity:0;visibility:hidden;pointer-events:none}
+.loader-logo{font-size:26px;font-weight:700;color:#fff;letter-spacing:4px;margin-bottom:16px}
+.loader-bar{width:160px;height:4px;border-radius:999px;background:rgba(255,255,255,0.25);overflow:hidden;position:relative}
+.loader-bar::before{content:"";position:absolute;inset:0;width:40%;background:linear-gradient(90deg,#fff,#f9d976);animation:loadingSlide 1.2s infinite ease-in-out}
+@keyframes loadingSlide{0%{transform:translateX(-100%)}50%{transform:translateX(60%)}100%{transform:translateX(160%)}}
+
+/* 네비게이션 */
+.navbar{position:fixed;top:0;left:0;width:100%;height:70px;background:var(--nav-bg);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:space-between;padding:0 60px;z-index:2000;transition:background .3s}
+.navbar h1{color:var(--primary);font-size:22px;cursor:pointer;transition:transform .2s}
+.navbar h1:hover{transform:scale(1.05)}
+.nav-menu{display:flex;gap:30px;align-items:center}
+.nav-menu a{color:var(--text-color);text-decoration:none;font-weight:600;font-size:15px;transition:color .3s;position:relative}
+.nav-menu a::after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:2px;background:var(--primary);transition:width .3s}
+.nav-menu a:hover::after,.nav-menu a.active::after{width:100%}
+.nav-menu a:hover,.nav-menu a.active{color:var(--primary)}
+.dropdown{position:relative}
+.dropdown-content{position:absolute;top:50px;left:0;background:var(--card-bg);border-radius:12px;box-shadow:var(--shadow);width:180px;opacity:0;visibility:hidden;transform:translateY(-10px);transition:all .3s;overflow:hidden;z-index:2500}
+.dropdown:hover .dropdown-content{opacity:1;visibility:visible;transform:translateY(0)}
+.dropdown-content a{display:block;padding:12px 16px;text-decoration:none;color:var(--text-color);font-weight:500;border-bottom:1px solid var(--border);transition:background .2s}
+.dropdown-content a:last-child{border-bottom:none}
+.dropdown-content a:hover{background:rgba(90,168,151,0.08);color:var(--primary)}
+
+/* 검색 */
+.search-box{position:relative;margin-right:12px}
+.search-box input{padding:8px 35px 8px 12px;border:1.5px solid var(--border);border-radius:20px;outline:none;width:200px;transition:all .3s;background:var(--bg-color);color:var(--text-color)}
+.search-box input:focus{width:260px;border-color:var(--primary);box-shadow:0 0 0 3px rgba(90,168,151,0.1)}
+.search-icon{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none;font-size:16px}
+.suggestions{position:absolute;top:45px;left:0;width:100%;background:var(--card-bg);border-radius:10px;box-shadow:var(--shadow);overflow:hidden;display:none;z-index:3000;max-height:300px;overflow-y:auto}
+.suggestions div{padding:10px 12px;cursor:pointer;font-size:14px;transition:background .2s;border-bottom:1px solid var(--border)}
+.suggestions div:last-child{border-bottom:none}
+.suggestions div:hover{background:rgba(90,168,151,0.08);color:var(--primary)}
+
+/* 다크모드 토글 */
+.theme-toggle{border:none;background:transparent;cursor:pointer;font-size:20px;margin-right:8px;padding:8px;border-radius:50%;transition:all .3s}
+.theme-toggle:hover{background:rgba(90,168,151,0.1);transform:rotate(20deg)}
+.theme-toggle.sun{color:#ffd84d}
+.theme-toggle.moon{color:var(--primary-dark)}
+
+/* 스크롤 진행바 */
+.scroll-progress{position:fixed;top:70px;left:0;width:0;height:3px;background:linear-gradient(90deg,#5aa897,#e8b44f);z-index:1999;transition:width .1s}
+
+/* 배너 */
+.hero{position:relative;margin-top:73px;height:480px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);display:flex;align-items:center;justify-content:center;color:#fff;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') bottom center no-repeat;background-size:cover;animation:waveAnimation 8s ease-in-out infinite}
+@keyframes waveAnimation{0%,100%{transform:translateX(0)}50%{transform:translateX(-20px)}}
+.hero::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,0.3)}
+.hero-text{position:relative;text-align:center;z-index:10;animation:fadeInUp .8s ease-out}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.hero-text h2{font-size:46px;margin-bottom:10px;text-shadow:2px 2px 8px rgba(0,0,0,0.3)}
+.hero-text p{font-size:20px;opacity:.9;text-shadow:1px 1px 4px rgba(0,0,0,0.3)}
+.weather-widget{position:absolute;right:28px;bottom:30px;padding:12px 18px;border-radius:20px;background:rgba(0,0,0,0.5);font-size:13px;color:#f5f5f5;backdrop-filter:blur(8px);z-index:10;transition:transform .3s;cursor:pointer}
+.weather-widget:hover{transform:translateY(-3px);background:rgba(0,0,0,0.6)}
+
+/* 빠른 통계 */
+.quick-stats{max-width:1100px;margin:30px auto 0;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+.stat-card{background:var(--card-bg);padding:20px;border-radius:14px;box-shadow:var(--shadow);text-align:center;transition:all .3s;cursor:pointer}
+.stat-card:hover{transform:translateY(-5px);box-shadow:0 8px 20px rgba(0,0,0,0.15)}
+.stat-number{font-size:32px;font-weight:700;color:var(--primary);margin-bottom:5px}
+.stat-label{font-size:20px;color:var(--muted)}
+
+/* 일수 선택 버튼 */
+.day-selector{Display:flex;flex-wrap:wrap;gap:10px}
+.day-btn{border-radius:20px;border:2px solid var(--border);padding:8px 20px;font-size:14px;font-weight:600;background:var(--card-bg);color:var(--text-color);cursor:pointer;transition:all .3s;min-width:70px}
+.day-btn:hover{border-color:var(--primary);background:rgba(90,168,151,0.1);transform:translateY(-2px)}
+.day-btn.active{background:var(--primary);color:#fff;border-color:var(--primary);box-shadow:0 4px 8px rgba(90,168,151,0.3)}
+
+/* 플래너 */
+.planner{max-width:1100px;margin:35px auto 5px;padding:0 20px}
+.planner-header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px}
+.planner-header h2{font-size:32px;display:flex;align-items:center;gap:10px}
+.planner-toggle-btn{border:none;background:var(--primary);color:#fff;padding:10px 20px;border-radius:20px;cursor:pointer;font-size:14px;font-weight:600;box-shadow:var(--shadow);transition:all .3s}
+.planner-toggle-btn:hover{background:var(--primary-dark);transform:translateY(-2px)}
+.planner-box{background:var(--card-bg);margin-top:15px;border-radius:14px;padding:0 18px;max-height:0;overflow:hidden;box-shadow:var(--shadow);transition:all .4s}
+.planner-box.open{max-height:800px;padding-top:18px;padding-bottom:22px}
+.planner-subtitle{margin-top:8px;font-size:14px;color:var(--muted);line-height:1.5}
+.keyword-box{display:flex;flex-wrap:wrap;gap:10px;margin:15px 0 12px}
+.keyword-box button{border-radius:20px;border:2px solid var(--primary);padding:8px 16px;font-size:13px;background:transparent;cursor:pointer;color:var(--primary);font-weight:600;transition:all .3s}
+.keyword-box button:hover{background:rgba(90,168,151,0.1);transform:translateY(-2px)}
+.keyword-box button.active{background:var(--primary);color:#fff;box-shadow:0 4px 8px rgba(90,168,151,0.3)}
+.planner-generate-btn{border:none;background:var(--accent);color:#fff;padding:10px 20px;border-radius:20px;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:12px;transition:all .3s;box-shadow:0 4px 8px rgba(230,57,70,0.3)}
+.planner-generate-btn:hover{background:#d62839;transform:translateY(-2px)}
+.planner-result{margin-top:10px;animation:fadeIn .5s}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.planner-table{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px}
+.planner-table th{background:var(--primary);color:#fff;padding:12px;text-align:left;font-weight:600}
+.planner-table td{background:rgba(90,168,151,0.05);padding:12px;border-bottom:1px solid var(--border)}
+.planner-table tr:last-child td{border-bottom:none}
+
+/* 필터바 */
+.filter-bar{max-width:1100px;margin:25px auto 10px;padding:0 20px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.filter-bar span{font-size:15px;font-weight:600;color:var(--text-color);margin-right:5px}
+.filter-bar button{border-radius:20px;border:2px solid var(--border);padding:8px 18px;font-size:13px;font-weight:600;background:var(--card-bg);color:var(--text-color);cursor:pointer;transition:all .3s}
+.filter-bar button:hover{border-color:var(--primary);background:rgba(90,168,151,0.1);transform:translateY(-2px)}
+.filter-bar button.active{background:var(--primary);color:#fff;border-color:var(--primary);box-shadow:0 4px 8px rgba(90,168,151,0.3)}
+
+/* 카드 그리드 */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px;padding:28px 80px 160px;max-width:1200px;margin:0 auto}
+.card{position:relative;border-radius:16px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;opacity:0;transform:translateY(30px);transition:all .5s;background:var(--card-bg)}
+.card.visible{opacity:1;transform:translateY(0)}
+.card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 12px 28px rgba(0,0,0,0.2)}
+.card img{width:100%;height:250px;object-fit:cover;filter:brightness(0.9);transition:all .3s}
+.card:hover img{filter:brightness(1);transform:scale(1.05)}
+.card-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,0.8) 0%,transparent 100%);padding:20px;transition:transform .3s}
+.card h3{color:#fff;font-size:1.4em;text-shadow:0 2px 8px rgba(0,0,0,0.8);margin:0 0 5px}
+.card-category{color:rgba(255,255,255,0.8);font-size:.85em;text-shadow:0 1px 4px rgba(0,0,0,0.6)}
+.card .bookmark{position:absolute;top:15px;right:15px;font-size:24px;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,0.8);cursor:pointer;user-select:none;transition:all .2s;z-index:10}
+.card .bookmark:hover{transform:scale(1.2)}
+.card .bookmark.active{color:#ffd84d;animation:bookmarkPop .3s}
+@keyframes bookmarkPop{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}
+
+/* 상세 패널 */
+.detail-panel{position:fixed;left:0;bottom:-100%;width:100%;background:var(--card-bg);border-radius:20px 20px 0 0;box-shadow:0 -6px 30px rgba(0,0,0,0.4);transition:bottom .4s cubic-bezier(0.4,0,0.2,1);z-index:1500;max-height:65vh;overflow-y:auto}
+.detail-panel.show{bottom:0}
+.detail-content{padding:25px 30px 30px}
+.detail-content h2{color:var(--primary);margin-top:5px;font-size:28px;margin-bottom:8px}
+.detail-sub{font-size:14px;color:var(--muted);margin-bottom:15px;font-style:italic}
+.detail-summary{line-height:1.8;font-size:15px;margin-bottom:20px;color:var(--text-color)}
+.detail-info{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;margin-bottom:20px}
+.info-item{background:rgba(90,168,151,0.08);padding:12px 15px;border-radius:10px;border-left:3px solid var(--primary)}
+.info-item strong{color:var(--primary);display:block;margin-bottom:5px;font-size:14px}
+.info-item span{font-size:13px;color:var(--text-color)}
+.detail-buttons{display:flex;gap:12px;margin-top:20px;justify-content:center}
+.detail-btn{flex:1;max-width:200px;padding:14px 0;text-align:center;border-radius:25px;font-weight:600;font-size:15px;cursor:pointer;transition:all .3s;text-decoration:none;border:none}
+.detail-btn.close{background:var(--card-bg);color:var(--text-color);border:2px solid var(--border)}
+.detail-btn.close:hover{background:rgba(90,168,151,0.1);border-color:var(--primary);transform:translateY(-2px)}
+.detail-btn.more{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;box-shadow:0 4px 12px rgba(90,168,151,0.3)}
+.detail-btn.more:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(90,168,151,0.4)}
+
+/* 패널 오버레이 */
+.panel-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);opacity:0;visibility:hidden;transition:all .3s;z-index:1400}
+.panel-overlay.show{opacity:1;visibility:visible}
+
+/* 플로팅 버튼 */
+.floating-back{position:fixed;bottom:25px;right:25px;background:var(--primary);color:#fff;font-weight:600;padding:12px 20px;border-radius:25px;box-shadow:0 3px 10px rgba(0,0,0,0.2);cursor:pointer;transition:all .3s;z-index:3000}
+.floating-back:hover{background:var(--primary-dark);transform:scale(1.05)}
+
+/* 리뷰 표시 아이템 (detail-content 안에서 사용) */
+.detail-content .review-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  box-shadow: var(--shadow);
+}
+.detail-content .review-item h4 { color: var(--primary); margin-bottom: 6px; }
+.detail-content .review-item p { margin: 4px 0; }
+.detail-content .review-item small { color: var(--muted); }
+
+/* 반응형 */
+@media(max-width:960px){
+  .navbar{padding:0 16px}
+  .nav-menu{gap:16px}
+  .hero{height:360px}
+  .hero-text h2{font-size:32px}
+  .hero-text p{font-size:16px}
+  .grid{padding:24px 20px 120px}
+  .quick-stats{grid-template-columns:repeat(2,1fr)}
+  .detail-info{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .nav-menu a:nth-child(3){display:none}
+  .search-box input{width:150px}
+  .search-box input:focus{width:190px}
+  .planner-header{flex-direction:column;align-items:flex-start}
+  .floating-back{bottom:18px;right:18px;padding:10px 16px}
+  .quick-stats{grid-template-columns:1fr}
+  .filter-bar{gap:8px}
+  .detail-buttons{flex-direction:column;gap:10px}
+  .detail-btn{max-width:100%}
+}
+</style>
+</head>
+<body>
+
+<div id="preloader">
+  <div class="loader-logo">TOKYO TRAVEL</div>
+  <div class="loader-bar"></div>
+</div>
+
+<nav class="navbar">
+  <h1 onclick="window.location.href='tokyo.html'">Tokyo Travel</h1>
+  <div class="nav-menu">
+    <a href="tokyo.html">홈</a>
+    <div class="dropdown">
+      <a href="#" class="active">도쿄소개</a>
+      <div class="dropdown-content">
+        <a href="tokyo_history.html">도쿄 역사</a>
+        <a href="tokyo_culture.html">문화와 생활</a>
+        <a href="tokyo_structure.html">도시 구조</a>
+      </div>
+    </div>
+    <a href="tokyo_map.html">지도보기</a>
+  </div>
+  <div style="display:flex;align-items:center">
+    <button class="theme-toggle moon" id="themeToggle" aria-label="다크 모드 전환">🌙</button>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="도쿄 여행지 검색...">
+      <span class="search-icon">🔍</span>
+      <div class="suggestions" id="suggestions"></div>
+    </div>
+  </div>
+</nav>
+
+<div class="scroll-progress" id="scrollBar"></div>
+
+<section id="mainContent">
+  <section class="hero">
+    <div class="hero-text">
+      <h2>TOKYO TRAVEL GUIDE</h2>
+      <p>Discover the Heart of Japan</p>
+    </div>
+    <div class="weather-widget" id="weatherWidget">
+      🌤️ 현재 도쿄: 18℃ / 맑음
+    </div>
+  </section>
+
+  <section class="quick-stats">
+    <div class="stat-card" onclick="filterFavorites()">
+      <div class="stat-number" id="favoriteCount">0</div>
+      <div class="stat-label">내 즐겨찾기 여행지 수</div>
+    </div>
+    <div class="stat-card" onclick="showMyReviews()">
+      <div class="stat-number" id="reviewCount">0</div>
+      <div class="stat-label">작성된 리뷰 수</div>
+    </div>
+  </section>
+
+  <section class="planner">
+    <div class="planner-header">
+      <h2>📅 도쿄 맞춤 여행 코스</h2>
+      <button class="planner-toggle-btn" id="plannerToggle">코스 펼쳐보기</button>
+    </div>
+    <div class="planner-box" id="plannerBox">
+      <p class="planner-subtitle">여행 기간과 키워드를 선택하여 나만의 맞춤 코스를 만들어보세요.</p>
+      
+      <div style="margin:15px 0">
+        <label style="font-weight:600;font-size:15px;color:var(--text-color);display:block;margin-bottom:8px">
+          🗓️ 여행 기간 선택
+        </label>
+        <div class="day-selector" id="daySelector">
+          <button class="day-btn" data-days="1">1일</button>
+          <button class="day-btn active" data-days="3">3일</button>
+          <button class="day-btn" data-days="5">5일</button>
+          <button class="day-btn" data-days="7">7일</button>
+        </div>
+      </div>
+
+      <div style="margin:15px 0">
+        <label style="font-weight:600;font-size:15px;color:var(--text-color);display:block;margin-bottom:8px">
+          🎯 여행 테마 선택
+        </label>
+        <div class="keyword-box" id="keywordBox">
+          <button data-key="전통">🏯 전통</button>
+          <button data-key="야경">🌃 야경</button>
+          <button data-key="쇼핑">🛍️ 쇼핑</button>
+          <button data-key="자연">🌳 자연</button>
+          <button data-key="음식">🍜 음식</button>
+          <button data-key="예술">🎨 예술</button>
+          <button data-key="액티비티">🎢 액티비티</button>
+        </div>
+      </div>
+
+      <button class="planner-generate-btn" id="plannerGenerate">✨ 맞춤 코스 생성하기</button>
+      <div class="planner-result" id="plannerResult"></div>
+    </div>
+  </section>
+
+  <div class="filter-bar">
+    <span>🏷️ 테마 선택:</span>
+    <button class="active" data-filter="all">전체</button>
+    <button data-filter="history">역사</button>
+    <button data-filter="view">야경·전망</button>
+    <button data-filter="youth">젊음·쇼핑</button>
+  </div>
+
+  <section class="grid">
+    <div class="card" data-id="sensoji" data-category="history" onclick="cardClick(event,'sensoji')">
+      <img src="tokyoimages/sensoji.jpg" alt="센소지" loading="lazy">
+      <div class="card-overlay">
+        <h3>센소지</h3>
+        <div class="card-category">🏯 역사</div>
+      </div>
+      <div class="bookmark" data-id="sensoji">★</div>
+    </div>
+    <div class="card" data-id="skytree" data-category="view" onclick="cardClick(event,'skytree')">
+      <img src="tokyoimages/tokyoskytree.jpg" alt="도쿄 스카이트리" loading="lazy">
+      <div class="card-overlay">
+        <h3>도쿄 스카이트리</h3>
+        <div class="card-category">🌃 야경·전망</div>
+      </div>
+      <div class="bookmark" data-id="skytree">★</div>
+    </div>
+    <div class="card" data-id="shibuya" data-category="youth" onclick="cardClick(event,'shibuya')">
+      <img src="tokyoimages/shibuya.jpg" alt="시부야 교차로" loading="lazy">
+      <div class="card-overlay">
+        <h3>시부야 교차로</h3>
+        <div class="card-category">🛍️ 젊음·쇼핑</div>
+      </div>
+      <div class="bookmark" data-id="shibuya">★</div>
+    </div>
+  </section>
+</section>
+
+<div class="panel-overlay" id="panelOverlay" onclick="closePanel()"></div>
+<div id="detailPanel" class="detail-panel">
+  <div class="detail-content" id="detailContent"></div>
+</div>
+
+<div class="floating-back" onclick="window.location.href='../kanto.html'">← 관동지방</div>
+
+<script>
+// 프리로더
+window.addEventListener('load',()=>{
+  document.getElementById('preloader').classList.add('hide');
+});
+
+// 다크모드
+const themeToggle=document.getElementById('themeToggle');
+const savedTheme=localStorage.getItem('tokyoTheme');
+if(savedTheme==='dark'){
+  document.body.classList.add('dark-mode');
+  themeToggle.textContent='☀';
+  themeToggle.classList.remove('moon');
+  themeToggle.classList.add('sun');
+}
+themeToggle.addEventListener('click',()=>{
+  document.body.classList.toggle('dark-mode');
+  const isDark=document.body.classList.contains('dark-mode');
+  themeToggle.textContent=isDark?'☀':'🌙';
+  themeToggle.classList.toggle('sun',isDark);
+  themeToggle.classList.toggle('moon',!isDark);
+  localStorage.setItem('tokyoTheme',isDark?'dark':'light');
+});
+
+// 스크롤 진행바
+window.addEventListener('scroll',()=>{
+  const docHeight=document.documentElement.scrollHeight-window.innerHeight;
+  if(docHeight<=0)return;
+  const scrolled=(window.scrollY/docHeight)*100;
+  document.getElementById('scrollBar').style.width=scrolled+'%';
+});
+
+// 플래너 토글
+const plannerToggle=document.getElementById('plannerToggle');
+const plannerBox=document.getElementById('plannerBox');
+plannerToggle.addEventListener('click',()=>{
+  plannerBox.classList.toggle('open');
+  plannerToggle.textContent=plannerBox.classList.contains('open')?'코스 접기':'코스 펼쳐보기';
+});
+
+// 일수 선택
+let selectedDays=3;
+const dayButtons=document.querySelectorAll('.day-btn');
+dayButtons.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    dayButtons.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedDays=parseInt(btn.dataset.days);
+  });
+});
+
+// 키워드 선택
+const keywordButtons=document.querySelectorAll('#keywordBox button');
+keywordButtons.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    btn.classList.toggle('active');
+  });
+});
+
+// 코스 생성
+document.getElementById('plannerGenerate').addEventListener('click',()=>{
+  const selected=Array.from(keywordButtons)
+    .filter(b=>b.classList.contains('active'))
+    .map(b=>b.dataset.key);
+  
+  if(selected.length===0){
+    document.getElementById('plannerResult').innerHTML='<p style="color:var(--accent);margin-top:10px;padding:15px;background:rgba(230,57,70,0.1);border-radius:10px;text-align:center">⚠️ 하나 이상의 여행 테마를 선택해주세요.</p>';
+    return;
+  }
+
+  const courseDB={
+    전통:['센소지·나카미세 산책','메이지신궁 참배','황거 외원 산책','우에노 공원·도쿄국립박물관'],
+    야경:['도쿄 스카이트리 전망대','도쿄타워 야경','시부야 스카이','롯폰기힐스 전망대','오다이바 해변'],
+    쇼핑:['시부야 109·센터가이','하라주쿠 다케시타거리','긴자 명품거리','신주쿠 이세탄·루미네','아키하바라 전자상가'],
+    자연:['요요기 공원 산책','신주쿠 교엔','우에노 공원','스미다 공원'],
+    음식:['츠키지 장외시장 맛집투어','이자카야 거리 탐방','라멘 맛집 투어','스시 오마카세 체험'],
+    예술:['모리미술관','도쿄국립박물관','지브리미술관','팀랩 보더리스'],
+    액티비티:['디즈니랜드/디즈니씨','유니버설 스튜디오','도쿄돔시티','조조지 스카이다이빙']
+  };
+
+  let allActivities=[];
+  selected.forEach(key=>{
+    if(courseDB[key]){
+      allActivities=allActivities.concat(courseDB[key]);
+    }
+  });
+
+  allActivities=[...new Set(allActivities)];
+
+  const itemsPerDay=Math.ceil(allActivities.length/selectedDays);
+  let html='<div style="margin-top:15px"><h4 style="color:var(--primary);margin-bottom:10px">🎉 생성된 맞춤 코스</h4><table class="planner-table">';
+  
+  for(let day=1;day<=selectedDays;day++){
+    const start=(day-1)*itemsPerDay;
+    const end=Math.min(start+itemsPerDay,allActivities.length);
+    const dayActivities=allActivities.slice(start,end);
+    const activities=dayActivities.length>0?dayActivities.join(' → '):'자유 일정';
+    html+=`<tr><th>${day}일차</th><td>${activities}</td></tr>`;
+  }
+  
+  html+=`</table>
+    <div style="margin-top:15px;padding:12px;background:rgba(90,168,151,0.08);border-radius:10px;font-size:13px;color:var(--muted)">
+      💡 Tip: 일정은 참고용이며, 실제 이동시간과 개인 일정에 맞춰 조정하세요.
+    </div>
+    <button onclick="saveCourse()" style="margin-top:10px;border:none;background:var(--primary);color:#fff;padding:8px 16px;border-radius:16px;cursor:pointer;font-size:13px;transition:all .3s">📥 코스 저장하기</button>
+  </div>`;
+  
+  document.getElementById('plannerResult').innerHTML=html;
+});
+
+// 코스 저장 기능
+function saveCourse(){
+  const result=document.getElementById('plannerResult').innerText;
+  localStorage.setItem('tokyoSavedCourse',result);
+  alert('✅ 여행 코스가 저장되었습니다!\n\n저장된 코스는 브라우저에 보관되며, 다시 방문하시면 확인할 수 있습니다.');
+}
+
+// 카드 애니메이션
+const cards=document.querySelectorAll('.card');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:0.2});
+cards.forEach(card=>observer.observe(card));
+
+// 검색
+const input=document.getElementById('searchInput');
+const suggestions=document.getElementById('suggestions');
+const places=[
+  {name:'센소지',id:'sensoji'},
+  {name:'도쿄 스카이트리',id:'skytree'},
+  {name:'시부야 교차로',id:'shibuya'}
+];
+input.addEventListener('input',()=>{
+  const v=input.value.trim();
+  suggestions.innerHTML='';
+  if(v===''){suggestions.style.display='none';return;}
+  const f=places.filter(p=>p.name.includes(v));
+  if(f.length>0){
+    f.forEach(p=>{
+      const d=document.createElement('div');
+      d.textContent=p.name;
+      d.onclick=()=>{showDetail(p.id);suggestions.style.display='none';input.value='';};
+      suggestions.appendChild(d);
+    });
+  }else{
+    const noResult=document.createElement('div');
+    noResult.textContent='검색결과 없음';
+    noResult.style.color='#999';
+    noResult.style.textAlign='center';
+    noResult.style.padding='10px 0';
+    suggestions.appendChild(noResult);
+  }
+  suggestions.style.display='block';
+});
+input.addEventListener('keypress',e=>{
+  if(e.key==='Enter'){
+    const first=suggestions.querySelector('div');
+    if(first&&first.textContent!=='검색결과 없음')first.click();
+  }
+});
+document.addEventListener('click',e=>{
+  if(!input.contains(e.target)&&!suggestions.contains(e.target))suggestions.style.display='none';
+});
+
+// 패널 데이터
+const panel=document.getElementById('detailPanel');
+const panelOverlay=document.getElementById('panelOverlay');
+const content=document.getElementById('detailContent');
+let currentId='';
+
+const details={
+  sensoji:{
+    title:'센소지',
+    subtitle:'도쿄의 전통을 간직한 아사쿠사의 상징 사찰',
+    img:'tokyoimages/sensoji.jpg',
+    summary:'센소지는 도쿄에서 가장 오래된 사찰 중 하나로, 628년에 창건되어 1,400년 이상의 역사를 자랑합니다. 카미나리몬의 거대한 붉은 등롱이 상징이며, 나카미세 상점가에서는 전통 기념품과 일본 전통 간식을 즐길 수 있습니다.',
+    info:{
+      location:'도쿄 다이토구 아사쿠사',
+      time:'24시간 개방 (본당 06:00-17:00)',
+      price:'무료',
+      duration:'1-2시간'
+    },
+    coords:{lat:35.7148,lng:139.7967},
+    link:'sensoji.html'
+  },
+  skytree:{
+    title:'도쿄 스카이트리',
+    subtitle:'도쿄 전경을 한눈에 볼 수 있는 일본 최고 높이의 타워',
+    img:'tokyoimages/skytree.jpg',
+    summary:'도쿄 스카이트리는 높이 634미터로 일본에서 가장 높은 구조물입니다. 전망대는 350m와 450m 두 층으로 구성되어 있으며, 날씨가 좋은 날에는 후지산까지 조망할 수 있습니다. 특히 일몰 시간대에 방문하면 낮과 밤의 도쿄를 모두 감상할 수 있습니다.',
+    info:{
+      location:'도쿄 스미다구',
+      time:'10:00-21:00',
+      price:'2,100엔~3,100엔',
+      duration:'2-3시간'
+    },
+    coords:{lat:35.7101,lng:139.8107},
+    link:'skytree.html'
+  },
+  shibuya:{
+    title:'시부야 교차로',
+    subtitle:'젊음의 중심지, 세계에서 가장 붐비는 스크램블 교차로',
+    img:'tokyoimages/shibuya.jpg',
+    summary:'시부야 스크램블 교차로는 한 번에 최대 3,000명이 동시에 건너는 세계에서 가장 붐비는 교차로입니다. 주변에는 시부야 109, 마루이, 파르코 등 유명 쇼핑몰이 밀집해 있으며, 저녁 시간대의 네온사인과 대형 전광판이 만들어내는 도쿄 특유의 화려한 분위기를 경험할 수 있습니다.',
+    info:{
+      location:'도쿄 시부야구',
+      time:'24시간',
+      price:'무료',
+      duration:'1-3시간'
+    },
+    coords:{lat:35.6595,lng:139.7005},
+    link:'shibuya.html'
+  }
+};
+
+function showDetail(id){
+  const detail=details[id];
+  if(!detail)return;
+
+  const mapUrl=`https://www.google.com/maps?q=${detail.coords.lat},${detail.coords.lng}&hl=ko&z=15&output=embed`;
+
+  const html=`
+    <h2>${detail.title}</h2>
+    <div class="detail-sub">${detail.subtitle}</div>
+    <div style="width:100%;height:260px;border-radius:14px;margin:8px 0 15px;box-shadow:var(--shadow);overflow:hidden">
+      <iframe src="${mapUrl}"
+        style="width:100%;height:100%;border:0"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <p class="detail-summary">${detail.summary}</p>
+    <div class="detail-info">
+      <div class="info-item">
+        <strong>📍 위치</strong>
+        <span>${detail.info.location}</span>
+      </div>
+      <div class="info-item">
+        <strong>🕐 운영시간</strong>
+        <span>${detail.info.time}</span>
+      </div>
+      <div class="info-item">
+        <strong>💰 입장료</strong>
+        <span>${detail.info.price}</span>
+      </div>
+      <div class="info-item">
+        <strong>⏱️ 소요시간</strong>
+        <span>${detail.info.duration}</span>
+      </div>
+    </div>
+    <div class="detail-buttons">
+      <button class="detail-btn close" onclick="closePanel()">← 돌아가기</button>
+      <a href="${detail.link}" class="detail-btn more">상세보기 →</a>
+    </div>
+  `;
+  
+  content.innerHTML=html;
+  panel.classList.add('show');
+  panelOverlay.classList.add('show');
+  currentId=id;
+  document.body.style.overflow='hidden';
+}
+
+function closePanel(){
+  panel.classList.remove('show');
+  panelOverlay.classList.remove('show');
+  currentId='';
+  document.body.style.overflow='';
+}
+
+function cardClick(event,id){
+  const target=event.target;
+  if(target.classList.contains('bookmark'))return;
+  showDetail(id);
+}
+
+// ESC 키로 패널 닫기
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&panel.classList.contains('show')){
+    closePanel();
+  }
+});
+
+// 즐겨찾기
+let favorites=JSON.parse(localStorage.getItem('tokyoFavorites')||'[]');
+const bookmarkButtons=document.querySelectorAll('.bookmark');
+
+function updateBookmarksUI(){
+  bookmarkButtons.forEach(btn=>{
+    const id=btn.dataset.id;
+    if(favorites.includes(id))btn.classList.add('active');
+    else btn.classList.remove('active');
+  });
+  updateStats();
+}
+updateBookmarksUI();
+
+bookmarkButtons.forEach(btn=>{
+  btn.addEventListener('click',e=>{
+    e.stopPropagation();
+    const id=btn.dataset.id;
+    if(favorites.includes(id)){
+      favorites=favorites.filter(f=>f!==id);
+    }else{
+      favorites.push(id);
+    }
+    localStorage.setItem('tokyoFavorites',JSON.stringify(favorites));
+    updateBookmarksUI();
+  });
+});
+
+// 즐겨찾기 필터 함수
+function filterFavorites(){
+  const filterButtons=document.querySelectorAll('.filter-bar button');
+  filterButtons.forEach(b=>b.classList.remove('active'));
+  cards.forEach(card=>{
+    const id=card.dataset.id;
+    card.style.display=favorites.includes(id)?'block':'none';
+  });
+}
+
+// 리뷰: 패널 안에서 모든 상세 페이지 리뷰를 통합해서 보여주도록 구현
+function showMyReviews(){
+  const reviews = JSON.parse(localStorage.getItem('tokyoReviews')) || [];
+
+  let html = `<h2 style="margin-bottom:15px;color:var(--primary)">📝 작성된 리뷰 (${reviews.length}개)</h2>`;
+
+  if (reviews.length === 0) {
+    html += `<p style="text-align:center;padding:40px;color:var(--muted)">
+      아직 작성된 리뷰가 없습니다.<br>
+      센소지·스카이트리·시부야 등 상세 페이지에서 리뷰를 작성해주세요.
+    </p>`;
+  } else {
+    // 날짜 문자열이 "YYYY.MM.DD" 또는 "YYYY. M. D" 등 다양할 수 있으니 Date 파싱 시 안전하게 처리
+    reviews.sort((a, b) => {
+      const da = new Date(a.date);
+      const db = new Date(b.date);
+      return db - da;
+    });
+
+    html += reviews.map(r => `
+      <div class="review-item">
+        <h4>${r.place}</h4>
+        <p>별점: ${'★'.repeat(Number(r.rating))}${'☆'.repeat(5 - Number(r.rating))}</p>
+        <p>작성자: ${r.nickname}</p>
+        <p>${r.content}</p>
+        <small>${r.date}</small>
+      </div>
+    `).join('');
+  }
+
+  html += `
+    <div class="detail-buttons" style="margin-top:25px">
+      <button class="detail-btn close" onclick="closePanel()" style="max-width:100%">← 돌아가기</button>
+    </div>
+  `;
+
+  content.innerHTML = html;
+  panel.classList.add('show');
+  panelOverlay.classList.add('show');
+  document.body.style.overflow = 'hidden';
+  currentId = 'reviews';
+}
+
+// 필터
+const filterButtons=document.querySelectorAll('.filter-bar button');
+filterButtons.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const category=btn.dataset.filter;
+    filterButtons.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    cards.forEach(card=>{
+      const cardCat=card.dataset.category;
+      let show=false;
+      if(category==='all')show=true;
+      else if(category===cardCat)show=true;
+      card.style.display=show?'block':'none';
+    });
+  });
+});
+
+// 통계 업데이트 (리뷰 개수 반영)
+function updateStats(){
+  const favEl=document.getElementById('favoriteCount');
+  const revEl=document.getElementById('reviewCount');
+  const favorites = JSON.parse(localStorage.getItem('tokyoFavorites') || '[]');
+  const reviews = JSON.parse(localStorage.getItem('tokyoReviews') || '[]');
+  if(favEl)favEl.textContent=favorites.length;
+  if(revEl)revEl.textContent=reviews.length;
+}
+updateStats();
+</script>
+
+</body>
+</html>

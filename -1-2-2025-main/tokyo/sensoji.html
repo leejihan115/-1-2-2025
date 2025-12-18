@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>센소지 & 나카미세 거리 | Tokyo Travel</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #5aa897;
+  --primary-dark: #4a8a7f;
+  --bg: #f8f9f6;
+  --text: #333;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+}
+
+/* 상단 네비게이션 */
+.navbar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 25px;
+  z-index: 2000;
+  flex-wrap: wrap;
+}
+.navbar h1 {
+  color: var(--primary);
+  font-size: 22px;
+  cursor: pointer;
+  margin: 0;
+  font-weight: 700;
+}
+.nav-center {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.nav-center a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  transition: color 0.3s;
+}
+.nav-center a:hover, .nav-center a.active {
+  color: var(--primary);
+}
+.dropdown { position: relative; }
+.dropdown-content {
+  position: absolute;
+  top: 45px;
+  left: 0;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  width: 160px;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+}
+.dropdown-content a {
+  padding: 10px 14px;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid #eee;
+}
+.dropdown-content a:hover {
+  background: #f3f7f6;
+  color: var(--primary);
+}
+
+/* 검색창 */
+.search-box { position: relative; }
+.search-box input {
+  padding: 8px 12px;
+  border: 1.5px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+  width: 180px;
+  transition: all 0.3s;
+}
+.search-box input:focus {
+  width: 240px;
+  border-color: var(--primary);
+}
+
+/* 배너 */
+.hero {
+  margin-top: 70px;
+  height: 430px;
+  background: url('tokyoimages/sensoji2.jpg') center center/cover no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-bottom: 5px solid var(--primary);
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+.hero-text {
+  position: relative;
+  text-align: center;
+  z-index: 1;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+}
+.hero-text h2 { font-size: 2.6em; margin-bottom: 10px; }
+.hero-text p { font-size: 1.2em; opacity: 0.95; }
+
+/* 본문 */
+.content {
+  max-width: 950px;
+  margin: 50px auto 100px;
+  padding: 0 25px;
+}
+.section {
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 25px 30px;
+  margin-bottom: 40px;
+}
+.section h3 {
+  color: var(--primary-dark);
+  border-left: 6px solid var(--primary);
+  padding-left: 10px;
+  margin-bottom: 14px;
+  font-size: 1.3em;
+}
+.map-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: background 0.3s;
+}
+.map-btn:hover { background: var(--primary-dark); }
+
+/* 갤러리 */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 22px;
+  margin: 30px 0 50px;
+}
+.gallery-item {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+.gallery-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+.gallery img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  display: block;
+  cursor: zoom-in;
+}
+.gallery-caption {
+  font-size: 15px;
+  color: #555;
+  padding: 10px 14px 14px;
+  background: #fafafa;
+  border-top: 1px solid #eee;
+}
+
+/* 리뷰 작성 폼 */
+#review-section form {
+  display: flex;
+  flex-direction: column;
+}
+#review-section input, #review-section textarea, #review-section select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* 이미지 모달 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.9);
+}
+.modal img {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 900px;
+  border-radius: 12px;
+}
+.close {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* 왼쪽 아이콘 네비게이션 */
+.sidebar {
+  position: fixed;
+  top: 50%;
+  left: 25px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 1500;
+}
+.sidebar button {
+  background: var(--primary);
+  border: none;
+  color: white;
+  font-size: 22px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  transition: background 0.3s, transform 0.3s;
+}
+.sidebar button:hover {
+  background: var(--primary-dark);
+  transform: scale(1.1);
+}
+
+/* 툴팁 스타일 */
+.sidebar button::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 70px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.8);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.sidebar button:hover::after {
+  opacity: 1;
+}
+
+/* 위로가기 */
+#topBtn {
+  position: fixed;
+  bottom: 35px;
+  right: 35px;
+  width: 70px;
+  height: 70px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 28px;
+  cursor: pointer;
+  display: none;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+  transition: background 0.3s, transform 0.3s;
+}
+#topBtn:hover {
+  background: var(--primary-dark);
+  transform: scale(1.1);
+}
+
+/* 돌아가기 버튼 */
+.back-button {
+  display: block;
+  margin: 70px auto 90px;
+  text-align: center;
+  font-weight: 600;
+  width: 260px;
+  background: var(--primary);
+  color: white;
+  padding: 14px 0;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: background 0.3s, transform 0.2s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.back-button:hover {
+  background: var(--primary-dark);
+  transform: scale(1.05);
+}
+
+/* 푸터 */
+footer {
+  background-color: #e9f3f1;
+  text-align: center;
+  padding: 15px;
+  font-size: 0.9em;
+  color: #555;
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <h1 onclick="window.location.href='tokyo.html'">Tokyo Travel</h1>
+  <div class="nav-center">
+    <a href="tokyo.html">홈</a>
+    <div class="dropdown">
+      <a href="#" id="introBtn">도쿄소개 ▾</a>
+      <div class="dropdown-content" id="introMenu">
+        <a href="tokyo_history.html">도쿄 역사</a>
+        <a href="tokyo_culture.html">문화와 생활</a>
+        <a href="tokyo_structure.html">도시 구조</a>
+      </div>
+    </div>
+    <a href="tokyo_map.html">지도보기</a>
+  </div>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="도쿄 여행지 검색...">
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-text">
+    <h2>센소지 & 나카미세 거리</h2>
+    <p>도쿄의 전통과 현대가 공존하는 아사쿠사의 상징</p>
+  </div>
+</section>
+
+<div class="sidebar">
+  <button data-tooltip="위치" onclick="scrollToSection('loc')">📍</button>
+  <button data-tooltip="운영정보" onclick="scrollToSection('time')">🕒</button>
+  <button data-tooltip="체험" onclick="scrollToSection('exp')">🎎</button>
+  <button data-tooltip="먹거리" onclick="scrollToSection('food')">🍡</button>
+  <button data-tooltip="여행팁" onclick="scrollToSection('tip')">💡</button>
+</div>
+
+<div class="content">
+  <div class="gallery">
+    <div class="gallery-item"><img src="tokyoimages/sensoji1.jpg" alt="나카미세 거리"><div class="gallery-caption">기념품과 간식이 즐비한 나카미세 상점가</div></div>
+    <div class="gallery-item"><img src="tokyoimages/sensoji2.jpg" alt="센소지 본당"><div class="gallery-caption">센소지 본당과 오중탑 풍경</div></div>
+    <div class="gallery-item"><img src="tokyoimages/sensoji3.jpg" alt="가미나리몬"><div class="gallery-caption">아사쿠사의 상징 가미나리몬(雷門)</div></div>
+    <div class="gallery-item"><img src="tokyoimages/sensoji4.jpg" alt="야간 센소지"><div class="gallery-caption">야경 속 환하게 빛나는 센소지</div></div>
+  </div>
+
+  <div class="section" id="loc">
+    <h3>위치 / 접근</h3>
+    <p>도쿄 다이토구 아사쿠사 2-3-1. 아사쿠사역에서 도보 약 5분 거리.</p>
+    <button class="map-btn" onclick="openMap()">📍 지도 열기</button>
+    <button class="map-btn" onclick="findRoute()">🚶 길찾기</button>
+  </div>
+
+  <div class="section" id="time">
+    <h3>운영 / 요금 / 시즌</h3>
+    <ul>
+      <li>본당: 06:00~17:00 (무료 입장)</li>
+      <li>나카미세 상점가: 10:00~18:00 (점포별 상이)</li>
+      <li>벚꽃철·연말에는 매우 혼잡</li>
+    </ul>
+  </div>
+
+  <div class="section" id="exp">
+    <h3>체험 / 명소</h3>
+    <p>가미나리몬의 거대한 홍등, 향로 체험, 오미쿠지 뽑기, 유카타 대여, 인력거 탑승 등 다양한 체험 가능.</p>
+  </div>
+
+  <div class="section" id="food">
+    <h3>먹거리 / 주변</h3>
+    <p>나카미세 거리에는 닌교야키, 아게만주, 말차 아이스크림 등 전통 간식이 즐비하다.</p>
+  </div>
+
+  <div class="section" id="tip">
+    <h3>여행 팁</h3>
+    <ul>
+      <li>혼잡을 피하려면 오전 8~9시 방문 추천</li>
+      <li>현금 결제 위주, 일부 상점만 카드 사용 가능</li>
+      <li>유카타 대여는 사전 예약 필수</li>
+    </ul>
+    <p>공식 사이트:  
+      <a href="https://www.senso-ji.jp/korean/" target="_blank">
+        https://www.senso-ji.jp/korean/
+      </a>
+    </p>
+  </div>
+
+  <!-- 리뷰 작성 섹션 -->
+  <div class="section" id="review-section">
+    <h3>리뷰 작성하기</h3>
+    <form id="reviewForm">
+      <label>별점</label>
+      <select id="rating" required>
+        <option value="">별점을 선택하세요</option>
+        <option value="5">★★★★★</option>
+        <option value="4">★★★★☆</option>
+        <option value="3">★★★☆☆</option>
+        <option value="2">★★☆☆☆</option>
+        <option value="1">★☆☆☆☆</option>
+      </select>
+
+      <label>닉네임</label>
+      <input type="text" id="nickname" placeholder="닉네임을 입력하세요" required>
+
+      <label>리뷰 내용</label>
+      <textarea id="content" placeholder="리뷰를 작성해주세요" rows="4" required></textarea>
+
+      <button type="submit" class="map-btn">리뷰 등록하기</button>
+    </form>
+  </div>
+
+  <a href="tokyo.html" class="back-button">← 도쿄 메인 페이지로 돌아가기</a>
+</div>
+
+<footer>© 2025 Tokyo Travel Guide | Designed by ERICA Team</footer>
+
+<button id="topBtn">↑</button>
+
+<div id="imgModal" class="modal">
+  <span class="close" onclick="closeModal()">&times;</span>
+  <img id="modalImg" src="">
+</div>
+
+<script>
+// 드롭다운
+const introBtn = document.getElementById("introBtn");
+const introMenu = document.getElementById("introMenu");
+introBtn.addEventListener("click", e => {
+  e.preventDefault();
+  introMenu.style.display = introMenu.style.display === "flex" ? "none" : "flex";
+});
+document.addEventListener("click", e => {
+  if (!introBtn.contains(e.target) && !introMenu.contains(e.target)) introMenu.style.display = "none";
+});
+
+// 지도 버튼
+function openMap() {
+  window.open("https://www.google.com/maps?q=35.7148,139.7967", "_blank");
+}
+function findRoute() {
+  window.open("https://www.google.com/maps/dir/?api=1&destination=35.7148,139.7967", "_blank");
+}
+
+// 이미지 클릭 확대
+const modal = document.getElementById("imgModal");
+const modalImg = document.getElementById("modalImg");
+document.querySelectorAll(".gallery img").forEach(img => {
+  img.addEventListener("click", () => {
+    modal.style.display = "block";
+    modalImg.src = img.src;
+  });
+});
+function closeModal() { modal.style.display = "none"; }
+
+// 위로가기 버튼
+const topBtn = document.getElementById("topBtn");
+window.addEventListener("scroll", () => {
+  topBtn.style.display = window.scrollY > 400 ? "block" : "none";
+});
+topBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+// 사이드 버튼 섹션 이동
+function scrollToSection(id) {
+  const target = document.getElementById(id);
+  if (target) {
+    target.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+// 리뷰 저장 기능
+const reviewForm = document.getElementById('reviewForm');
+reviewForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const rating = document.getElementById('rating').value;
+  const nickname = document.getElementById('nickname').value.trim();
+  const content = document.getElementById('content').value.trim();
+
+  if (!rating || !nickname || !content) {
+    alert('모든 항목을 입력해주세요.');
+    return;
+  }
+
+  const newReview = {
+    place: '센소지 & 나카미세 거리',
+    rating,
+    nickname,
+    content,
+    date: new Date().toLocaleDateString('ko-KR')
+  };
+
+  let reviews = JSON.parse(localStorage.getItem('tokyoReviews')) || [];
+  reviews.push(newReview);
+  localStorage.setItem('tokyoReviews', JSON.stringify(reviews));
+
+  alert('리뷰가 등록되었습니다!');
+  reviewForm.reset();
+});
+</script>
+
+</body>
+</html>

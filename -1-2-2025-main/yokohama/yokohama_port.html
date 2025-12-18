@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>요코하마의 항구와 관광 | Yokohama Travel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-color: #f8f9f6;
+  --text-color: #333;
+  --card-bg: #fff;
+  --primary: #5aa897;
+  --primary-dark: #4a8a7f;
+  --accent: #e63946;
+  --border: rgba(0,0,0,0.1);
+  --shadow: 0 3px 15px rgba(0,0,0,0.1);
+}
+
+body {
+  margin: 0;
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  overflow-x: hidden;
+  line-height: 1.7;
+  transition: background 0.4s, color 0.4s;
+}
+
+/* 네비게이션 */
+.navbar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 70px;
+  background: var(--card-bg);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 60px;
+  z-index: 2000;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.navbar.scrolled {
+  box-shadow: 0 2px 15px rgba(0,0,0,0.15);
+  background: rgba(255,255,255,0.97);
+}
+.navbar h1 {
+  color: var(--primary);
+  font-size: 22px;
+  margin: 0;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 0.2s;
+}
+.navbar h1:hover { transform: scale(1.05); }
+.nav-menu { display: flex; gap: 35px; align-items: center; }
+.nav-menu a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  transition: color 0.3s, transform 0.2s;
+}
+.nav-menu a:hover, .nav-menu a.active {
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+/* 드롭다운 */
+.dropdown { position: relative; }
+.dropdown-content {
+  position: absolute;
+  top: 60px; left: 0;
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  width: 180px;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 2500;
+}
+.dropdown-content a {
+  padding: 12px 16px;
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  border-bottom: 1px solid #eee;
+  transition: background 0.2s;
+}
+.dropdown-content a:hover {
+  background-color: rgba(90,168,151,0.08);
+  color: var(--primary);
+}
+
+/* 검색창 */
+.search-box {
+  position: relative;
+}
+.search-box input {
+  padding: 8px 35px 8px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  outline: none;
+  width: 200px;
+  transition: all 0.3s ease;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+.search-box input:focus {
+  width: 260px;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(90,168,151,0.1);
+}
+.search-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary);
+  font-size: 16px;
+}
+.suggestions {
+  position: absolute;
+  top: 42px; left: 0;
+  width: 100%;
+  background: var(--card-bg);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: none;
+  z-index: 3000;
+}
+.suggestions div {
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+.suggestions div:hover {
+  background-color: rgba(90,168,151,0.08);
+  color: var(--primary);
+}
+
+/* 배너 */
+.hero {
+  position: relative;
+  margin-top: 70px;
+  height: 380px;
+  background: url('yokohamaimages/port_banner.jpg') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  overflow: hidden;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom right, rgba(0,0,0,0.45), rgba(0,0,0,0.55));
+}
+.hero-text {
+  position: relative;
+  text-align: center;
+  z-index: 10;
+  animation: fadeUp 1s ease-in-out;
+}
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.hero-text h2 {
+  font-size: 44px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+.hero-text p {
+  font-size: 19px;
+  opacity: 0.9;
+}
+
+/* 본문 */
+.content {
+  max-width: 950px;
+  margin: 70px auto 120px;
+  padding: 0 25px;
+  color: var(--text-color);
+}
+.content-section {
+  margin-bottom: 50px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+.content-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.content h3 {
+  color: var(--primary);
+  margin-top: 20px;
+  font-size: 22px;
+  font-weight: 700;
+  border-left: 5px solid var(--primary);
+  padding-left: 10px;
+  background: rgba(90,168,151,0.05);
+  border-radius: 5px;
+  display: inline-block;
+}
+.content p {
+  margin-top: 12px;
+  font-size: 16.2px;
+  line-height: 1.8;
+  word-break: keep-all;
+  text-align: justify;
+}
+
+/* 푸터 */
+footer {
+  background: #5aa897;
+  color: #fff;
+  text-align: center;
+  padding: 25px 10px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+/* 반응형 */
+@media(max-width:900px){
+  .navbar{padding:0 20px}
+  .nav-menu{gap:20px}
+  .hero{height:300px}
+  .hero-text h2{font-size:32px}
+  .content{padding:0 20px}
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <h1 onclick="window.location.href='yokohama.html'">Yokohama Travel</h1>
+  <div class="nav-menu">
+    <a href="yokohama.html">홈</a>
+    <div class="dropdown" id="yokohamaDropdown">
+      <a href="#" id="yokohamaIntro" class="active" onclick="toggleDropdown()">요코하마소개</a>
+      <div class="dropdown-content" id="yokohamaMenu">
+        <a href="yokohama_overview.html">도시 개요</a>
+        <a href="yokohama_culture.html">문화와 역사</a>
+        <a href="yokohama_port.html" class="active">항구와 관광</a>
+      </div>
+    </div>
+    <a href="yokohama_map.html">지도보기</a>
+  </div>
+
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="요코하마 여행지 검색...">
+    <span class="search-icon">🔍</span>
+    <div class="suggestions" id="suggestions"></div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-text">
+    <h2>요코하마의 항구와 관광</h2>
+    <p>일본의 바다 관문, 그리고 세계로 열린 도시</p>
+  </div>
+</section>
+
+<section class="content">
+  <div class="content-section">
+    <h3>1. 항만 도시의 상징</h3>
+    <p>요코하마항은 1859년 개항 이래 일본의 대표적인 무역항으로 발전했다.  
+    현재는 일본 3대 항만 중 하나로, 무역량·여객선 운항 수 모두 상위권을 차지한다.  
+    항만 주변에는 ‘요코하마 레드브릭 창고’, ‘오산바시 국제터미널’, ‘야마시타 공원’ 등 관광 명소가 모여 있어  
+    항구 그 자체가 도시의 관광 코스로 이어진다.</p>
+  </div>
+
+  <div class="content-section">
+    <h3>2. 랜드마크 타워와 미나토미라이21</h3>
+    <p>‘미나토미라이21(Minato Mirai 21)’은 요코하마의 상징적 관광지로,  
+    고층 빌딩군과 바다 전망이 어우러진 복합도시다.  
+    296m 높이의 랜드마크 타워 전망대에서는 요코하마 전경과 도쿄만, 후지산까지 조망할 수 있다.  
+    인근에는 ‘퀸즈 스퀘어’, ‘코스모월드 대관람차’, ‘요코하마 미술관’ 등 다양한 명소가 위치한다.</p>
+  </div>
+
+  <div class="content-section">
+    <h3>3. 요코하마 레드브릭 창고</h3>
+    <p>메이지 시대에 세워진 붉은 벽돌 창고를 리모델링한 복합문화공간이다.  
+    현재는 카페, 레스토랑, 아트숍, 이벤트홀로 활용되며 요코하마의 대표적 데이트 명소로 사랑받는다.  
+    계절마다 열리는 크리스마스 마켓, 맥주 페스티벌, 아트 전시가 인기를 끈다.</p>
+  </div>
+
+  <div class="content-section">
+    <h3>4. 차이나타운과 거리문화</h3>
+    <p>요코하마 차이나타운은 아시아 최대 규모로 500개 이상의 음식점과 상점이 있다.  
+    중화요리뿐 아니라 일본식 퓨전 음식, 전통 공연, 축제 등이 다양하게 열리며  
+    동양적 색채와 현대적 감각이 어우러진 독특한 거리문화를 형성한다.</p>
+  </div>
+
+  <div class="content-section">
+    <h3>5. 해양 관광과 야경 명소</h3>
+    <p>요코하마는 바다와 맞닿아 있는 도시답게 다양한 해양 관광이 가능하다.  
+    ‘시버스(Sea Bus)’ 수상버스를 타면 미나토미라이–오산바시–야마시타공원을 잇는 해상 코스를 즐길 수 있다.  
+    밤에는 랜드마크 타워, 관람차, 항구 조명이 어우러져 일본에서도 손꼽히는 야경을 자랑한다.</p>
+  </div>
+
+  <div class="content-section">
+    <h3>6. 문화 이벤트와 도시의 매력</h3>
+    <p>매년 개최되는 ‘요코하마 국제 불꽃축제’, ‘요코하마 개항제’, ‘재즈 페스티벌’은  
+    항구 도시의 활기와 예술적 감성을 동시에 느낄 수 있는 대표 행사다.  
+    현대적인 도시 속에서도 낭만과 감성이 공존하며,  
+    바다를 배경으로 한 요코하마만의 개방적이고 세련된 관광 이미지를 완성한다.</p>
+  </div>
+</section>
+
+<footer>
+  © 2025 Yokohama Travel | Designed with the spirit of the sea.
+</footer>
+
+<script>
+const menu=document.getElementById("yokohamaMenu");
+let isMenuOpen=false;
+function toggleDropdown(){
+  if(!isMenuOpen){
+    menu.style.display="flex";
+    isMenuOpen=true;
+  }else{
+    menu.style.display="none";
+    isMenuOpen=false;
+  }
+}
+document.addEventListener("click",function(e){
+  const dropdown=document.getElementById("yokohamaDropdown");
+  if(!dropdown.contains(e.target)){
+    menu.style.display="none";
+    isMenuOpen=false;
+  }
+});
+
+// 네비게이션 스크롤 효과
+window.addEventListener("scroll",()=>{
+  const nav=document.getElementById("navbar");
+  if(window.scrollY>30)nav.classList.add("scrolled");
+  else nav.classList.remove("scrolled");
+});
+
+// 검색 기능
+const input=document.getElementById("searchInput");
+const suggestions=document.getElementById("suggestions");
+const places=[
+  {name:"랜드마크 타워",link:"landmark.html"},
+  {name:"레드브릭 창고",link:"redbrick.html"},
+  {name:"코스모월드",link:"cosmoworld.html"}
+];
+input.addEventListener("input",()=>{
+  const v=input.value.trim();
+  suggestions.innerHTML="";
+  if(v===""){suggestions.style.display="none";return;}
+  const f=places.filter(p=>p.name.includes(v));
+  if(f.length>0){
+    f.forEach(p=>{
+      const d=document.createElement("div");
+      d.textContent=p.name;
+      d.onclick=()=>{window.location.href=p.link;};
+      suggestions.appendChild(d);
+    });
+  }else{
+    const noResult=document.createElement("div");
+    noResult.textContent="검색결과 없음";
+    noResult.style.color="#999";
+    noResult.style.textAlign="center";
+    noResult.style.padding="10px 0";
+    suggestions.appendChild(noResult);
+  }
+  suggestions.style.display="block";
+});
+input.addEventListener("keypress",e=>{
+  if(e.key==="Enter"){
+    const first=suggestions.querySelector("div");
+    if(first&&first.textContent!=="검색결과 없음")first.click();
+  }
+});
+document.addEventListener("click",e=>{
+  if(!input.contains(e.target))suggestions.style.display="none";
+});
+
+// 스크롤 시 콘텐츠 페이드 인
+const sections=document.querySelectorAll('.content-section');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:0.2});
+sections.forEach(sec=>observer.observe(sec));
+</script>
+
+</body>
+</html>

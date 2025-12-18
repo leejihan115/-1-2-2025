@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>도쿄 스카이트리 | Tokyo Travel</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #5aa897;
+  --primary-dark: #4a8a7f;
+  --bg: #f8f9f6;
+  --text: #333;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+}
+
+/* 상단 네비게이션 */
+.navbar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 25px;
+  z-index: 2000;
+  flex-wrap: wrap;
+}
+.navbar h1 {
+  color: var(--primary);
+  font-size: 22px;
+  cursor: pointer;
+  margin: 0;
+  font-weight: 700;
+}
+.nav-center {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.nav-center a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  transition: color 0.3s;
+}
+.nav-center a:hover, .nav-center a.active {
+  color: var(--primary);
+}
+.dropdown { position: relative; }
+.dropdown-content {
+  position: absolute;
+  top: 45px;
+  left: 0;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  width: 160px;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+}
+.dropdown-content a {
+  padding: 10px 14px;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid #eee;
+}
+.dropdown-content a:hover {
+  background: #f3f7f6;
+  color: var(--primary);
+}
+
+/* 검색창 */
+.search-box { position: relative; }
+.search-box input {
+  padding: 8px 12px;
+  border: 1.5px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+  width: 180px;
+  transition: all 0.3s;
+}
+.search-box input:focus {
+  width: 240px;
+  border-color: var(--primary);
+}
+
+/* 배너 */
+.hero {
+  margin-top: 70px;
+  height: 430px;
+  background: url('tokyoimages/tokyoskytree1.jpg') center center/cover no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-bottom: 5px solid var(--primary);
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+.hero-text {
+  position: relative;
+  text-align: center;
+  z-index: 1;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+}
+.hero-text h2 { font-size: 2.6em; margin-bottom: 10px; }
+.hero-text p { font-size: 1.2em; opacity: 0.95; }
+
+/* 본문 */
+.content {
+  max-width: 950px;
+  margin: 50px auto 100px;
+  padding: 0 25px;
+}
+.section {
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 25px 30px;
+  margin-bottom: 40px;
+}
+.section h3 {
+  color: var(--primary-dark);
+  border-left: 6px solid var(--primary);
+  padding-left: 10px;
+  margin-bottom: 14px;
+  font-size: 1.3em;
+}
+.map-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: background 0.3s;
+}
+.map-btn:hover { background: var(--primary-dark); }
+
+/* 갤러리 */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 22px;
+  margin: 30px 0 50px;
+}
+.gallery-item {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+.gallery-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+.gallery img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  display: block;
+  cursor: zoom-in;
+}
+.gallery-caption {
+  font-size: 15px;
+  color: #555;
+  padding: 10px 14px 14px;
+  background: #fafafa;
+  border-top: 1px solid #eee;
+}
+
+/* 리뷰 작성 폼 */
+#review-section form {
+  display: flex;
+  flex-direction: column;
+}
+#review-section input, #review-section textarea, #review-section select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* 이미지 모달 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.9);
+}
+.modal img {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 900px;
+  border-radius: 12px;
+}
+.close {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* 사이드바 */
+.sidebar {
+  position: fixed;
+  top: 50%;
+  left: 25px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 1500;
+}
+.sidebar button {
+  background: var(--primary);
+  border: none;
+  color: white;
+  font-size: 22px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  transition: background 0.3s, transform 0.3s;
+}
+.sidebar button:hover {
+  background: var(--primary-dark);
+  transform: scale(1.1);
+}
+.sidebar button::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 70px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.8);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.sidebar button:hover::after { opacity: 1; }
+
+/* 위로가기 */
+#topBtn {
+  position: fixed;
+  bottom: 35px;
+  right: 35px;
+  width: 70px;
+  height: 70px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 28px;
+  cursor: pointer;
+  display: none;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+  transition: background 0.3s, transform 0.3s;
+}
+#topBtn:hover {
+  background: var(--primary-dark);
+  transform: scale(1.1);
+}
+
+/* 돌아가기 */
+.back-button {
+  display: block;
+  margin: 70px auto 90px;
+  text-align: center;
+  font-weight: 600;
+  width: 260px;
+  background: var(--primary);
+  color: white;
+  padding: 14px 0;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: background 0.3s, transform 0.2s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.back-button:hover {
+  background: var(--primary-dark);
+  transform: scale(1.05);
+}
+
+/* 푸터 */
+footer {
+  background-color: #e9f3f1;
+  text-align: center;
+  padding: 15px;
+  font-size: 0.9em;
+  color: #555;
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <h1 onclick="window.location.href='tokyo.html'">Tokyo Travel</h1>
+  <div class="nav-center">
+    <a href="tokyo.html">홈</a>
+    <div class="dropdown">
+      <a href="#" id="introBtn">도쿄소개 ▾</a>
+      <div class="dropdown-content" id="introMenu">
+        <a href="tokyo_history.html">도쿄 역사</a>
+        <a href="tokyo_culture.html">문화와 생활</a>
+        <a href="tokyo_structure.html">도시 구조</a>
+      </div>
+    </div>
+    <a href="tokyo_map.html">지도보기</a>
+  </div>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="도쿄 여행지 검색...">
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-text">
+    <h2>도쿄 스카이트리</h2>
+    <p>634m에서 내려다보는 도쿄의 하늘과 도시</p>
+  </div>
+</section>
+
+<div class="sidebar">
+  <button data-tooltip="위치" onclick="scrollToSection('loc')">📍</button>
+  <button data-tooltip="이용정보" onclick="scrollToSection('info')">🕒</button>
+  <button data-tooltip="전망대" onclick="scrollToSection('view')">🗼</button>
+  <button data-tooltip="쇼핑·식사" onclick="scrollToSection('shop')">🛍️</button>
+  <button data-tooltip="팁" onclick="scrollToSection('tip')">💡</button>
+</div>
+
+<div class="content">
+  <div class="gallery">
+    <div class="gallery-item"><img src="tokyoimages/tokyoskytree1.jpg" alt="스카이트리 전경"><div class="gallery-caption">스미다 강변에서 본 스카이트리 전경</div></div>
+    <div class="gallery-item"><img src="tokyoimages/tokyoskytree2.jpg" alt="스카이트리 주변"><div class="gallery-caption">오시아게 일대의 스카이트리 전경</div></div>
+    <div class="gallery-item"><img src="tokyoimages/tokyoskytree3.jpg" alt="전망대 내부"><div class="gallery-caption">템보 덱에서 본 도쿄 도심</div></div>
+    <div class="gallery-item"><img src="tokyoimages/tokyoskytree4.jpg" alt="스카이트리 야경"><div class="gallery-caption">야간 조명으로 빛나는 스카이트리</div></div>
+  </div>
+
+  <div class="section" id="loc">
+    <h3>위치 / 접근</h3>
+    <p>도쿄 스미다구 오시아게 1-1-2에 위치. 오시아게역과 스카이트리역 바로 연결.</p>
+    <button class="map-btn" onclick="openMap()">📍 지도 열기</button>
+    <button class="map-btn" onclick="findRoute()">🚶 길찾기</button>
+  </div>
+
+  <div class="section" id="info">
+    <h3>이용 정보</h3>
+    <ul>
+      <li>운영시간: 10:00~21:00 (마지막 입장 20:00)</li>
+      <li>템보 덱(350m) + 갤러리아(450m) 티켓: 성인 약 2,100엔~</li>
+      <li>날씨가 맑으면 후지산까지 조망 가능</li>
+    </ul>
+  </div>
+
+  <div class="section" id="view">
+    <h3>전망대에서 즐기는 도시 전경</h3>
+    <p>템보 덱은 도심과 스미다강을, 갤러리아는 하늘길 느낌의 유리 통로를 제공한다.</p>
+  </div>
+
+  <div class="section" id="shop">
+    <h3>소라마치 쇼핑몰 & 주변</h3>
+    <p>도쿄 소라마치에는 300여 개 매장과 레스토랑, 수족관, 기념품샵이 모여있다.</p>
+  </div>
+
+  <div class="section" id="tip">
+    <h3>여행 팁</h3>
+    <ul>
+      <li>일몰~야경 시간대 입장 추천</li>
+      <li>성수기엔 온라인 예매 필수</li>
+      <li>공식 사이트에서 혼잡도·라이트업 정보 확인</li>
+    </ul>
+    <p>공식 사이트:  
+      <a href="https://www.tokyo-skytree.jp/kr/" target="_blank">
+        https://www.tokyo-skytree.jp/kr/
+      </a>
+    </p>
+  </div>
+
+  <div class="section" id="review-section">
+    <h3>리뷰 작성하기</h3>
+    <form id="reviewForm">
+      <label>별점</label>
+      <select id="rating" required>
+        <option value="">별점을 선택하세요</option>
+        <option value="5">★★★★★</option>
+        <option value="4">★★★★☆</option>
+        <option value="3">★★★☆☆</option>
+        <option value="2">★★☆☆☆</option>
+        <option value="1">★☆☆☆☆</option>
+      </select>
+
+      <label>닉네임</label>
+      <input type="text" id="nickname" placeholder="닉네임을 입력하세요" required>
+
+      <label>리뷰 내용</label>
+      <textarea id="content" placeholder="리뷰를 작성해주세요" rows="4" required></textarea>
+
+      <button type="submit" class="map-btn">리뷰 등록하기</button>
+    </form>
+  </div>
+
+  <a href="tokyo.html" class="back-button">← 도쿄 메인 페이지로 돌아가기</a>
+</div>
+
+<footer>© 2025 Tokyo Travel Guide | Designed by ERICA Team</footer>
+
+<button id="topBtn">↑</button>
+
+<div id="imgModal" class="modal">
+  <span class="close" onclick="closeModal()">&times;</span>
+  <img id="modalImg" src="">
+</div>
+
+<script>
+// 드롭다운
+const introBtn = document.getElementById("introBtn");
+const introMenu = document.getElementById("introMenu");
+introBtn.addEventListener("click", e => {
+  e.preventDefault();
+  introMenu.style.display = introMenu.style.display === "flex" ? "none" : "flex";
+});
+document.addEventListener("click", e => {
+  if (!introBtn.contains(e.target) && !introMenu.contains(e.target)) introMenu.style.display = "none";
+});
+
+// 지도 버튼
+function openMap() {
+  window.open("https://www.google.com/maps?q=35.7101,139.8107", "_blank");
+}
+function findRoute() {
+  window.open("https://www.google.com/maps/dir/?api=1&destination=35.7101,139.8107", "_blank");
+}
+
+// 이미지 클릭 확대
+const modal = document.getElementById("imgModal");
+const modalImg = document.getElementById("modalImg");
+document.querySelectorAll(".gallery img").forEach(img => {
+  img.addEventListener("click", () => {
+    modal.style.display = "block";
+    modalImg.src = img.src;
+  });
+});
+function closeModal() { modal.style.display = "none"; }
+
+// 위로가기 버튼
+const topBtn = document.getElementById("topBtn");
+window.addEventListener("scroll", () => {
+  topBtn.style.display = window.scrollY > 400 ? "block" : "none";
+});
+topBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+// 사이드 버튼
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+
+// 리뷰 저장
+const reviewForm = document.getElementById('reviewForm');
+reviewForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const rating = document.getElementById('rating').value;
+  const nickname = document.getElementById('nickname').value.trim();
+  const content = document.getElementById('content').value.trim();
+
+  if (!rating || !nickname || !content) return alert('모든 항목을 입력해주세요.');
+
+  const newReview = {
+    place: '도쿄 스카이트리',
+    rating, nickname, content,
+    date: new Date().toLocaleDateString('ko-KR')
+  };
+  const reviews = JSON.parse(localStorage.getItem('tokyoReviews')) || [];
+  reviews.push(newReview);
+  localStorage.setItem('tokyoReviews', JSON.stringify(reviews));
+
+  alert('리뷰가 등록되었습니다!');
+  reviewForm.reset();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>가마쿠라 문화와 사찰 | Kamakura Travel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-color: #f8f9f6;
+  --text-color: #333;
+  --card-bg: #fff;
+  --primary: #5aa897;
+  --primary-dark: #4a8a7f;
+  --accent: #e63946;
+  --border: rgba(0,0,0,0.1);
+  --shadow: 0 3px 15px rgba(0,0,0,0.1);
+}
+
+body {
+  margin: 0;
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  overflow-x: hidden;
+  line-height: 1.7;
+  transition: background 0.4s, color 0.4s;
+}
+
+/* 네비게이션 */
+.navbar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 70px;
+  background: var(--card-bg);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 60px;
+  z-index: 2000;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.navbar.scrolled {
+  box-shadow: 0 2px 15px rgba(0,0,0,0.15);
+  background: rgba(255,255,255,0.97);
+}
+.navbar h1 {
+  color: var(--primary);
+  font-size: 22px;
+  margin: 0;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 0.2s;
+}
+.navbar h1:hover { transform: scale(1.05); }
+.nav-menu {
+  display: flex;
+  gap: 35px;
+  align-items: center;
+}
+.nav-menu a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  transition: color 0.3s, transform 0.2s;
+}
+.nav-menu a:hover, .nav-menu a.active {
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+/* 드롭다운 */
+.dropdown { position: relative; }
+.dropdown-content {
+  position: absolute;
+  top: 60px; left: 0;
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  width: 180px;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 2500;
+}
+.dropdown-content a {
+  padding: 12px 16px;
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  border-bottom: 1px solid #eee;
+  transition: background 0.2s;
+}
+.dropdown-content a:hover {
+  background-color: rgba(90,168,151,0.08);
+  color: var(--primary);
+}
+
+/* 검색창 */
+.search-box {
+  position: relative;
+}
+.search-box input {
+  padding: 8px 35px 8px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  outline: none;
+  width: 200px;
+  transition: all 0.3s ease;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+.search-box input:focus {
+  width: 260px;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(90,168,151,0.1);
+}
+.search-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary);
+  font-size: 16px;
+}
+.suggestions {
+  position: absolute;
+  top: 42px; left: 0;
+  width: 100%;
+  background: var(--card-bg);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: none;
+  z-index: 3000;
+}
+.suggestions div {
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+.suggestions div:hover {
+  background-color: rgba(90,168,151,0.08);
+  color: var(--primary);
+}
+
+/* 배너 */
+.hero {
+  position: relative;
+  margin-top: 70px;
+  height: 380px;
+  background: url('kamakuraimages/temple_banner.jpg') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  overflow: hidden;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom right, rgba(0,0,0,0.45), rgba(0,0,0,0.55));
+}
+.hero-text {
+  position: relative;
+  text-align: center;
+  z-index: 10;
+  animation: fadeUp 1s ease-in-out;
+}
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.hero-text h2 {
+  font-size: 44px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+.hero-text p {
+  font-size: 19px;
+  opacity: 0.9;
+}
+
+/* 본문 */
+.content {
+  max-width: 950px;
+  margin: 70px auto 120px;
+  padding: 0 25px;
+  color: var(--text-color);
+}
+.content-section {
+  margin-bottom: 50px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+.content-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.content h3 {
+  color: var(--primary);
+  margin-top: 20px;
+  font-size: 22px;
+  font-weight: 700;
+  border-left: 5px solid var(--primary);
+  padding-left: 10px;
+  background: rgba(90,168,151,0.05);
+  border-radius: 5px;
+  display: inline-block;
+}
+.content p {
+  margin-top: 12px;
+  font-size: 16.2px;
+  line-height: 1.8;
+  word-break: keep-all;
+  text-align: justify;
+}
+
+/* 푸터 */
+footer {
+  background: #5aa897;
+  color: #fff;
+  text-align: center;
+  padding: 25px 10px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+/* 반응형 */
+@media(max-width:900px){
+  .navbar{padding:0 20px}
+  .nav-menu{gap:20px}
+  .hero{height:300px}
+  .hero-text h2{font-size:32px}
+  .content{padding:0 20px}
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <h1 onclick="window.location.href='kamakura.html'">Kamakura Travel</h1>
+  <div class="nav-menu">
+    <a href="kamakura.html">홈</a>
+    <div class="dropdown" id="kamakuraDropdown">
+      <a href="#" id="kamakuraIntro" class="active" onclick="toggleDropdown()">가마쿠라소개</a>
+      <div class="dropdown-content" id="kamakuraMenu">
+        <a href="kamakura_overview.html">도시 개요</a>
+        <a href="kamakura_temple.html" class="active">문화와 사찰</a>
+        <a href="kamakura_sea.html">자연과 바다</a>
+      </div>
+    </div>
+    <a href="kamakura_map.html">지도보기</a>
+  </div>
+
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="가마쿠라 여행지 검색...">
+    <span class="search-icon">🔍</span>
+    <div class="suggestions" id="suggestions"></div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-text">
+    <h2>가마쿠라의 문화와 사찰</h2>
+    <p>불교의 숨결과 예술이 살아 숨 쉬는 고즈넉한 도시</p>
+  </div>
+</section>
+
+<section class="content">
+  <div class="content-section">
+    <h3>1. 불교문화의 중심</h3>
+    <p>가마쿠라는 일본 불교 문화의 근간을 형성한 도시로, 겐초지(建長寺), 엔가쿠지(円覚寺) 등 선종 사찰이 밀집해 있다.  
+    무사 계급의 정신적 중심지로서 선(禅) 사상이 발전하며 일본 불교의 새로운 흐름을 열었다.</p>
+  </div>
+
+  <div class="content-section">
+    <h3>2. 대표 사찰들</h3>
+    <p>하세 지역의 하세데라(長谷寺)는 수국 명소로 유명하며, 관음보살상이 안치되어 있다.  
+    가마쿠라 대불(大仏)이 있는 고토쿠인(高徳院)은 도시의 상징으로, 높이 11.3m의 청동불상이 장엄하다.  
+    엔가쿠지와 겐초지는 ‘가마쿠라 오산(五山)’으로 불리며 일본 선종의 핵심 사찰로 손꼽힌다.</p>
+  </div>
+
+  <div class="content-section">
+    <h3>3. 신사와 전통행사</h3>
+    <p>츠루가오카 하치만구(鶴岡八幡宮)는 가마쿠라의 정신적 상징으로, 매년 9월 열리는 ‘야부사메(流鏑馬)’ 마상궁술 축제가 유명하다.  
+    봄에는 벚꽃, 여름에는 수국, 가을에는 단풍이 어우러져 사계절의 아름다움을 느낄 수 있다.</p>
+  </div>
+
+  <div class="content-section">
+    <h3>4. 예술과 전통공예</h3>
+    <p>가마쿠라에는 도자기, 칠기, 목공예 등 전통 장인의 공방이 많다.  
+    ‘가마쿠라 목불(木仏)’은 수백 년의 역사를 자랑하며 불상 조각예술의 정수를 보여준다.  
+    현대 작가들의 갤러리와 소규모 예술공방도 함께 발전하여 도시 전체가 하나의 예술촌처럼 구성되어 있다.</p>
+  </div>
+
+  <div class="content-section">
+    <h3>5. 현대 속의 전통</h3>
+    <p>최근 가마쿠라는 전통문화와 현대 감성을 융합한 카페, 미술관, 북스페이스 등으로 주목받고 있다.  
+    사찰 옆의 찻집에서는 선차(禅茶)를 즐기며 명상하는 체험이 가능해, 관광과 힐링을 함께 경험할 수 있다.</p>
+  </div>
+</section>
+
+<footer>
+  © 2025 Kamakura Travel | Designed with spirit and tradition.
+</footer>
+
+<script>
+const menu=document.getElementById("kamakuraMenu");
+let isMenuOpen=false;
+function toggleDropdown(){
+  if(!isMenuOpen){
+    menu.style.display="flex";
+    isMenuOpen=true;
+  }else{
+    menu.style.display="none";
+    isMenuOpen=false;
+  }
+}
+document.addEventListener("click",function(e){
+  const dropdown=document.getElementById("kamakuraDropdown");
+  if(!dropdown.contains(e.target)){
+    menu.style.display="none";
+    isMenuOpen=false;
+  }
+});
+
+window.addEventListener("scroll",()=>{
+  const nav=document.getElementById("navbar");
+  if(window.scrollY>30)nav.classList.add("scrolled");
+  else nav.classList.remove("scrolled");
+});
+
+const input=document.getElementById("searchInput");
+const suggestions=document.getElementById("suggestions");
+const places=[
+  {name:"츠루가오카 하치만구",link:"hachiman.html"},
+  {name:"가마쿠라 대불",link:"daibutsu.html"},
+  {name:"하세데라",link:"hasedera.html"}
+];
+input.addEventListener("input",()=>{
+  const v=input.value.trim();
+  suggestions.innerHTML="";
+  if(v===""){suggestions.style.display="none";return;}
+  const f=places.filter(p=>p.name.includes(v));
+  if(f.length>0){
+    f.forEach(p=>{
+      const d=document.createElement("div");
+      d.textContent=p.name;
+      d.onclick=()=>{window.location.href=p.link;};
+      suggestions.appendChild(d);
+    });
+  }else{
+    const noResult=document.createElement("div");
+    noResult.textContent="검색결과 없음";
+    noResult.style.color="#999";
+    noResult.style.textAlign="center";
+    noResult.style.padding="10px 0";
+    suggestions.appendChild(noResult);
+  }
+  suggestions.style.display="block";
+});
+input.addEventListener("keypress",e=>{
+  if(e.key==="Enter"){
+    const first=suggestions.querySelector("div");
+    if(first&&first.textContent!=="검색결과 없음")first.click();
+  }
+});
+document.addEventListener("click",e=>{
+  if(!input.contains(e.target))suggestions.style.display="none";
+});
+
+const sections=document.querySelectorAll('.content-section');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:0.2});
+sections.forEach(sec=>observer.observe(sec));
+</script>
+
+</body>
+</html>
